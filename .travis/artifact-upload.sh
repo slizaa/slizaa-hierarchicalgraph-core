@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/sh
 
 ftp_ip=ftp.wuetherich.com
 target_dir=org.slizaa.core
