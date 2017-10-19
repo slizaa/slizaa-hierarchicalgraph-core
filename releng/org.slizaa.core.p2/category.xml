@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.slizaa.core.feature_0.0.0.jar" id="org.slizaa.core.feature" version="0.0.0">
+      <category name="org.slizaa.core.feature.category"/>
+   </feature>
+   <category-def name="org.slizaa.core.feature.category" label="org.slizaa.core"/>
+</site>

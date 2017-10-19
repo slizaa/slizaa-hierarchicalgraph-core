@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.slizaa.core</groupId>
+	<artifactId>org.slizaa.core.parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>releng/org.slizaa.core.target</module>
+		<module>releng/org.slizaa.core.feature</module>
+		<module>releng/org.slizaa.core.p2</module>
+
+		<module>plugins/org.slizaa.hierarchicalgraph</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.algorithms</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.edit</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.selection</module>
+		<module>plugins/org.slizaa.workbench.model</module>
+
+	<!-- <module>plugins/org.slizaa.hierarchicalgraph.test</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.selection.test</module>
+		<module>plugins/org.slizaa.testfwk</module>
+		<module>plugins/org.slizaa.testfwk.ui</module>  -->	
+		
+		<module>plugins/org.slizaa.ui.shared</module>
+		<module>plugins/org.slizaa.ui.dependencytable</module>
+		<module>plugins/org.slizaa.ui.dependencytree</module>
+		<module>plugins/org.slizaa.ui.dsm</module>
+		<module>plugins/org.slizaa.ui.klighd</module>
+		<module>plugins/org.slizaa.ui.klighd.synthesis</module>
+		<module>plugins/org.slizaa.ui.tree</module>
+		<module>plugins/org.slizaa.ui.widget.dsm</module>
+		<module>plugins/org.slizaa.ui.xref</module>
+	</modules>
+
+	<!-- tycho requires maven >= 3.0 -->
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<properties>
+		<tycho-version>1.0.0</tycho-version>
+		<xtend-version>2.12.0</xtend-version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<version>${xtend-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<!-- optionally you can configure a different target folder -->
+						<configuration>
+							<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<!-- enable tycho build extension -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>org.slizaa.core</groupId>
+							<artifactId>org.slizaa.core.target</artifactId>
+							<version>${project.version}</version>
+						</artifact>
+					</target>
+					<!-- <filters>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.core</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.core.manipulation</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.launching</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.jdt.ui</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.emf.codegen</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.emf.codegen.ecore</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.emf.ecore.edit</id>
+							<removeAll />
+						</filter>
+						<filter>
+							<type>eclipse-plugin</type>
+							<id>org.eclipse.emf.ecore.editor</id>
+							<removeAll />
+						</filter>
+					</filters> -->
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
