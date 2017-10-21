@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ftp_ip=ftp.wuetherich.com
-target_dir=org.slizaa.core
+target_dir=slizaa-hierarchicalgraph
 
 echo TRAVIS_BUILD_DIR: $TRAVIS_BUILD_DIR
 
