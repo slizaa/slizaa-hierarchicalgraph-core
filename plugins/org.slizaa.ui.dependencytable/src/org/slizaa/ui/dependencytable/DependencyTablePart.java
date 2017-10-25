@@ -74,8 +74,9 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
 
     createColumns(tableComposite, _viewer);
 
-    //
-    handleDetailDependencySelectionChanged(null, getWorkbenchModel().getMainDependencySelection());
+    if (getWorkbenchModel() != null) {
+      handleDetailDependencySelectionChanged(null, getWorkbenchModel().getMainDependencySelection());
+    }
   }
 
   @Override

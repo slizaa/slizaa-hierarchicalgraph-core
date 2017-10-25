@@ -8,24 +8,34 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.testfwk.ui.AbstractXmiBasedSlizaaPartTest;
-import org.slizaa.testfwk.ui.SlizaaUITest;
+import org.slizaa.testfwk.ui.AbstractSlizaaPartTest;
+import org.slizaa.workbench.model.ModelFactory;
+import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
-@Category(SlizaaUITest.class)
-public class DependencyTableTest extends AbstractXmiBasedSlizaaPartTest {
+public class DependencyTableTest extends AbstractSlizaaPartTest {
 
   /** - */
-  private DependencyTablePart _part;
+  private DependencyTablePart  _part;
+
+  /** - */
+  private SlizaaWorkbenchModel _workbenchModel;
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void beforeShellOpens(Shell shell) {
+    
+    super.beforeShellOpens(shell);
+
+    //
+    _workbenchModel = ModelFactory.eINSTANCE.createSlizaaWorkbenchModel();
+
+    // create the xref part
     _part = new DependencyTablePart();
-    _part.createComposite(shell());
+    _part.initializeAbstractSlizaaPart(_workbenchModel);
+    _part.createComposite(shell);
   }
 
   /**
@@ -39,8 +49,8 @@ public class DependencyTableTest extends AbstractXmiBasedSlizaaPartTest {
     SWTBotTable tableBot = swtbot().table();
 
     //
-    Collection<HGCoreDependency> dependencies = node(28232).getOutgoingDependenciesTo(node(267432))
-        .getCoreDependencies();
+    Collection<HGCoreDependency> dependencies = graphProvider().node(28232)
+        .getOutgoingDependenciesTo(graphProvider().node(267432)).getCoreDependencies();
 
     //
     _part.handleDetailDependencySelectionChanged(null, createDependencySelection(dependencies));

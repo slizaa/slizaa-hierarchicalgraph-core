@@ -10,15 +10,28 @@ import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
+import org.slizaa.testfwk.TestGraph;
+import org.slizaa.testfwk.TestGraphProviderRule;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 @RunWith(SWTBotJunit4ClassRunner.class)
-public abstract class AbstractSlizaaUITest implements IImageProvider, SlizaaUITest {
+public abstract class AbstractSlizaaUITest implements IImageProvider {
+
+  @ClassRule
+  public static TestGraphProviderRule testGraphProviderRule = new TestGraphProviderRule(TestGraph.EUREKA);
+
+  @Rule
+  public MockitoRule                  rule                  = MockitoJUnit.rule();
 
   /** - */
   private SWTBot                      _swtbot;
@@ -32,8 +45,15 @@ public abstract class AbstractSlizaaUITest implements IImageProvider, SlizaaUITe
   /** - */
   private LoadingCache<String, Image> _imageCache;
 
+  /**
+   * <p>
+   * </p>
+   */
   @Before
   public void setupAbstractSlizaaUITest() {
+
+    //
+    testGraphProviderRule.rootNode().registerExtension(INodeLabelProvider.class, new DefaultNodeLabelProvider(this));
 
     //
     MockitoAnnotations.initMocks(this);
@@ -94,6 +114,10 @@ public abstract class AbstractSlizaaUITest implements IImageProvider, SlizaaUITe
    */
   public void beforeShellOpens(Shell shell) {
     // default
+  }
+
+  public TestGraphProviderRule graphProvider() {
+    return testGraphProviderRule;
   }
 
   /**

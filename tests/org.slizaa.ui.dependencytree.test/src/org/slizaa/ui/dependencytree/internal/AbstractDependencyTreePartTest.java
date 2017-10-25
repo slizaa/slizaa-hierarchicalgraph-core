@@ -13,7 +13,6 @@ import org.slizaa.testfwk.ui.SlizaaUITest;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-@Category(SlizaaUITest.class)
 public class AbstractDependencyTreePartTest extends AbstractXmiBasedSlizaaPartTest {
 
   /** - */
