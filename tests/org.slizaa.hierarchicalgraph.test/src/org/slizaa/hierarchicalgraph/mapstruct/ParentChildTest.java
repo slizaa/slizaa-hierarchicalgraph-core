@@ -6,24 +6,18 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
-import org.slizaa.testfwk.AbstractXmiBasedTest;
+import org.slizaa.testfwk.TestGraph;
+import org.slizaa.testfwk.TestGraphProviderRule;
 
-public class ParentChildTest extends AbstractXmiBasedTest {
+public class ParentChildTest {
 
-  /**
-   * <p>
-   * Creates a new instance of type {@link ParentChildTest}.
-   * </p>
-   *
-   * @param xmiModelPath
-   */
-  public ParentChildTest() {
-    super("mapstruct_1-1-0-Beta2.hggraph");
-  }
+  @ClassRule
+  public static TestGraphProviderRule _graphProvider = new TestGraphProviderRule(TestGraph.MAP_STRUCT);
 
   /**
    * <p>
@@ -31,7 +25,7 @@ public class ParentChildTest extends AbstractXmiBasedTest {
    */
   @Test
   public void testParentChild() {
-    EcoreUtil.getAllContents(rootNode(), false).forEachRemaining((c) -> {
+    EcoreUtil.getAllContents(_graphProvider.rootNode(), false).forEachRemaining((c) -> {
       if (HierarchicalgraphPackage.eINSTANCE.getHGNode().isInstance(c)) {
         HGNode node = (HGNode) c;
         checkParentChild(node);

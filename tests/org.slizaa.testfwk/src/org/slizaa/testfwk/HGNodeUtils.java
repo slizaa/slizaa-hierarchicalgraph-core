@@ -1,5 +1,7 @@
 package org.slizaa.testfwk;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -55,6 +57,12 @@ public class HGNodeUtils {
 
     //
     return Collections.emptyList();
+  }
+
+  public static void dumpChildren(HGNode hgNode) {
+    for (HGNode node : checkNotNull(hgNode).getChildren()) {
+      System.out.println(node.getIdentifier() + " : " + HGNodeUtils.getProperties(node));
+    }
   }
 
 }

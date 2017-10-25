@@ -8,7 +8,7 @@ import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
 import org.slizaa.testfwk.IHierarchicalGraphProvider;
-import org.slizaa.testfwk.XmiBasedGraphProvider;
+import org.slizaa.testfwk.TestGraphProviderRule;
 
 import com.google.common.base.Stopwatch;
 
@@ -22,7 +22,7 @@ public abstract class AbstractXmiBasedSlizaaPartTest extends AbstractSlizaaPartT
     implements IImageProvider, IHierarchicalGraphProvider {
 
   /** - */
-  private static XmiBasedGraphProvider _xmiBasedGraphedProvider;
+  private static TestGraphProviderRule _xmiBasedGraphedProvider;
 
   /** - */
   private String                       _modelName;
@@ -61,7 +61,7 @@ public abstract class AbstractXmiBasedSlizaaPartTest extends AbstractSlizaaPartT
 
       System.out.println("Loading XMI-based model...");
       Stopwatch stopwatch = Stopwatch.createStarted();
-      _xmiBasedGraphedProvider = new XmiBasedGraphProvider(_modelName);
+      _xmiBasedGraphedProvider = new TestGraphProviderRule(_modelName);
       _xmiBasedGraphedProvider.setup();
       System.out.printf("Loading XMI-based model completed (%s ms).\n", stopwatch.elapsed(TimeUnit.MILLISECONDS));
     }

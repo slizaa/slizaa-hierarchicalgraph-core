@@ -19,10 +19,6 @@
 		<module>plugins/org.slizaa.hierarchicalgraph.edit</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.selection</module>
 		<module>plugins/org.slizaa.workbench.model</module>
-
-		<!-- <module>plugins/org.slizaa.hierarchicalgraph.test</module> <module>plugins/org.slizaa.hierarchicalgraph.selection.test</module> 
-			<module>plugins/org.slizaa.testfwk</module> <module>plugins/org.slizaa.testfwk.ui</module> -->
-
 		<module>plugins/org.slizaa.ui.shared</module>
 		<module>plugins/org.slizaa.ui.dependencytable</module>
 		<module>plugins/org.slizaa.ui.dependencytree</module>
@@ -32,6 +28,10 @@
 		<module>plugins/org.slizaa.ui.tree</module>
 		<module>plugins/org.slizaa.ui.widget.dsm</module>
 		<module>plugins/org.slizaa.ui.xref</module>
+
+		<module>tests/org.slizaa.testfwk</module>
+		<module>tests/org.slizaa.hierarchicalgraph.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.selection.test</module>
 	</modules>
 
 	<prerequisites>

@@ -3,10 +3,12 @@ package org.slizaa.hierarchicalgraph.eureka;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
-import org.slizaa.testfwk.AbstractXmiBasedTest;
+import org.slizaa.testfwk.TestGraph;
+import org.slizaa.testfwk.TestGraphProviderRule;
 
 /**
  * <p>
@@ -14,16 +16,10 @@ import org.slizaa.testfwk.AbstractXmiBasedTest;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class LookupNodeTest extends AbstractXmiBasedTest {
+public class LookupNodeTest {
 
-  /**
-   * <p>
-   * Creates a new instance of type {@link LookupNodeTest}.
-   * </p>
-   */
-  public LookupNodeTest() {
-    super("eureka_1-4-10.hggraph");
-  }
+  @ClassRule
+  public static TestGraphProviderRule _graphProvider = new TestGraphProviderRule(TestGraph.EUREKA_AGGREGATED);
 
   /**
    * <p>
@@ -31,11 +27,11 @@ public class LookupNodeTest extends AbstractXmiBasedTest {
    */
   @Test
   public void testLookup() {
-    EcoreUtil.getAllContents(rootNode(), false).forEachRemaining((c) -> {
+    EcoreUtil.getAllContents(_graphProvider.rootNode(), false).forEachRemaining((c) -> {
       if (HierarchicalgraphPackage.eINSTANCE.getHGNode().isInstance(c)) {
         HGNode node = (HGNode) c;
         assertThat(node.getIdentifier()).isNotNull();
-        assertThat(rootNode().lookupNode(node.getIdentifier())).isEqualTo(node);
+        assertThat(_graphProvider.rootNode().lookupNode(node.getIdentifier())).isEqualTo(node);
       }
     });
   }
