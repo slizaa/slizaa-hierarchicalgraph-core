@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.slizaa.hierarchicalgraph.core.feature" version="0.0.0">
+      <category name="org.slizaa.hierarchicalgraph.core.feature.category"/>
+   </feature>
+   <category-def name="org.slizaa.hierarchicalgraph.core.feature.category" label="org.slizaa.hierarchicalgraph.core"/>
+   
+   <feature id="org.slizaa.hierarchicalgraph.core.feature.source" version="0.0.0">
+      <category name="org.slizaa.hierarchicalgraph.core.feature.source.category"/>
+   </feature>
+   <category-def name="org.slizaa.hierarchicalgraph.core.feature.source.category" label="org.slizaa.hierarchicalgraph.core.source"/>
+</site>

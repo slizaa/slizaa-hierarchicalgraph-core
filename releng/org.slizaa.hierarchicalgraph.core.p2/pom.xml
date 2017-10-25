@@ -9,7 +9,7 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.core.p2</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.core.p2</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<build>
