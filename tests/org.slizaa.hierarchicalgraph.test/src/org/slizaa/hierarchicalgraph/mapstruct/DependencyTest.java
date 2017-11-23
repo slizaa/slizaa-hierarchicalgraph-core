@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.slizaa.testfwk.TestGraph;
-import org.slizaa.testfwk.TestGraphProviderRule;
+import org.slizaa.testfwk.XmiBasedGraph;
+import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>
@@ -16,8 +16,8 @@ import org.slizaa.testfwk.TestGraphProviderRule;
 public class DependencyTest {
 
   @ClassRule
-  public static TestGraphProviderRule _graphProvider                          = new TestGraphProviderRule(
-      TestGraph.MAP_STRUCT);
+  public static XmiBasedTestGraphProviderRule _graphProvider                          = new XmiBasedTestGraphProviderRule(
+      XmiBasedGraph.MAP_STRUCT);
 
   /** - */
   public static final Long            ID_PKG_ORG_MAPSTRUCT_AP_INTERNAL_WRITER = new Long(6308);

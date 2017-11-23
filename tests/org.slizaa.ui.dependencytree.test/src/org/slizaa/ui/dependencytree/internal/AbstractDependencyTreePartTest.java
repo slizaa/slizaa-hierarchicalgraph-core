@@ -1,11 +1,9 @@
 package org.slizaa.ui.dependencytree.internal;
 
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
-import org.junit.experimental.categories.Category;
-import org.slizaa.testfwk.ui.AbstractXmiBasedSlizaaPartTest;
-import org.slizaa.testfwk.ui.SlizaaUITest;
+import org.junit.BeforeClass;
+import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 
 /**
  * <p>
@@ -13,26 +11,24 @@ import org.slizaa.testfwk.ui.SlizaaUITest;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class AbstractDependencyTreePartTest extends AbstractXmiBasedSlizaaPartTest {
+public class AbstractDependencyTreePartTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
-  private DependencyTreePart _part;
+  private static DependencyTreePart _part;
 
   /** - */
-  private SWTBotTree         _fromTree;
+  private SWTBotTree                _fromTree;
 
   /** - */
-  private SWTBotTree         _toTree;
-
+  private SWTBotTree                _toTree;
 
   /**
-   * {@inheritDoc}
+   * <p>
+   * </p>
    */
-  public void beforeShellOpens(Shell shell) {
-
-    // create the xref part
-    _part = new DependencyTreePart();
-    _part.createComposite(shell());
+  @BeforeClass
+  public static void createPart() {
+    _part = openShell(new DependencyTreePart());
   }
 
   /**

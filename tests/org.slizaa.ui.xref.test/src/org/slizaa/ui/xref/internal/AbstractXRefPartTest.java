@@ -2,16 +2,14 @@ package org.slizaa.ui.xref.internal;
 
 import java.util.List;
 
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotToolbarButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Before;
-import org.junit.experimental.categories.Category;
+import org.junit.BeforeClass;
 import org.slizaa.hierarchicalgraph.DefaultNodeSource;
 import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.testfwk.ui.AbstractXmiBasedSlizaaPartTest;
-import org.slizaa.testfwk.ui.SlizaaUITest;
+import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 import org.slizaa.ui.tree.actions.CollapseSelectionAction;
 import org.slizaa.ui.tree.actions.CopyActionGroup;
 import org.slizaa.ui.tree.actions.CopyIdAction;
@@ -20,14 +18,12 @@ import org.slizaa.ui.tree.actions.ExpandSelectionAction;
 import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 import org.slizaa.ui.xref.internal.testfwk.XRefTestLabelProviderInterceptor;
-import org.slizaa.workbench.model.ModelFactory;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
-@Category(SlizaaUITest.class)
-public abstract class AbstractXRefPartTest extends AbstractXmiBasedSlizaaPartTest {
+public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
-  private XRefPart             _part;
+  private static XRefPart      _part;
 
   /** - */
   private SWTBotTree           _xrefFromTree;
@@ -56,40 +52,23 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedSlizaaPartTes
   /** - */
   private List<HGNode>         _modules;
 
-  /** - */
-  private SlizaaWorkbenchModel _workbenchModel;
-
   /**
    * <p>
-   * Creates a new instance of type {@link AbstractXRefPartTest}.
    * </p>
    */
-  public AbstractXRefPartTest() {
-    super("eureka_1-4-10-aggregated.hggraph");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public void beforeShellOpens(Shell shell) {
-
-    // always call super.beforeShellOpens(shell)
-    super.beforeShellOpens(shell);
-
+  @BeforeClass
+  public static void createPart() {
+    
     //
-    _workbenchModel = ModelFactory.eINSTANCE.createSlizaaWorkbenchModel();
-
-    // create the xref part
-    _part = new XRefPart();
-    _part.initializeAbstractSlizaaPart(_workbenchModel);
-    _part.createComposite(shell);
+    _part = openShell(new XRefPart());
 
     // add actions
-    defaultActionContributionProvider().actionGroups().add(new CopyActionGroup());
-    defaultActionContributionProvider().actions().add(new CopyNameAction());
-    defaultActionContributionProvider().actions().add(new CopyIdAction());
-    defaultActionContributionProvider().actions().add(new ExpandSelectionAction());
-    defaultActionContributionProvider().actions().add(new CollapseSelectionAction());
+    
+    treeViewerFactoryRule.defaultActionContributionProvider().actionGroups().add(new CopyActionGroup());
+    treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new CopyNameAction());
+    treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new CopyIdAction());
+    treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new ExpandSelectionAction());
+    treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new CollapseSelectionAction());
   }
 
   /**
@@ -115,8 +94,8 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedSlizaaPartTes
                 .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
 
     //
-    _workbenchModel.setRootNode(rootNode());
-    _modules = rootNode().getChildren();
+    workbenchModel().setRootNode(testGraph().rootNode());
+    _modules = testGraph().rootNode().getChildren();
     _fromRootItem = fromTree().getTreeItem("HG Root Node");
     _centerRootItem = centerTree().getTreeItem("HG Root Node");
     _toRootItem = toTree().getTreeItem("HG Root Node");

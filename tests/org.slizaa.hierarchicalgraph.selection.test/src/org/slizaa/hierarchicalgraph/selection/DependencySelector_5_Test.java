@@ -15,12 +15,12 @@ import org.mockito.junit.MockitoRule;
 import org.slizaa.hierarchicalgraph.selection.fwk.DependencySelectorProbeRule;
 import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelectorListener;
 import org.slizaa.hierarchicalgraph.selection.selector.SelectedNodesChangedEvent;
-import org.slizaa.testfwk.TestGraph;
-import org.slizaa.testfwk.TestGraphProviderRule;
+import org.slizaa.testfwk.XmiBasedGraph;
+import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 public class DependencySelector_5_Test {
 
-  public static TestGraphProviderRule       _graphProvider = new TestGraphProviderRule(TestGraph.MAP_STRUCT);
+  public static XmiBasedTestGraphProviderRule       _graphProvider = new XmiBasedTestGraphProviderRule(XmiBasedGraph.MAP_STRUCT);
 
   public static DependencySelectorProbeRule _probe         = new DependencySelectorProbeRule(_graphProvider);
 

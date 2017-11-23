@@ -9,7 +9,7 @@ import org.junit.runners.model.Statement;
 import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
 import org.slizaa.hierarchicalgraph.selection.selector.DefaultDependencySelector;
 import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelector;
-import org.slizaa.testfwk.TestGraphProviderRule;
+import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>
@@ -20,7 +20,7 @@ import org.slizaa.testfwk.TestGraphProviderRule;
 public class DependencySelectorProbeRule implements TestRule {
 
   /** - */
-  private TestGraphProviderRule  _testGraphProvider;
+  private XmiBasedTestGraphProviderRule  _testGraphProvider;
 
   /** - */
   private HGAggregatedDependency _aggregatedDependency;
@@ -35,7 +35,7 @@ public class DependencySelectorProbeRule implements TestRule {
    *
    * @param testGraphProvider
    */
-  public DependencySelectorProbeRule(TestGraphProviderRule testGraphProvider) {
+  public DependencySelectorProbeRule(XmiBasedTestGraphProviderRule testGraphProvider) {
     _testGraphProvider = checkNotNull(testGraphProvider);
   }
 

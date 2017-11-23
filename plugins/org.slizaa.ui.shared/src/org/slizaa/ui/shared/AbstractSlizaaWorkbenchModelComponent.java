@@ -1,6 +1,7 @@
 package org.slizaa.ui.shared;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.selection.DependencySelection;
@@ -30,6 +32,9 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
   /** - */
   private Adapter              _workbenchModelObserver;
 
+  @PostConstruct
+  public abstract void createComposite(Composite parent);
+
   /**
    * <p>
    * </p>
@@ -38,8 +43,8 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
   @Inject
   public final void initializeAbstractSlizaaPart(SlizaaWorkbenchModel workbenchModel) {
 
-    _workbenchModel = checkNotNull(workbenchModel, "SlizaaWorkbenchModel must not be null." );
-    
+    _workbenchModel = checkNotNull(workbenchModel, "SlizaaWorkbenchModel must not be null.");
+
     //
     _workbenchModelObserver = new AdapterImpl() {
       @Override
@@ -51,19 +56,19 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
             //
             if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_RootNode())) {
               handleRootNodeChanged((HGRootNode) msg.getOldValue(), (HGRootNode) msg.getNewValue());
-            } 
+            }
             //
             else if (msg.getFeature()
                 .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_MainDependencySelection())) {
               handleMainDependencySelectionChanged((DependencySelection) msg.getOldValue(),
                   (DependencySelection) msg.getNewValue());
-            } 
+            }
             //
             else if (msg.getFeature()
                 .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_DetailDependencySelection())) {
               handleDetailDependencySelectionChanged((DependencySelection) msg.getOldValue(),
                   (DependencySelection) msg.getNewValue());
-            } 
+            }
             //
             else if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_NodeSelection())) {
               handleNodeSelectionChanged((NodeSelection) msg.getOldValue(), (NodeSelection) msg.getNewValue());
@@ -95,6 +100,8 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
    * @return
    */
   public SlizaaWorkbenchModel getWorkbenchModel() {
+    checkState(_workbenchModel != null,
+        "Component has not been initialized (invoke 'initializeAbstractSlizaaPart(SlizaaWorkbenchModel)').");
     return _workbenchModel;
   }
 

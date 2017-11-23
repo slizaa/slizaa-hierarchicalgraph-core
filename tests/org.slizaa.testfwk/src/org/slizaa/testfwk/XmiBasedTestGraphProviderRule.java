@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -28,23 +29,38 @@ import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class TestGraphProviderRule implements TestRule {
+public class XmiBasedTestGraphProviderRule implements TestRule {
 
   /** the root node */
-  private HGRootNode _rootNode;
+  private HGRootNode           _rootNode;
 
   /** - */
-  private TestGraph  _testGraph;
+  private XmiBasedGraph        _testGraph;
+
+  /** - */
+  private Consumer<HGRootNode> _testGraphConfigurer;
 
   /**
    * <p>
-   * Creates a new instance of type {@link TestGraphProviderRule}.
+   * Creates a new instance of type {@link XmiBasedTestGraphProviderRule}.
    * </p>
    *
    * @param testGraph
    */
-  public TestGraphProviderRule(TestGraph testGraph) {
+  public XmiBasedTestGraphProviderRule(XmiBasedGraph testGraph) {
+    this(testGraph, null);
+  }
+
+  /**
+   * <p>
+   * Creates a new instance of type {@link XmiBasedTestGraphProviderRule}.
+   * </p>
+   *
+   * @param testGraph
+   */
+  public XmiBasedTestGraphProviderRule(XmiBasedGraph testGraph, Consumer<HGRootNode> testGraphConfigurer) {
     this._testGraph = checkNotNull(testGraph);
+    this._testGraphConfigurer = testGraphConfigurer;
   }
 
   @Override
@@ -55,6 +71,8 @@ public class TestGraphProviderRule implements TestRule {
       public void evaluate() throws Throwable {
 
         _rootNode = load(_testGraph.getXmiFileName());
+
+        _testGraphConfigurer.accept(_rootNode);
 
         base.evaluate();
 
@@ -109,7 +127,7 @@ public class TestGraphProviderRule implements TestRule {
     ResourceImpl resource = new XMIResourceImpl();
 
     // load the content
-    try (InputStream zippedInputStream = TestGraphProviderRule.class.getClassLoader()
+    try (InputStream zippedInputStream = XmiBasedTestGraphProviderRule.class.getClassLoader()
         .getResourceAsStream(fileName.replace("hggraph", "zip"))) {
 
       assertThat(zippedInputStream).isNotNull();

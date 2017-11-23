@@ -7,8 +7,8 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
-import org.slizaa.testfwk.TestGraph;
-import org.slizaa.testfwk.TestGraphProviderRule;
+import org.slizaa.testfwk.XmiBasedGraph;
+import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>
@@ -19,7 +19,7 @@ import org.slizaa.testfwk.TestGraphProviderRule;
 public class LookupNodeTest {
 
   @ClassRule
-  public static TestGraphProviderRule _graphProvider = new TestGraphProviderRule(TestGraph.MAP_STRUCT);
+  public static XmiBasedTestGraphProviderRule _graphProvider = new XmiBasedTestGraphProviderRule(XmiBasedGraph.MAP_STRUCT);
 
   /**
    * <p>

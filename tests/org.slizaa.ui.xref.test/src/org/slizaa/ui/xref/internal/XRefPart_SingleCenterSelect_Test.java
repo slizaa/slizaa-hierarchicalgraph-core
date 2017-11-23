@@ -19,6 +19,8 @@ public class XRefPart_SingleCenterSelect_Test extends AbstractXRefPartTest {
   @Test
   public void test() throws InterruptedException {
 
+    displaySleep();
+    
     //
     for (int i = 0; i < modules().size(); i++) {
 

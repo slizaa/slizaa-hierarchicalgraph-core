@@ -22,14 +22,11 @@ public class DependencyTreePartTest extends AbstractDependencyTreePartTest {
     //
     DependencySelection dependencySelection = SelectionFactory.eINSTANCE.createDependencySelection();
     dependencySelection.getDependencies()
-        .addAll(rootNode().getChildren().get(5).getAccumulatedOutgoingCoreDependencies());
+        .addAll(testGraph().rootNode().getChildren().get(5).getAccumulatedOutgoingCoreDependencies());
 
     //
     part().handleMainDependencySelectionChanged(null, dependencySelection);
 
-    // TODO
-
-    //
-    displaySleep();
+    // TODO: tests
   }
 }

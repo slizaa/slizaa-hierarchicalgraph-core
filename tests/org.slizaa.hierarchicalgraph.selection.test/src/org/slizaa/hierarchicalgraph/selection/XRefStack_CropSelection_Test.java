@@ -7,13 +7,13 @@ import java.util.Collections;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.selection.fwk.XRefStackProbeRule;
-import org.slizaa.testfwk.TestGraph;
-import org.slizaa.testfwk.TestGraphProviderRule;
+import org.slizaa.testfwk.XmiBasedGraph;
+import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 public class XRefStack_CropSelection_Test {
 
   @ClassRule
-  public static TestGraphProviderRule _graphProvider = new TestGraphProviderRule(TestGraph.EUREKA_AGGREGATED);
+  public static XmiBasedTestGraphProviderRule _graphProvider = new XmiBasedTestGraphProviderRule(XmiBasedGraph.EUREKA_AGGREGATED);
 
   @ClassRule
   public static XRefStackProbeRule    _probe         = new XRefStackProbeRule();

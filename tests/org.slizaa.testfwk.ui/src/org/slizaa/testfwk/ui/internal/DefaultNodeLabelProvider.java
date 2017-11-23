@@ -1,10 +1,12 @@
-package org.slizaa.testfwk.ui;
+package org.slizaa.testfwk.ui.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.function.Function;
 
 import org.eclipse.emf.edit.provider.StyledString;
+import org.eclipse.swt.graphics.Image;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
 import org.slizaa.testfwk.HGNodeUtils;
@@ -17,7 +19,7 @@ import org.slizaa.testfwk.HGNodeUtils;
  */
 public class DefaultNodeLabelProvider implements INodeLabelProvider {
 
-  private final IImageProvider _imageProvider;
+  private final Function<String, Image> _imageProvider;
 
   /**
    * <p>
@@ -26,7 +28,7 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
    *
    * @param imageProvider
    */
-  public DefaultNodeLabelProvider(IImageProvider imageProvider) {
+  public DefaultNodeLabelProvider(Function<String, Image> imageProvider) {
     _imageProvider = checkNotNull(imageProvider);
   }
 
@@ -47,23 +49,23 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
 
     //
     List<String> labels = HGNodeUtils.getLabels(hgNode);
-    
+
     //
-    String[][] mappings = { { "Artifact", "org/slizaa/testfwk/ui/icons/jar_obj.png" },
-        { "Package", "org/slizaa/testfwk/ui/icons/package_obj.png" },
-        { "Method", "org/slizaa/testfwk/ui/icons/methdef_obj.png" },
-        { "Field", "org/slizaa/testfwk/ui/icons/field_default_obj.png" },
-        { "Class", "org/slizaa/testfwk/ui/icons/class_obj.png" },
-        { "Annotation", "org/slizaa/testfwk/ui/icons/annotation_obj.png" },
-        { "Enum", "org/slizaa/testfwk/ui/icons/enum_obj.png" },
-        { "Interface", "org/slizaa/testfwk/ui/icons/int_obj.png" },
-        { "Directory", "org/slizaa/testfwk/ui/icons/fldr_obj.png" },
-        { "File", "org/slizaa/testfwk/ui/icons/file_obj.png" } };
+    String[][] mappings = { { "Artifact", "org/slizaa/testfwk/ui/internal/icons/jar_obj.png" },
+        { "Package", "org/slizaa/testfwk/ui/internal//icons/package_obj.png" },
+        { "Method", "org/slizaa/testfwk/ui/internal//icons/methdef_obj.png" },
+        { "Field", "org/slizaa/testfwk/ui/internal//icons/field_default_obj.png" },
+        { "Class", "org/slizaa/testfwk/ui/internal//icons/class_obj.png" },
+        { "Annotation", "org/slizaa/testfwk/ui/internal//icons/annotation_obj.png" },
+        { "Enum", "org/slizaa/testfwk/ui/internal//icons/enum_obj.png" },
+        { "Interface", "org/slizaa/testfwk/ui/internal//icons/int_obj.png" },
+        { "Directory", "org/slizaa/testfwk/ui/internal//icons/fldr_obj.png" },
+        { "File", "org/slizaa/testfwk/ui/internal//icons/file_obj.png" } };
 
     //
     for (String[] mapping : mappings) {
       if (labels.contains(mapping[0])) {
-        return _imageProvider.getImage(mapping[1]);
+        return _imageProvider.apply(mapping[1]);
       }
     }
 
@@ -91,7 +93,8 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
     //
     for (String[] mapping : mappings) {
       if (labels.contains(mapping[0])) {
-        return new StyledString(HGNodeUtils.getProperties(hgNode).get((mapping[1])) + " (" + hgNode.getIdentifier() + ")");
+        return new StyledString(
+            HGNodeUtils.getProperties(hgNode).get((mapping[1])) + " (" + hgNode.getIdentifier() + ")");
       }
     }
 

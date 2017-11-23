@@ -4,38 +4,31 @@ import static org.slizaa.hierarchicalgraph.selection.SelectionFactoryMethods.cre
 
 import java.util.Collection;
 
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.testfwk.ui.AbstractSlizaaPartTest;
-import org.slizaa.workbench.model.ModelFactory;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
+import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 
-public class DependencyTableTest extends AbstractSlizaaPartTest {
+/**
+ * <p>
+ * </p>
+ *
+ * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
+ */
+public class DependencyTableTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
-  private DependencyTablePart  _part;
-
-  /** - */
-  private SlizaaWorkbenchModel _workbenchModel;
+  private static DependencyTablePart _part;
 
   /**
-   * {@inheritDoc}
+   * <p>
+   * </p>
    */
-  @Override
-  public void beforeShellOpens(Shell shell) {
-    
-    super.beforeShellOpens(shell);
-
-    //
-    _workbenchModel = ModelFactory.eINSTANCE.createSlizaaWorkbenchModel();
-
-    // create the xref part
-    _part = new DependencyTablePart();
-    _part.initializeAbstractSlizaaPart(_workbenchModel);
-    _part.createComposite(shell);
+  @BeforeClass
+  public static void createPart() {
+    _part = openShell(new DependencyTablePart());
   }
 
   /**
@@ -49,8 +42,8 @@ public class DependencyTableTest extends AbstractSlizaaPartTest {
     SWTBotTable tableBot = swtbot().table();
 
     //
-    Collection<HGCoreDependency> dependencies = graphProvider().node(28232)
-        .getOutgoingDependenciesTo(graphProvider().node(267432)).getCoreDependencies();
+    Collection<HGCoreDependency> dependencies = testGraph().node(28232)
+        .getOutgoingDependenciesTo(testGraph().node(267432)).getCoreDependencies();
 
     //
     _part.handleDetailDependencySelectionChanged(null, createDependencySelection(dependencies));
@@ -61,7 +54,5 @@ public class DependencyTableTest extends AbstractSlizaaPartTest {
     // TODO: sort/filter/etc.
     // assert (tableBot.getTableItem(0).getText(0))
     // .equals("com.amazonaws.services.ec2.model.transform.DhcpConfigurationStaxUnmarshaller");
-
-    // displaySleep();
   }
 }
