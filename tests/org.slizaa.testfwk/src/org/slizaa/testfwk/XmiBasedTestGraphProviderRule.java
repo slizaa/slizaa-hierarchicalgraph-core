@@ -72,8 +72,11 @@ public class XmiBasedTestGraphProviderRule implements TestRule {
 
         _rootNode = load(_testGraph.getXmiFileName());
 
-        _testGraphConfigurer.accept(_rootNode);
-
+        // configure the resulting graph if necessary
+        if (_testGraphConfigurer != null) {
+          _testGraphConfigurer.accept(_rootNode);
+        }
+        
         base.evaluate();
 
         _rootNode = null;
