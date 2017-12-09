@@ -1,3 +1,5 @@
+sudo: false
+
 language: java
 
 jdk:
@@ -5,15 +7,24 @@ jdk:
 
 env:
   global:
+  - DISPLAY=:99.0
   - secure: Drg8dSza67q/h3WKF6LCvi2OOGk+wZ0gQtmpeKA2u8MrNeaw0sHbQRITFK3yx5uvX0eVOD7pNy9sfCO+QdbOloQdzpCsb1XjigHlDks8c5iPKnPCvJ8EPuP5vT0W9aBOIdjSt4XIsuqj7qyQbGE6BnR72Dk3zt8IBpywfkYmN/UsEyeGg0nRvmmV+dRkdarj4QVyD0TcsJq+VZveYIG0CETAUQ2EgjLshTPt6Gp25J5kbC/9f/Jqm1+HuALdkdFws3yvzvx7zSic/nPCYaHGEkERuGtKspb/uCzqEfzgEcuiD7zfPNJOIjMdekvRWYjIhw1fkYTJplhQzlieHogjoMrK9BPICPw6tV/dZnCEX3uRTl6ANC1qb116nvijFMVlgi/BaXNZDBw6Nm4NAhsdV3W0YQ8N+F+7Bnjwv1Ai/qOtRIkuY1WP/LQ45QG2pmWdm9i6WcftRFJKpxsGYqjzQChBXJzyqwT5kMUjSn5qRI8ZGhf110wlPUkwl5slbCNXbmcJOBwAdkhxNKp0hBJJi5GwCi0Bi/8/oMhOlwCbMI8dROr8NGIUc1W9r9G/I0zheIMATXIHms3ysPJBRoleVvJfc0tV6tsxRTgto9DV2louOPLKgDcS39jAvhWqxrVsdpHs4A5A10z80sRBOqKe/IQyhGwHmO2s4VN/fb/YtTI=
   - secure: oVCl5SZ7NL1nJZUfk/7k36+j5+UT6MCYNllIJi4hrTAnrs7rfv/DMu6i/GJkQNJ7CI0F60DGmGVjP0qa7kaKgtNdToHCeSsbc/CtmR9mdhg/f84NwCZ6UKgzcWomc/VO0Hp2CqWmKm1ogNz5AqgvOxYSLNFPY4PrX4Ce3KJuWx5rA8z1tqwl5Vip+HrnyvhPqYpGb590elJHiIDAmvdTuEXVJ4T2Ni8FRdfeMxE3K09pZe4ws5tDeoyfkYg33ZYYaRJ9VMpGbNsPndQjYdJeUeaoX24gfjvVohVvtdD63wruIRd3MNxG0TKyba9iNyqGleibHW41XiXj8AOETO5i1L1I0eEsb1vPLJGBJz/xZk1YI2ETIj8ANMEo/wXQFsFPq4sdBMQeLTUrSV287Ue0CGyUqQUqd64x5W2Oc/sWtnj+1dxLVM4jfFXWfNK8JlxQ4PqpZvZft9Ev8+nAuMWTTjUie8vu+/4BhXvlD1MQGQdEkjZED1uKDZGw0Yh8SN6ADauWId+4WUvU3Mrokmn4hLbByaRF9VN2MEz/SI49LAYz/TkBfxeFlUgcpRoXPDV2QOkIfMdzQ/hK0UGaQL5jqjB0Mh8wXoAYG7mOgRsuwMqYe4yYkfPyjh8e5GzrBoDdZ20lnOxRIy0vFPnAw20hPKXC15H/3frWYxpILQ3jvDY=
 
+install: true
+
+addons:
+  apt:
+    packages:
+    - metacity
+
 before_script:
-  - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to star
+  - metacity --sm-disable --replace 2> metacity.err &
 
 script:
+- export
 - mvn clean install -f pom.xml
 
 after_success:
