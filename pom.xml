@@ -12,6 +12,7 @@
 	<modules>
 		<module>releng/org.slizaa.hierarchicalgraph.core.target</module>
 		<module>releng/org.slizaa.hierarchicalgraph.core.feature</module>
+		<module>releng/org.slizaa.hierarchicalgraph.core.testfwk.feature</module>
 		<module>releng/org.slizaa.hierarchicalgraph.core.p2</module>
 
 		<module>plugins/org.slizaa.hierarchicalgraph</module>
@@ -30,12 +31,14 @@
 		<module>plugins/org.slizaa.ui.widget.dsm</module>
 		<module>plugins/org.slizaa.ui.xref</module>
 
-		<module>tests/org.slizaa.testfwk</module>
-		<module>tests/org.slizaa.hierarchicalgraph.test</module>
-		<module>tests/org.slizaa.hierarchicalgraph.selection.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.selection.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.testfwk</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.testfwk.ui</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.ui.dependencytable.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.ui.dependencytree.test</module>
+		<module>tests/org.slizaa.hierarchicalgraph.core.ui.xref.test</module>
 		
-		<module>tests/org.slizaa.testfwk.ui</module>
-		<module>tests/org.slizaa.ui.dependencytable.test</module>
 	</modules>
 
 	<prerequisites>
