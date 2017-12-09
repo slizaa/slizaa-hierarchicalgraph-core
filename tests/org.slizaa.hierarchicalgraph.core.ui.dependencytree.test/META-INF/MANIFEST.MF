@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.slizaa.hierarchicalgraph.core.ui.dependencytree.test
 Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.ui.dependencytree.test
-Fragment-Host: org.slizaa.ui.dependencytree
+Fragment-Host: org.slizaa.hierarchicalgraph.core.ui.dependencytree
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.slizaa.hierarchicalgraph.core.testfwk.ui;bundle-version="1.0.0",

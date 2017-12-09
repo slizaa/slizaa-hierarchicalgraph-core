@@ -51,16 +51,14 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
     List<String> labels = HGNodeUtils.getLabels(hgNode);
 
     //
-    String[][] mappings = { { "Artifact", "org/slizaa/testfwk/ui/internal/icons/jar_obj.png" },
-        { "Package", "org/slizaa/testfwk/ui/internal//icons/package_obj.png" },
-        { "Method", "org/slizaa/testfwk/ui/internal//icons/methdef_obj.png" },
-        { "Field", "org/slizaa/testfwk/ui/internal//icons/field_default_obj.png" },
-        { "Class", "org/slizaa/testfwk/ui/internal//icons/class_obj.png" },
-        { "Annotation", "org/slizaa/testfwk/ui/internal//icons/annotation_obj.png" },
-        { "Enum", "org/slizaa/testfwk/ui/internal//icons/enum_obj.png" },
-        { "Interface", "org/slizaa/testfwk/ui/internal//icons/int_obj.png" },
-        { "Directory", "org/slizaa/testfwk/ui/internal//icons/fldr_obj.png" },
-        { "File", "org/slizaa/testfwk/ui/internal//icons/file_obj.png" } };
+    String path = DefaultNodeLabelProvider.class.getPackage().getName().replace('.', '/');
+
+    //
+    String[][] mappings = { { "Artifact", path + "/icons/jar_obj.png" }, { "Package", path + "/icons/package_obj.png" },
+        { "Method", path + "/icons/methdef_obj.png" }, { "Field", path + "/icons/field_default_obj.png" },
+        { "Class", path + "/icons/class_obj.png" }, { "Annotation", path + "/icons/annotation_obj.png" },
+        { "Enum", path + "/icons/enum_obj.png" }, { "Interface", path + "/icons/int_obj.png" },
+        { "Directory", path + "/icons/fldr_obj.png" }, { "File", path + "/icons/file_obj.png" } };
 
     //
     for (String[] mapping : mappings) {

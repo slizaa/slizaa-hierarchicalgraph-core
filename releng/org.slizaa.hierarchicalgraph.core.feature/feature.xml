@@ -52,63 +52,63 @@
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.shared"
+         id="org.slizaa.hierarchicalgraph.core.ui.shared"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.dependencytable"
+         id="org.slizaa.hierarchicalgraph.core.ui.dependencytable"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.dependencytree"
+         id="org.slizaa.hierarchicalgraph.core.ui.dependencytree"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.dsm"
+         id="org.slizaa.hierarchicalgraph.core.ui.dsm"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.klighd"
+         id="org.slizaa.hierarchicalgraph.core.ui.klighd"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.klighd.synthesis"
+         id="org.slizaa.hierarchicalgraph.core.ui.klighd.synthesis"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.tree"
+         id="org.slizaa.hierarchicalgraph.core.ui.tree"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.widget.dsm"
+         id="org.slizaa.hierarchicalgraph.core.ui.widget.dsm"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.ui.xref"
+         id="org.slizaa.hierarchicalgraph.core.ui.xref"
          download-size="0"
          install-size="0"
          version="0.0.0"

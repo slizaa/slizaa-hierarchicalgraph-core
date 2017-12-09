@@ -21,15 +21,15 @@
 		<module>plugins/org.slizaa.hierarchicalgraph.selection</module>
 		<module>plugins/org.slizaa.workbench.model</module>
 		
-		<module>plugins/org.slizaa.ui.shared</module>
-		<module>plugins/org.slizaa.ui.dependencytable</module>
-		<module>plugins/org.slizaa.ui.dependencytree</module>
-		<module>plugins/org.slizaa.ui.dsm</module>
-		<module>plugins/org.slizaa.ui.klighd</module>
-		<module>plugins/org.slizaa.ui.klighd.synthesis</module>
-		<module>plugins/org.slizaa.ui.tree</module>
-		<module>plugins/org.slizaa.ui.widget.dsm</module>
-		<module>plugins/org.slizaa.ui.xref</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.shared</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dependencytable</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dependencytree</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dsm</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.klighd</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.klighd.synthesis</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.tree</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.widget.dsm</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.xref</module>
 
 		<module>tests/org.slizaa.hierarchicalgraph.core.selection.test</module>
 		<module>tests/org.slizaa.hierarchicalgraph.core.test</module>
