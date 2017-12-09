@@ -1,5 +1,6 @@
 package org.slizaa.ui.xref.internal;
 
+import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
 import org.slizaa.hierarchicalgraph.HGNode;
@@ -37,10 +38,11 @@ public class XRefPart_SingleCenterSelect_Test extends AbstractXRefPartTest {
       //
       for (HGAggregatedDependency dependency : centerModule.getIncomingDependenciesFrom(modules())) {
         
+        
         String fromLabel = getLabel(dependency.getFrom());
         
         System.out.printf("Try to find 'from' node '%s.'\n", fromLabel);
-        fromRootItem().getNode(getLabel(dependency.getFrom()));
+        swtbot().waitUntil(Conditions.treeItemHasNode(fromRootItem(), getLabel(dependency.getFrom())));
         System.out.printf("Found 'from' node '%s.'\n", fromLabel);
       }
 
@@ -50,7 +52,7 @@ public class XRefPart_SingleCenterSelect_Test extends AbstractXRefPartTest {
         String toLabel = getLabel(dependency.getFrom());
         
         System.out.printf("Try to find 'to' node '%s.' \n", toLabel);
-        toRootItem().getNode(getLabel(dependency.getTo()));
+        swtbot().waitUntil(Conditions.treeItemHasNode(toRootItem(), getLabel(dependency.getTo())));
         System.out.printf("Found 'to' node '%s.'\n", toLabel);
       }
     }

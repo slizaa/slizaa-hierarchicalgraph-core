@@ -2,6 +2,7 @@ package org.slizaa.ui.xref.internal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
 import org.slizaa.hierarchicalgraph.HGNode;
@@ -19,6 +20,7 @@ public class XRefPart_SingleCrop_Test extends AbstractXRefPartTest {
    * @throws InterruptedException
    */
   @Test
+  @Ignore
   public void test() throws InterruptedException {
 
     //
