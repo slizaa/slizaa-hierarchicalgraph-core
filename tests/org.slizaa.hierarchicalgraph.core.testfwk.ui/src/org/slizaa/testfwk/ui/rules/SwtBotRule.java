@@ -37,17 +37,19 @@ public class SwtBotRule extends ExternalResource {
    */
   @Override
   protected void after() {
-    if (_shell != null && !_shell.isDisposed()) {
-      _shell.dispose();
-      _shell = null;
-    }
+    _display.syncExec(() -> {
+      if (_shell != null && !_shell.isDisposed()) {
+        _shell.dispose();
+        _shell = null;
+      }
+    });
   };
 
   public void openShell() {
     _shell.open();
     _swtbot = new SWTBot(_shell);
   }
-  
+
   /**
    * <p>
    * </p>
