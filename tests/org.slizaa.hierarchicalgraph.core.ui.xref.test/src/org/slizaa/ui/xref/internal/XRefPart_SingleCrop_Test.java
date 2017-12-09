@@ -2,6 +2,7 @@ package org.slizaa.ui.xref.internal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.eclipse.swt.widgets.TreeItem;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
 import org.slizaa.hierarchicalgraph.HGNode;
@@ -27,6 +28,11 @@ public class XRefPart_SingleCrop_Test extends AbstractXRefPartTest {
       //
       HGNode centerModule = (HGNode) modules().get(i);
 
+      for (TreeItem item :    centerRootItem().widget.getItems()) {
+        System.out.println(item.getText());
+      }
+   
+      
       //
       centerRootItem().getNode(getLabel(centerModule)).select();
       cropSelectionButton().click();
