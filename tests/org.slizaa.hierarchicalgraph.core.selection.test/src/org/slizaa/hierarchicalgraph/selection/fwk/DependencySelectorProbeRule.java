@@ -7,9 +7,9 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 import org.slizaa.hierarchicalgraph.selection.selector.DefaultDependencySelector;
 import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelector;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>

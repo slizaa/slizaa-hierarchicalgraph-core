@@ -3,7 +3,7 @@ package org.slizaa.ui.dependencytree.internal;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 
 /**
  * <p>

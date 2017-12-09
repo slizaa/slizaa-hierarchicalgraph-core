@@ -12,4 +12,4 @@ Require-Bundle: org.slizaa.hierarchicalgraph;bundle-version="0.0.3",
  org.hamcrest.library;bundle-version="1.3.0",
  org.hamcrest.core;bundle-version="1.3.0",
  org.assertj.core;bundle-version="3.3.0"
-Export-Package: org.slizaa.testfwk
+Export-Package: org.slizaa.hierarchicalgraph.core.testfwk

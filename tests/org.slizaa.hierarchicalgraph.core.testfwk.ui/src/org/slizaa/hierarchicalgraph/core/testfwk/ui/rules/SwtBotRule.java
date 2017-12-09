@@ -1,4 +1,4 @@
-package org.slizaa.testfwk.ui.rules;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui.rules;
 
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;

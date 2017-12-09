@@ -1,13 +1,13 @@
-package org.slizaa.testfwk.ui;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.junit.ClassRule;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
-import org.slizaa.testfwk.XmiBasedGraph;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 public class AbstractXmiBasedTestGraphUiTest extends AbstractSlizaaUiTest {
 

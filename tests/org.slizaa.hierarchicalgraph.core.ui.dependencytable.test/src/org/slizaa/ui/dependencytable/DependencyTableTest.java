@@ -9,7 +9,7 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 
 /**
  * <p>

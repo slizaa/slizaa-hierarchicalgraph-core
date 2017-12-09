@@ -1,4 +1,4 @@
-package org.slizaa.testfwk.ui;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -11,10 +11,10 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.slizaa.testfwk.ui.rules.ImageRegistryRule;
-import org.slizaa.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
-import org.slizaa.testfwk.ui.rules.SlizaaWorkbenchModelRule;
-import org.slizaa.testfwk.ui.rules.SwtBotRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.ImageRegistryRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaWorkbenchModelRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SwtBotRule;
 import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 

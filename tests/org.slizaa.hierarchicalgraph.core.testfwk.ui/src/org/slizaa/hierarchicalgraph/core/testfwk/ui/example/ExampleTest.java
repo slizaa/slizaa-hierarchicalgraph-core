@@ -1,4 +1,4 @@
-package org.slizaa.testfwk.ui.example;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui.example;
 
 import java.io.Serializable;
 
@@ -11,12 +11,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.slizaa.testfwk.XmiBasedGraph;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
-import org.slizaa.testfwk.ui.TestGraphConfigurer;
-import org.slizaa.testfwk.ui.rules.ImageRegistryRule;
-import org.slizaa.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
-import org.slizaa.testfwk.ui.rules.SwtBotRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.TestGraphConfigurer;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.ImageRegistryRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SwtBotRule;
 
 @RunWith(SWTBotJunit4ClassRunner.class)
 public class ExampleTest {

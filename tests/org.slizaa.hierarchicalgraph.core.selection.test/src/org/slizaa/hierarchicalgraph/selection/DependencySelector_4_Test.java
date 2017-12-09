@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 import org.slizaa.hierarchicalgraph.selection.fwk.DependencySelectorProbeRule;
-import org.slizaa.testfwk.XmiBasedGraph;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 public class DependencySelector_4_Test  {
 

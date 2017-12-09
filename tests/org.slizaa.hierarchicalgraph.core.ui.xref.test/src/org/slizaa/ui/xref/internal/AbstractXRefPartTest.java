@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slizaa.hierarchicalgraph.DefaultNodeSource;
 import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 import org.slizaa.ui.tree.actions.CollapseSelectionAction;
 import org.slizaa.ui.tree.actions.CopyActionGroup;
 import org.slizaa.ui.tree.actions.CopyIdAction;

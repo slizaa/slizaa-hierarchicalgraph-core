@@ -12,11 +12,11 @@ import org.junit.rules.RuleChain;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 import org.slizaa.hierarchicalgraph.selection.fwk.DependencySelectorProbeRule;
 import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelectorListener;
 import org.slizaa.hierarchicalgraph.selection.selector.SelectedNodesChangedEvent;
-import org.slizaa.testfwk.XmiBasedGraph;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
 
 public class DependencySelector_5_Test {
 

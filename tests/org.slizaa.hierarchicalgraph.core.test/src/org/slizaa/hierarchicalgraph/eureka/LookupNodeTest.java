@@ -7,8 +7,8 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
-import org.slizaa.testfwk.XmiBasedGraph;
-import org.slizaa.testfwk.XmiBasedTestGraphProviderRule;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
+import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 
 /**
  * <p>

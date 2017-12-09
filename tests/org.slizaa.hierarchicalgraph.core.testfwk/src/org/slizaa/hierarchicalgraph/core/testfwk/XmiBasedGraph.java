@@ -1,4 +1,4 @@
-package org.slizaa.testfwk;
+package org.slizaa.hierarchicalgraph.core.testfwk;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

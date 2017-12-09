@@ -1,4 +1,4 @@
-package org.slizaa.testfwk.ui.internal;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -8,8 +8,8 @@ import java.util.function.Function;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.testfwk.HGNodeUtils;
 import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
-import org.slizaa.testfwk.HGNodeUtils;
 
 /**
  * <p>

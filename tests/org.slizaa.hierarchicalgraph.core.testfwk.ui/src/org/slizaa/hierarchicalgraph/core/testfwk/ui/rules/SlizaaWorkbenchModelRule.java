@@ -1,4 +1,4 @@
-package org.slizaa.testfwk.ui.rules;
+package org.slizaa.hierarchicalgraph.core.testfwk.ui.rules;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
