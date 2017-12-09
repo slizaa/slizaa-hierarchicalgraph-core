@@ -171,11 +171,6 @@ public class SlizaaTreeViewerCreator {
     treeViewer.setContentProvider(getAdapterFactoryContentProvider(checkNotNull(_adapterFactory)));
     new SlizaaTreeMenuBuilder(treeViewer, _slizaaActionContributionProvider, _contextSupplier).populateMenu();
 
-    
-    System.out.println(treeViewer.getControl().getFont().getFontData()[0].getName());
-    System.out.println(treeViewer.getControl().getForeground());
-    System.out.println(treeViewer.getControl().getBackground());
-    
     //
     treeViewer
         .setLabelProvider(new InterceptableAdapterFactoryLabelProvider(checkNotNull(_adapterFactory), treeViewer));

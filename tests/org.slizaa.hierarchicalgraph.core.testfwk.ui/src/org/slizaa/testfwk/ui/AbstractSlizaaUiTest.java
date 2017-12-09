@@ -49,7 +49,7 @@ public class AbstractSlizaaUiTest {
     swtBotRule.openShell();
     return component;
   }
-
+  
   /**
    * <p>
    * </p>
@@ -79,7 +79,7 @@ public class AbstractSlizaaUiTest {
     return swtBotRule.shell();
   }
 
-  public Display display() {
+  public static Display display() {
     return swtBotRule.display();
   }
 

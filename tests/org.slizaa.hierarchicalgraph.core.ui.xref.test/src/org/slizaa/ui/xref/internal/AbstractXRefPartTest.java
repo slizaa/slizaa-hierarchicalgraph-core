@@ -18,39 +18,38 @@ import org.slizaa.ui.tree.actions.ExpandSelectionAction;
 import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 import org.slizaa.ui.xref.internal.testfwk.XRefTestLabelProviderInterceptor;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
-  private static XRefPart      _part;
+  private static XRefPart     _part;
 
   /** - */
-  private SWTBotTree           _xrefFromTree;
+  private SWTBotTree          _xrefFromTree;
 
   /** - */
-  private SWTBotTree           _xrefCenterTree;
+  private SWTBotTree          _xrefCenterTree;
 
   /** - */
-  private SWTBotTree           _xrefToTree;
+  private SWTBotTree          _xrefToTree;
 
   /** - */
-  private SWTBotTreeItem       _fromRootItem;
+  private SWTBotTreeItem      _fromRootItem;
 
   /** - */
-  private SWTBotTreeItem       _centerRootItem;
+  private SWTBotTreeItem      _centerRootItem;
 
   /** - */
-  private SWTBotTreeItem       _toRootItem;
+  private SWTBotTreeItem      _toRootItem;
 
   /** - */
-  private SWTBotToolbarButton  _cropSelectionButton;
+  private SWTBotToolbarButton _cropSelectionButton;
 
   /** - */
-  private SWTBotToolbarButton  _uncropButton;
+  private SWTBotToolbarButton _uncropButton;
 
   /** - */
-  private List<HGNode>         _modules;
+  private List<HGNode>        _modules;
 
   /**
    * <p>
@@ -58,12 +57,12 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTe
    */
   @BeforeClass
   public static void createPart() {
-    
+
     //
-    _part = openShell(new XRefPart());
+    display().syncExec(() -> _part = openShell(new XRefPart()));
 
     // add actions
-    
+
     treeViewerFactoryRule.defaultActionContributionProvider().actionGroups().add(new CopyActionGroup());
     treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new CopyNameAction());
     treeViewerFactoryRule.defaultActionContributionProvider().actions().add(new CopyIdAction());
@@ -86,15 +85,19 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTe
     _cropSelectionButton = swtbot().toolbarButtonWithId("slizaa-id", XRefComposite.ToolbarItems.CROP.name());
     _uncropButton = swtbot().toolbarButtonWithId("slizaa-id", XRefComposite.ToolbarItems.UNCROP.name());
 
-    // patch the label provider
-    XRefComposite xRefComposite = (XRefComposite) _xrefCenterTree.widget.getParent().getParent().getParent();
-    ((IInterceptableLabelProvider) xRefComposite.centeredTreeViewComposite().getTreeViewer().getLabelProvider())
-        .setLabelProviderInterceptor(new XRefTestLabelProviderInterceptor(
-            (SelectedNodesLabelProviderInterceptor) ((IInterceptableLabelProvider) xRefComposite
-                .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
+    display().syncExec(() -> {
 
-    //
-    workbenchModel().setRootNode(testGraph().rootNode());
+      // patch the label provider
+      XRefComposite xRefComposite = (XRefComposite) _xrefCenterTree.widget.getParent().getParent().getParent();
+      ((IInterceptableLabelProvider) xRefComposite.centeredTreeViewComposite().getTreeViewer().getLabelProvider())
+          .setLabelProviderInterceptor(new XRefTestLabelProviderInterceptor(
+              (SelectedNodesLabelProviderInterceptor) ((IInterceptableLabelProvider) xRefComposite
+                  .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
+
+      //
+      workbenchModel().setRootNode(testGraph().rootNode());
+    });
+
     _modules = testGraph().rootNode().getChildren();
     _fromRootItem = fromTree().getTreeItem("HG Root Node");
     _centerRootItem = centerTree().getTreeItem("HG Root Node");
