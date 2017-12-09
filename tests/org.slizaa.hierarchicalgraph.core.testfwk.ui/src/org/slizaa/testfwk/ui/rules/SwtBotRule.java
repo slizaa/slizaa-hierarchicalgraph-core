@@ -24,10 +24,12 @@ public class SwtBotRule extends ExternalResource {
   protected void before() throws Throwable {
 
     //
-    _display = Display.getCurrent() != null ? Display.getCurrent() : new Display();
-    _shell = new Shell(_display);
-    _shell.setLayout(new FillLayout());
-    _shell.setSize(800, 400);
+    _display = Display.getDefault();
+    _display.syncExec(() -> {
+      _shell = new Shell(_display);
+      _shell.setLayout(new FillLayout());
+      _shell.setSize(800, 400);
+    });
   };
 
   /**
