@@ -9,6 +9,6 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.ui.dependencytree.test</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.core.ui.dependencytree.test</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 </project>

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.slizaa.hierarchicalgraph.selection.test
-Bundle-SymbolicName: org.slizaa.hierarchicalgraph.selection.test
+Bundle-Name: org.slizaa.hierarchicalgraph.core.selection.test
+Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.selection.test
 Bundle-Version: 1.0.0.qualifier
 Fragment-Host: org.slizaa.hierarchicalgraph.selection
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -11,6 +11,6 @@ Require-Bundle: org.slizaa.hierarchicalgraph,
  org.junit;visibility:=reexport,
  com.google.guava;bundle-version="15.0.0",
  org.assertj.core;bundle-version="3.3.0",
- org.slizaa.testfwk;bundle-version="0.0.3",
+ org.slizaa.hierarchicalgraph.core.testfwk;bundle-version="0.0.3",
  org.eclipse.emf.edit;bundle-version="2.12.0",
  org.mockito.mockito-all;bundle-version="1.10.19"

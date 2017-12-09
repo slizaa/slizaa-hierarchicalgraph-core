@@ -9,6 +9,6 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.hierarchicalgraph.selection.test</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.core.selection.test</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 </project>

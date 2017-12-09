@@ -9,6 +9,6 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	
-	<artifactId>org.slizaa.testfwk.ui</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.core.testfwk.ui</artifactId>
 	<packaging>eclipse-plugin</packaging>
 </project>
