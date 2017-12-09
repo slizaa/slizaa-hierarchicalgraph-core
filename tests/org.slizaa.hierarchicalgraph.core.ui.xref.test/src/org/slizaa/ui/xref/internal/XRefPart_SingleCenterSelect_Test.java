@@ -26,16 +26,32 @@ public class XRefPart_SingleCenterSelect_Test extends AbstractXRefPartTest {
       HGNode centerModule = (HGNode) modules().get(i);
 
       //
-      centerRootItem().getNode(getLabel(centerModule)).select();
+      System.out.println("Before select centered node...");
+      
+      //
+      centerTree().select(centerRootItem().getNode(getLabel(centerModule)));
+      
+      //
+      System.out.println("Center node selected.");
 
       //
       for (HGAggregatedDependency dependency : centerModule.getIncomingDependenciesFrom(modules())) {
+        
+        String fromLabel = getLabel(dependency.getFrom());
+        
+        System.out.printf("Try to find 'from' node '%s.'\n", fromLabel);
         fromRootItem().getNode(getLabel(dependency.getFrom()));
+        System.out.printf("Found 'from' node '%s.'\n", fromLabel);
       }
 
       //
       for (HGAggregatedDependency dependency : centerModule.getOutgoingDependenciesTo(modules())) {
+        
+        String toLabel = getLabel(dependency.getFrom());
+        
+        System.out.printf("Try to find 'to' node '%s.' \n", toLabel);
         toRootItem().getNode(getLabel(dependency.getTo()));
+        System.out.printf("Found 'to' node '%s.'\n", toLabel);
       }
     }
   }
