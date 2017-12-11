@@ -16,10 +16,10 @@
 		<module>releng/org.slizaa.hierarchicalgraph.core.p2</module>
 
 		<module>plugins/org.slizaa.hierarchicalgraph</module>
-		<module>plugins/org.slizaa.hierarchicalgraph.algorithms</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.algorithms</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.edit</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.selection</module>
-		<module>plugins/org.slizaa.workbench.model</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.workbench.model</module>
 		
 		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.shared</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dependencytable</module>

@@ -4,7 +4,7 @@ Bundle-Name: org.slizaa.ui.dsm
 Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.ui.dsm;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.slizaa.hierarchicalgraph;bundle-version="0.0.3",
- org.slizaa.hierarchicalgraph.algorithms;bundle-version="0.0.3",
+ org.slizaa.hierarchicalgraph.core.algorithms;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.core.ui.widget.dsm;bundle-version="0.0.3",
  org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -17,7 +17,7 @@ Require-Bundle: org.slizaa.hierarchicalgraph;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.core.ui.shared;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.selection;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.core.ui.tree;bundle-version="0.0.4",
- org.slizaa.workbench.model;bundle-version="0.0.4"
+ org.slizaa.hierarchicalgraph.core.workbench.model;bundle-version="0.0.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject;version="1.0.0",

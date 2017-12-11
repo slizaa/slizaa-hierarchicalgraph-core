@@ -20,5 +20,5 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.core.contexts;bundle-version="1.5.0",
  org.slizaa.hierarchicalgraph.core.ui.shared;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.selection;bundle-version="0.0.3",
- org.slizaa.workbench.model;bundle-version="0.0.4"
+ org.slizaa.hierarchicalgraph.core.workbench.model;bundle-version="0.0.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

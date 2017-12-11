@@ -15,5 +15,5 @@ Require-Bundle: org.eclipse.swtbot.eclipse.core;bundle-version="2.5.0",
  org.slizaa.hierarchicalgraph.core.testfwk.ui;bundle-version="0.0.4",
  org.eclipse.e4.core.di;bundle-version="1.6.1",
  org.assertj.core;bundle-version="3.3.0",
- org.slizaa.hierarchicalgraph.algorithms;bundle-version="0.0.4",
+ org.slizaa.hierarchicalgraph.core.algorithms;bundle-version="0.0.4",
  org.mockito.mockito-all;bundle-version="1.10.19"
