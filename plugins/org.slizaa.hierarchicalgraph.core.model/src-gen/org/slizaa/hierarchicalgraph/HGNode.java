@@ -278,7 +278,7 @@ public interface HGNode extends EObject {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model dataType="org.slizaa.hierarchicalgraph.Optional<T>" required="true"
+   * @model dataType="org.slizaa.hierarchicalgraph.Optional&lt;T&gt;" required="true"
    * @generated
    */
   <T> Optional<T> getNodeSource(Class<T> clazz);

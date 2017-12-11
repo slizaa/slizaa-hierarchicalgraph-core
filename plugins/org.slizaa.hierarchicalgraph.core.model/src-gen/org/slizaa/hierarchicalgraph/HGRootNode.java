@@ -59,7 +59,7 @@ public interface HGRootNode extends HGNode {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Extension Registry</em>' map.
    * @see org.slizaa.hierarchicalgraph.HierarchicalgraphPackage#getHGRootNode_ExtensionRegistry()
-   * @model mapType="org.slizaa.hierarchicalgraph.StringToObjectMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject>"
+   * @model mapType="org.slizaa.hierarchicalgraph.StringToObjectMap&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EJavaObject&gt;"
    * @generated
    */
   Map<String, Object> getExtensionRegistry();

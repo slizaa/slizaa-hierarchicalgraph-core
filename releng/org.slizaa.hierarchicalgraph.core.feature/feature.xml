@@ -24,14 +24,14 @@
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.hierarchicalgraph.core.algorithms"
+         id="org.slizaa.hierarchicalgraph.core.model.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+         
    <plugin
-         id="org.slizaa.hierarchicalgraph.edit"
+         id="org.slizaa.hierarchicalgraph.core.algorithms"
          download-size="0"
          install-size="0"
          version="0.0.0"

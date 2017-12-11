@@ -137,7 +137,7 @@ public interface HGCoreDependency extends AbstractHGDependency {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model dataType="org.slizaa.hierarchicalgraph.Optional<T>" required="true"
+   * @model dataType="org.slizaa.hierarchicalgraph.Optional&lt;T&gt;" required="true"
    * @generated
    */
   <T> Optional<T> getDependencySource(Class<T> clazz);

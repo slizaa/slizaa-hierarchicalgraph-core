@@ -16,8 +16,8 @@
 		<module>releng/org.slizaa.hierarchicalgraph.core.p2</module>
 
 		<module>plugins/org.slizaa.hierarchicalgraph.core.model</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.model.edit</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.core.algorithms</module>
-		<module>plugins/org.slizaa.hierarchicalgraph.edit</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.core.selection</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.core.workbench.model</module>
 		

@@ -33,7 +33,7 @@ public interface DefaultDependencySource extends IDependencySource {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Properties</em>' map.
    * @see org.slizaa.hierarchicalgraph.HierarchicalgraphPackage#getDefaultDependencySource_Properties()
-   * @model mapType="org.slizaa.hierarchicalgraph.StringToStringMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+   * @model mapType="org.slizaa.hierarchicalgraph.StringToStringMap&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString&gt;"
    * @generated
    */
   Map<String, String> getProperties();
