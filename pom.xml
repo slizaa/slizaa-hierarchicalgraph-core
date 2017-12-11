@@ -15,7 +15,7 @@
 		<module>releng/org.slizaa.hierarchicalgraph.core.testfwk.feature</module>
 		<module>releng/org.slizaa.hierarchicalgraph.core.p2</module>
 
-		<module>plugins/org.slizaa.hierarchicalgraph</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.model</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.core.algorithms</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.edit</module>
 		<module>plugins/org.slizaa.hierarchicalgraph.selection</module>

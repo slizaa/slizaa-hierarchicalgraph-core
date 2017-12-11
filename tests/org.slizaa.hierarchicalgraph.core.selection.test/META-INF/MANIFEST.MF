@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.selection.test
 Bundle-Version: 1.0.0.qualifier
 Fragment-Host: org.slizaa.hierarchicalgraph.selection
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.slizaa.hierarchicalgraph,
+Require-Bundle: org.slizaa.hierarchicalgraph.core.model,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,

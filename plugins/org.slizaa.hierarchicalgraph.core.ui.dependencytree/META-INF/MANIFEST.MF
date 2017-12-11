@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.ui.dependencytree;singlet
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.inject
-Require-Bundle: org.slizaa.hierarchicalgraph;bundle-version="0.0.3",
+Require-Bundle: org.slizaa.hierarchicalgraph.core.model;bundle-version="0.0.3",
  org.slizaa.hierarchicalgraph.core.algorithms;bundle-version="0.0.3",
  org.eclipse.ui,
  org.eclipse.core.runtime,

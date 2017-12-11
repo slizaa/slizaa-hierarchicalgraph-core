@@ -9,6 +9,6 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.hierarchicalgraph</artifactId>
+	<artifactId>org.slizaa.hierarchicalgraph.core.model</artifactId>
 	<packaging>eclipse-plugin</packaging>
 </project>
