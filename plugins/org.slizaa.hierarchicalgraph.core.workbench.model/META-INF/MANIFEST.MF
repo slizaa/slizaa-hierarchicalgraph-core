@@ -13,7 +13,7 @@ Export-Package: org.slizaa.workbench.model,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.slizaa.hierarchicalgraph.core.model;bundle-version="0.0.4";visibility:=reexport,
- org.slizaa.hierarchicalgraph.selection;bundle-version="0.0.4";visibility:=reexport,
+ org.slizaa.hierarchicalgraph.core.selection;bundle-version="0.0.4";visibility:=reexport,
  com.google.guava;bundle-version="15.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.slizaa.workbench.model.internal.Activator
