@@ -59,7 +59,7 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTe
   public static void createPart() {
 
     //
-    display().syncExec(() -> _part = openShell(new XRefPart()));
+    _part = openShell(new XRefPart());
 
     // add actions
 
@@ -85,18 +85,15 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTe
     _cropSelectionButton = swtbot().toolbarButtonWithId("slizaa-id", XRefComposite.ToolbarItems.CROP.name());
     _uncropButton = swtbot().toolbarButtonWithId("slizaa-id", XRefComposite.ToolbarItems.UNCROP.name());
 
-    display().syncExec(() -> {
+    // patch the label provider
+    XRefComposite xRefComposite = (XRefComposite) _xrefCenterTree.widget.getParent().getParent().getParent();
+    ((IInterceptableLabelProvider) xRefComposite.centeredTreeViewComposite().getTreeViewer().getLabelProvider())
+        .setLabelProviderInterceptor(new XRefTestLabelProviderInterceptor(
+            (SelectedNodesLabelProviderInterceptor) ((IInterceptableLabelProvider) xRefComposite
+                .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
 
-      // patch the label provider
-      XRefComposite xRefComposite = (XRefComposite) _xrefCenterTree.widget.getParent().getParent().getParent();
-      ((IInterceptableLabelProvider) xRefComposite.centeredTreeViewComposite().getTreeViewer().getLabelProvider())
-          .setLabelProviderInterceptor(new XRefTestLabelProviderInterceptor(
-              (SelectedNodesLabelProviderInterceptor) ((IInterceptableLabelProvider) xRefComposite
-                  .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
-
-      //
-      workbenchModel().setRootNode(testGraph().rootNode());
-    });
+    //
+    workbenchModel().setRootNode(testGraph().rootNode());
 
     _modules = testGraph().rootNode().getChildren();
     _fromRootItem = fromTree().getTreeItem("HG Root Node");
