@@ -39,17 +39,29 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    * </p>
    */
   public ExtendedHGRootNodeImpl() {
-    _trait = new ExtendedHGNodeTrait(this);
+    this._trait = new ExtendedHGNodeTrait(this);
   }
-  
+
   @SuppressWarnings("unchecked")
   @Override
   public <T> T getExtension(Class<T> clazz) {
     return (T) getExtensionRegistry().get(checkNotNull(clazz).getName());
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public <T> void registerExtension(Class<T> clazz, T extension) {
+
+    //
+    if (getExtensionRegistry().containsKey(checkNotNull(clazz).getName())) {
+      eSetDeliver(false);
+      getExtensionRegistry().remove(checkNotNull(clazz).getName());
+      eSetDeliver(true);
+    }
+
+    //
     getExtensionRegistry().put(checkNotNull(clazz).getName(), extension);
   }
 
@@ -62,12 +74,12 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
   @Override
   public <T> T getExtension(String key, Class<T> type) {
     Object result = getExtensionRegistry().get(checkNotNull(key));
-    
+
     if (result == null) {
       checkState(checkNotNull(type).isAssignableFrom(result.getClass()));
       return null;
     }
-    
+
     return (T) result;
   }
 
@@ -79,11 +91,11 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
   @Override
   public <T> boolean hasExtension(String key, Class<T> type) {
     Object result = getExtensionRegistry().get(checkNotNull(key));
-    
+
     if (result != null) {
       return checkNotNull(type).isAssignableFrom(result.getClass());
     }
-    
+
     return false;
   }
 
@@ -100,7 +112,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public void invalidateAllCaches() {
-    _trait.invalidateLocalCaches();
+    this._trait.invalidateLocalCaches();
     EcoreUtil.getAllContents(this, false).forEachRemaining((c) -> {
       ExtendedHGNodeTrait.getTrait(c).ifPresent((trait) -> trait.invalidateLocalCaches());
     });
@@ -131,7 +143,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public HGNode lookupNode(Object identifier) {
-    if (_idToNodeMap == null) {
+    if (this._idToNodeMap == null) {
       EcoreUtil.getAllContents(this, false).forEachRemaining((c) -> {
         if (HierarchicalgraphPackage.eINSTANCE.getHGNode().isInstance(c)) {
           HGNode node = (HGNode) c;
@@ -140,7 +152,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
       });
     }
 
-    return _idToNodeMap.get(identifier);
+    return this._idToNodeMap.get(identifier);
   }
 
   /**
@@ -148,7 +160,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public Object getIdentifier() {
-    return _trait.getIdentifier();
+    return this._trait.getIdentifier();
   }
 
   /**
@@ -156,41 +168,44 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public HGRootNode getRootNode() {
-    return _trait.getRootNode();
+    return this._trait.getRootNode();
   }
 
   public void resolveProxyDependencies() {
-    _trait.resolveProxyDependencies();
+    this._trait.resolveProxyDependencies();
   }
 
+  @Override
   public void resolveIncomingProxyDependencies() {
-    _trait.resolveIncomingProxyDependencies();
+    this._trait.resolveIncomingProxyDependencies();
   }
 
+  @Override
   public void resolveOutgoingProxyDependencies() {
-    _trait.resolveOutgoingProxyDependencies();
+    this._trait.resolveOutgoingProxyDependencies();
   }
 
   public void invalidateLocalCaches() {
-    _trait.invalidateLocalCaches();
+    this._trait.invalidateLocalCaches();
   }
 
   public void initializeLocalCaches() {
-    _trait.initializeLocalCaches();
+    this._trait.initializeLocalCaches();
   }
 
+  @Override
   public <T> Optional<T> getNodeSource(Class<T> clazz) {
-    return _trait.getNodeSource(clazz);
+    return this._trait.getNodeSource(clazz);
   }
 
   @Override
   public EList<HGCoreDependency> getAccumulatedOutgoingCoreDependencies() {
-    return _trait.getAccumulatedOutgoingCoreDependencies();
+    return this._trait.getAccumulatedOutgoingCoreDependencies();
   }
 
   @Override
   public EList<HGCoreDependency> getAccumulatedIncomingCoreDependencies() {
-    return _trait.getAccumulatedIncomingCoreDependencies();
+    return this._trait.getAccumulatedIncomingCoreDependencies();
   }
 
   /**
@@ -198,7 +213,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public HGAggregatedDependency getIncomingDependenciesFrom(HGNode node) {
-    return _trait.getIncomingDependenciesFrom(node);
+    return this._trait.getIncomingDependenciesFrom(node);
   }
 
   /**
@@ -206,7 +221,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public List<HGAggregatedDependency> getIncomingDependenciesFrom(List<HGNode> nodes) {
-    return _trait.getIncomingDependenciesFrom(nodes);
+    return this._trait.getIncomingDependenciesFrom(nodes);
   }
 
   /**
@@ -214,7 +229,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public HGAggregatedDependency getOutgoingDependenciesTo(HGNode node) {
-    return _trait.getOutgoingDependenciesTo(node);
+    return this._trait.getOutgoingDependenciesTo(node);
   }
 
   /**
@@ -222,7 +237,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public List<HGAggregatedDependency> getOutgoingDependenciesTo(List<HGNode> nodes) {
-    return _trait.getOutgoingDependenciesTo(nodes);
+    return this._trait.getOutgoingDependenciesTo(nodes);
   }
 
   /**
@@ -230,7 +245,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public boolean isPredecessorOf(HGNode node) {
-    return _trait.isPredecessorOf(node);
+    return this._trait.isPredecessorOf(node);
   }
 
   /**
@@ -238,15 +253,15 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    */
   @Override
   public boolean isSuccessorOf(HGNode node) {
-    return _trait.isSuccessorOf(node);
+    return this._trait.isSuccessorOf(node);
   }
 
   public void onExpand() {
-    _trait.onExpand();
+    this._trait.onExpand();
   }
 
   public void onCollapse() {
-    _trait.onCollapse();
+    this._trait.onCollapse();
   }
 
   public Map<Object, HGNode> getIdToNodeMap() {
@@ -254,7 +269,7 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
   }
 
   public ExtendedHGNodeTrait getTrait() {
-    return _trait;
+    return this._trait;
   }
 
   private List<HGNode> getSelfAndParentNodes(List<HGNode> modifiedNodes) {
@@ -277,17 +292,19 @@ public class ExtendedHGRootNodeImpl extends HGRootNodeImpl {
    * @return
    */
   private Map<Object, HGNode> idToNodeMap() {
-    if (_idToNodeMap == null) {
-      _idToNodeMap = new HashMap<>();
+    if (this._idToNodeMap == null) {
+      this._idToNodeMap = new HashMap<>();
     }
-    return _idToNodeMap;
+    return this._idToNodeMap;
   }
 
+  @Override
   public EList<HGCoreDependency> getIncomingCoreDependencies() {
-    return _trait.getIncomingCoreDependencies();
+    return this._trait.getIncomingCoreDependencies();
   }
 
+  @Override
   public EList<HGCoreDependency> getOutgoingCoreDependencies() {
-    return _trait.getOutgoingCoreDependencies();
+    return this._trait.getOutgoingCoreDependencies();
   }
 }
