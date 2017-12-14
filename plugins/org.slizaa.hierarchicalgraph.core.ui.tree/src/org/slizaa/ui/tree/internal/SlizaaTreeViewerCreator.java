@@ -22,7 +22,7 @@ import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;
 import org.slizaa.ui.tree.InterceptableAdapterFactoryLabelProvider;
-import org.slizaa.ui.tree.interceptors.ITreeEventInterceptor;
+import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
 
 import com.google.common.base.Supplier;
 
@@ -132,7 +132,7 @@ public class SlizaaTreeViewerCreator {
    * @return
    */
   public TreeViewer createTreeViewer(Composite parent, int style, int autoExpandLevel,
-      ITreeEventInterceptor eventInterceptor) {
+      ISlizaaTreeEventInterceptor eventInterceptor) {
 
     //
     final TreeViewer treeViewer = new SlizaaTreeViewer(parent, SWT.NO_SCROLL | SWT.V_SCROLL | style, eventInterceptor,

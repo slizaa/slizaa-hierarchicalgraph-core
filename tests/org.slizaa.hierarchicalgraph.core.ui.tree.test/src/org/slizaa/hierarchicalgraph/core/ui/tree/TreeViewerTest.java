@@ -1,5 +1,8 @@
 package org.slizaa.hierarchicalgraph.core.ui.tree;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.core.ui.tree.fwk.AbstractTreeViewerTest;
@@ -27,13 +30,21 @@ public class TreeViewerTest extends AbstractTreeViewerTest {
     rootNode.registerExtension(INodeComparator.class, new DummyNodeComparator());
 
     // TODO!!
-    
+
     // we have to set the node
     part().handleRootNodeChanged(null, testGraph().rootNode());
 
     //
-    // displaySleep();
+    SWTBotTreeItem[] treeItems = tree().getAllItems();
 
-    // TODO: tests
+    assertThat(treeItems).hasSize(63);
+    
+    //
+    for (SWTBotTreeItem treeItem : treeItems) {
+      System.out.println(treeItem);
+    }
+
+    //
+    // displaySleep();
   }
 }

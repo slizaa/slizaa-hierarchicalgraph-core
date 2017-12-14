@@ -6,7 +6,7 @@ import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.impl.ExtendedHGNodeImpl;
 import org.slizaa.ui.shared.context.BusyCursor;
-import org.slizaa.ui.tree.interceptors.ITreeEventInterceptor;
+import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
 
 /**
  * <p>
@@ -17,7 +17,7 @@ import org.slizaa.ui.tree.interceptors.ITreeEventInterceptor;
 public class SlizaaTreeViewer extends TreeViewer {
 
   /** - */
-  private ITreeEventInterceptor _eventInterceptor;
+  private ISlizaaTreeEventInterceptor _eventInterceptor;
 
   /**
    * <p>
@@ -28,7 +28,7 @@ public class SlizaaTreeViewer extends TreeViewer {
    * @param style
    * @param eventInterceptor
    */
-  public SlizaaTreeViewer(Composite parent, int style, ITreeEventInterceptor eventInterceptor, int autoExpandLevel) {
+  public SlizaaTreeViewer(Composite parent, int style, ISlizaaTreeEventInterceptor eventInterceptor, int autoExpandLevel) {
     super(parent, style);
 
     //

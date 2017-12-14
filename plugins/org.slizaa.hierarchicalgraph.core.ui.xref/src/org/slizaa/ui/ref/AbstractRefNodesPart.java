@@ -18,6 +18,7 @@ import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
 import org.slizaa.ui.tree.VisibleNodesFilter;
+import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
 
 /**
  * <p>
@@ -43,7 +44,8 @@ public abstract class AbstractRefNodesPart extends AbstractSlizaaWorkbenchModelC
     GridLayoutFactory.fillDefaults().applyTo(parent);
 
     // create the tree viewer
-    _treeViewer = SlizaaTreeViewerFactory.createTreeViewer(parent, SWT.NO_BACKGROUND | SWT.NONE | SWT.MULTI, 2, null);
+    _treeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(parent)
+        .withStyle(SWT.NO_BACKGROUND | SWT.NONE | SWT.MULTI).withAutoExpandLevel(2).create();
 
     //
     setSelection();
@@ -83,8 +85,9 @@ public abstract class AbstractRefNodesPart extends AbstractSlizaaWorkbenchModelC
     }
 
     // compute referenced/referencing nodes
-    Set<HGNode> referencedNodes = getNodesToShow(getWorkbenchModel().getNodeSelection() == null
-        ? Collections.emptyList() : getWorkbenchModel().getNodeSelection().getNodes());
+    Set<HGNode> referencedNodes = getNodesToShow(
+        getWorkbenchModel().getNodeSelection() == null ? Collections.emptyList()
+            : getWorkbenchModel().getNodeSelection().getNodes());
 
     //
     Set<HGNode> visible = NodeSelections.computeNodesWithParents(referencedNodes, false);

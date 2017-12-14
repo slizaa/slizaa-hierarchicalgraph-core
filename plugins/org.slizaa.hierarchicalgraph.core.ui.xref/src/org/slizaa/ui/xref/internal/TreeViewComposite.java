@@ -24,13 +24,13 @@ import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
 public class TreeViewComposite {
 
   /** the from tree viewer */
-  private TreeViewer                       _treeViewer;
+  private TreeViewer            _treeViewer;
 
   /** - */
-  private IExpandStrategy                  _treeExpandStrategy;
+  private IExpandStrategy       _treeExpandStrategy;
 
   /** - */
-  private ToolBar                          _toolBar;
+  private ToolBar               _toolBar;
 
   /** - */
   private Map<String, ToolItem> _toolItemMap;
@@ -60,7 +60,9 @@ public class TreeViewComposite {
     GridDataFactory.fillDefaults().align(hAlign, SWT.FILL).indent(0, 10).grab(true, false).applyTo(_toolBar);
 
     //
-    _treeViewer = SlizaaTreeViewerFactory.createTreeViewer(composite, SWT.NO_BACKGROUND | SWT.MULTI, 2, interceptor);
+    _treeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(composite).withStyle(SWT.NO_BACKGROUND | SWT.MULTI)
+        .withAutoExpandLevel(2).withTreeEventInterceptor(interceptor).create();
+
     _treeExpandStrategy = expandStrategy;
 
     //

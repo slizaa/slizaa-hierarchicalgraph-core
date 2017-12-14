@@ -19,7 +19,7 @@ public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelCompo
 
   /** - */
   private TreeViewer _slizaaTreeViewer;
-  
+
   /**
    * <p>
    * </p>
@@ -39,7 +39,9 @@ public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelCompo
     //
     GridLayoutFactory.fillDefaults().applyTo(parent);
 
-    _slizaaTreeViewer = SlizaaTreeViewerFactory.createTreeViewer(parent, SWT.NONE, 1, null);
+    //
+    _slizaaTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(parent).withStyle(SWT.NONE).withAutoExpandLevel(1)
+        .create();
 
     //
     GridDataFactory.fillDefaults().grab(true, true).applyTo(_slizaaTreeViewer.getControl());

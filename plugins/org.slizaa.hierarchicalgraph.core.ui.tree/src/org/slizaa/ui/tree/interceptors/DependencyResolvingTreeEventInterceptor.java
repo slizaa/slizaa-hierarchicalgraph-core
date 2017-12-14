@@ -18,7 +18,7 @@ import org.slizaa.hierarchicalgraph.impl.Utilities;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class DependencyResolvingTreeEventInterceptor implements ITreeEventInterceptor {
+public class DependencyResolvingTreeEventInterceptor implements ISlizaaTreeEventInterceptor {
 
   /** - */
   private Function<HGNode, Collection<HGCoreDependency>> _coreDependencySupplier;

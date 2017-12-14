@@ -9,11 +9,29 @@ import org.slizaa.hierarchicalgraph.HGNode;
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  *
  */
-public interface ITreeEventInterceptor {
+public interface ISlizaaTreeEventInterceptor {
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param data
+   */
   void handleSelect(HGNode data);
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param data
+   */
   void handleTreeExpand(HGNode data);
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param data
+   */
   void handleTreeCollapse(HGNode data);
 }
