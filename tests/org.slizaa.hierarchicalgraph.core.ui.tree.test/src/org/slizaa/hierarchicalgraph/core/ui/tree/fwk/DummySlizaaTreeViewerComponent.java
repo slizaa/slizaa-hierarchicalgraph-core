@@ -1,3 +1,4 @@
+
 package org.slizaa.hierarchicalgraph.core.ui.tree.fwk;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -15,7 +16,7 @@ import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelComponent {
+public class DummySlizaaTreeViewerComponent extends AbstractSlizaaWorkbenchModelComponent {
 
   /** - */
   private TreeViewer _slizaaTreeViewer;
@@ -27,7 +28,7 @@ public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelCompo
    * @return
    */
   public TreeViewer getTreeViewer() {
-    return _slizaaTreeViewer;
+    return this._slizaaTreeViewer;
   }
 
   /**
@@ -40,11 +41,11 @@ public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelCompo
     GridLayoutFactory.fillDefaults().applyTo(parent);
 
     //
-    _slizaaTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(parent).withStyle(SWT.NONE).withAutoExpandLevel(1)
-        .create();
+    this._slizaaTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(parent).withStyle(SWT.NONE)
+        .withAutoExpandLevel(1).create();
 
     //
-    GridDataFactory.fillDefaults().grab(true, true).applyTo(_slizaaTreeViewer.getControl());
+    GridDataFactory.fillDefaults().grab(true, true).applyTo(this._slizaaTreeViewer.getControl());
   }
 
   /**
@@ -52,6 +53,6 @@ public class DummySlizaaTreeViewerPart extends AbstractSlizaaWorkbenchModelCompo
    */
   @Override
   public void handleRootNodeChanged(HGRootNode oldValue, HGRootNode newValue) {
-    _slizaaTreeViewer.setInput(newValue);
+    this._slizaaTreeViewer.setInput(newValue);
   }
 }

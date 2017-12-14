@@ -14,7 +14,7 @@ import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiT
 public abstract class AbstractTreeViewerTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
-  private static DummySlizaaTreeViewerPart _part;
+  private static DummySlizaaTreeViewerComponent _part;
 
   /** - */
   private SWTBotTree                           _tree;
@@ -25,7 +25,7 @@ public abstract class AbstractTreeViewerTest extends AbstractXmiBasedTestGraphUi
    */
   @BeforeClass
   public static void createPart() {
-    _part = openShell(new DummySlizaaTreeViewerPart());
+    _part = openShell(new DummySlizaaTreeViewerComponent());
   }
 
   /**
@@ -52,7 +52,7 @@ public abstract class AbstractTreeViewerTest extends AbstractXmiBasedTestGraphUi
    * <p>
    * </p>
    */
-  public DummySlizaaTreeViewerPart part() {
+  public DummySlizaaTreeViewerComponent part() {
     return _part;
   }
 }
