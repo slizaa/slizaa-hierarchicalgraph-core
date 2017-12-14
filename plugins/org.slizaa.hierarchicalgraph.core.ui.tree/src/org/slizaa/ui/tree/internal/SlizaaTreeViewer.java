@@ -4,7 +4,10 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.widgets.Composite;
+import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.impl.ExtendedHGNodeImpl;
+import org.slizaa.hierarchicalgraph.spi.INodeComparator;
+import org.slizaa.ui.shared.NodeComparator2ViewerComparatorAdapter;
 import org.slizaa.ui.shared.context.BusyCursor;
 import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
 
@@ -28,11 +31,12 @@ public class SlizaaTreeViewer extends TreeViewer {
    * @param style
    * @param eventInterceptor
    */
-  public SlizaaTreeViewer(Composite parent, int style, ISlizaaTreeEventInterceptor eventInterceptor, int autoExpandLevel) {
+  public SlizaaTreeViewer(Composite parent, int style, ISlizaaTreeEventInterceptor eventInterceptor,
+      int autoExpandLevel) {
     super(parent, style);
 
     //
-    _eventInterceptor = eventInterceptor;
+    this._eventInterceptor = eventInterceptor;
 
     //
     setAutoExpandLevel(autoExpandLevel);
@@ -51,8 +55,8 @@ public class SlizaaTreeViewer extends TreeViewer {
       BusyCursor.execute(getTree().getParent(), () -> {
 
         //
-        if (_eventInterceptor != null) {
-          _eventInterceptor.handleSelect((ExtendedHGNodeImpl) event.item.getData());
+        if (this._eventInterceptor != null) {
+          this._eventInterceptor.handleSelect((ExtendedHGNodeImpl) event.item.getData());
         }
 
         ExtendedHGNodeImpl hgNode = (ExtendedHGNodeImpl) event.item.getData();
@@ -74,8 +78,8 @@ public class SlizaaTreeViewer extends TreeViewer {
       BusyCursor.execute(getTree().getParent(), () -> {
 
         //
-        if (_eventInterceptor != null) {
-          _eventInterceptor.handleTreeExpand((ExtendedHGNodeImpl) event.item.getData());
+        if (this._eventInterceptor != null) {
+          this._eventInterceptor.handleTreeExpand((ExtendedHGNodeImpl) event.item.getData());
         }
 
         ExtendedHGNodeImpl hgNode = (ExtendedHGNodeImpl) event.item.getData();
@@ -97,8 +101,8 @@ public class SlizaaTreeViewer extends TreeViewer {
       BusyCursor.execute(getTree().getParent(), () -> {
 
         //
-        if (_eventInterceptor != null) {
-          _eventInterceptor.handleTreeCollapse((ExtendedHGNodeImpl) event.item.getData());
+        if (this._eventInterceptor != null) {
+          this._eventInterceptor.handleTreeCollapse((ExtendedHGNodeImpl) event.item.getData());
         }
 
         //
@@ -109,4 +113,28 @@ public class SlizaaTreeViewer extends TreeViewer {
     super.handleTreeCollapse(event);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void inputChanged(Object input, Object oldInput) {
+
+    System.out.println("inputChanged: " + input);
+
+    //
+    if (input instanceof HGRootNode) {
+
+      HGRootNode newRootNode = (HGRootNode) input;
+
+      if (newRootNode.hasExtension(INodeComparator.class)) {
+
+        INodeComparator nodeComparator = newRootNode.getExtension(INodeComparator.class);
+
+        this.setComparator(new NodeComparator2ViewerComparatorAdapter(nodeComparator));
+      }
+    }
+
+    //
+    super.inputChanged(input, oldInput);
+  }
 }

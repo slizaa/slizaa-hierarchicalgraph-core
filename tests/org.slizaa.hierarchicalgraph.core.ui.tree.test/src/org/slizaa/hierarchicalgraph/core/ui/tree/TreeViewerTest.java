@@ -17,7 +17,7 @@ public class TreeViewerTest extends AbstractTreeViewerTest {
   /**
    * <p>
    * </p>
-   * 
+   *
    * @throws InterruptedException
    */
   @Test
@@ -37,8 +37,9 @@ public class TreeViewerTest extends AbstractTreeViewerTest {
     //
     SWTBotTreeItem[] treeItems = tree().getAllItems();
 
+    //
     assertThat(treeItems).hasSize(63);
-    
+
     //
     for (SWTBotTreeItem treeItem : treeItems) {
       System.out.println(treeItem);
