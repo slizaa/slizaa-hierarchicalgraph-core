@@ -1,10 +1,17 @@
 package org.slizaa.ui.tree.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.impl.ExtendedHGNodeImpl;
 import org.slizaa.hierarchicalgraph.spi.INodeComparator;
 import org.slizaa.ui.shared.NodeComparator2ViewerComparatorAdapter;
@@ -21,6 +28,9 @@ public class SlizaaTreeViewer extends TreeViewer {
 
   /** - */
   private ISlizaaTreeEventInterceptor _eventInterceptor;
+
+  /** - */
+  private Adapter                     _adapter;
 
   /**
    * <p>
@@ -41,6 +51,34 @@ public class SlizaaTreeViewer extends TreeViewer {
     //
     setAutoExpandLevel(autoExpandLevel);
     setUseHashlookup(true);
+
+    //
+    this._adapter = new AdapterImpl() {
+
+      @Override
+      public void notifyChanged(Notification notification) {
+
+        switch (notification.getFeatureID(HGRootNode.class)) {
+        case HierarchicalgraphPackage.HG_ROOT_NODE__EXTENSION_REGISTRY: {
+
+          @SuppressWarnings("unchecked")
+          BasicEMap.Entry<String, Object> newValue = (BasicEMap.Entry<String, Object>) notification.getNewValue();
+
+          switch (newValue.getKey()) {
+          case "org.slizaa.hierarchicalgraph.spi.INodeComparator":
+            updateNodeComparator((HGRootNode) getInput());
+            break;
+          default:
+            break;
+          }
+
+          break;
+        }
+        default:
+          break;
+        }
+      }
+    };
   }
 
   /**
@@ -117,22 +155,40 @@ public class SlizaaTreeViewer extends TreeViewer {
    * {@inheritDoc}
    */
   @Override
-  protected void inputChanged(Object input, Object oldInput) {
+  protected void inputChanged(Object newInput, Object oldInput) {
 
-    //
-    if (input instanceof HGRootNode) {
+    // handle new input
+    if (newInput instanceof HGRootNode) {
 
-      HGRootNode newRootNode = (HGRootNode) input;
+      // initial setup
+      updateNodeComparator((HGRootNode) newInput);
 
-      if (newRootNode.hasExtension(INodeComparator.class)) {
+      // add adapters
+      ((HGRootNode) newInput).eAdapters().add(this._adapter);
+    }
 
-        INodeComparator nodeComparator = newRootNode.getExtension(INodeComparator.class);
+    // remove the old adapter
+    if (oldInput instanceof HGRootNode) {
 
-        this.setComparator(new NodeComparator2ViewerComparatorAdapter(nodeComparator));
-      }
+      //
+      ((HGRootNode) oldInput).eAdapters().remove(this._adapter);
     }
 
     //
-    super.inputChanged(input, oldInput);
+    super.inputChanged(newInput, oldInput);
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param rootNode
+   */
+  protected void updateNodeComparator(HGRootNode rootNode) {
+
+    //
+    if (checkNotNull(rootNode).hasExtension(INodeComparator.class)) {
+      this.setComparator(new NodeComparator2ViewerComparatorAdapter(rootNode.getExtension(INodeComparator.class)));
+    }
   }
 }

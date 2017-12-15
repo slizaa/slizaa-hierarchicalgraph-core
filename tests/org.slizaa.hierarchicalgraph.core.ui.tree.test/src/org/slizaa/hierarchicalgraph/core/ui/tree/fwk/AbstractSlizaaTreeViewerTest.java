@@ -11,7 +11,7 @@ import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiT
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public abstract class AbstractTreeViewerTest extends AbstractXmiBasedTestGraphUiTest {
+public abstract class AbstractSlizaaTreeViewerTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
   private static DummySlizaaTreeViewerComponent _part;
