@@ -37,8 +37,8 @@ import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.VisibleNodesFilter;
 import org.slizaa.ui.tree.expand.NullExpandStrategy;
 import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
-import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
+import org.slizaa.ui.tree.internal.IInterceptableLabelProvider;
 
 public class XRefComposite extends Composite {
 

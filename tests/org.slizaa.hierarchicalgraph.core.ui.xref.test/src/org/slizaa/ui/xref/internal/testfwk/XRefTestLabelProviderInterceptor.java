@@ -7,10 +7,10 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.slizaa.hierarchicalgraph.HGRootNode;
-import org.slizaa.ui.tree.interceptors.ILabelProviderInterceptor;
+import org.slizaa.ui.tree.interceptors.ISlizaaLabelProviderInterceptor;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 
-public class XRefTestLabelProviderInterceptor implements ILabelProviderInterceptor {
+public class XRefTestLabelProviderInterceptor implements ISlizaaLabelProviderInterceptor {
 
   /** - */
   private SelectedNodesLabelProviderInterceptor _delegate;

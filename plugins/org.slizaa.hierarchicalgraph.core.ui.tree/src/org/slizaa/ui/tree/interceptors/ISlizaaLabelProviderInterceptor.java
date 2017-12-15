@@ -10,7 +10,7 @@ import org.eclipse.swt.graphics.Font;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public interface ILabelProviderInterceptor {
+public interface ISlizaaLabelProviderInterceptor {
 
   /**
    * <p>
@@ -68,7 +68,7 @@ public interface ILabelProviderInterceptor {
    *
    * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
    */
-  public static class Adapter implements ILabelProviderInterceptor {
+  public static class Adapter implements ISlizaaLabelProviderInterceptor {
 
     /**
      * {@inheritDoc}

@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;
-import org.slizaa.ui.tree.InterceptableAdapterFactoryLabelProvider;
 import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
 
 import com.google.common.base.Supplier;
@@ -131,11 +130,11 @@ public class SlizaaTreeViewerCreator {
    * @param adapterFactory
    * @return
    */
-  public TreeViewer createTreeViewer(Composite parent, int style, int autoExpandLevel,
+  public SlizaaTreeViewer createTreeViewer(Composite parent, int style, int autoExpandLevel,
       ISlizaaTreeEventInterceptor eventInterceptor) {
 
     //
-    final TreeViewer treeViewer = new SlizaaTreeViewer(parent, SWT.NO_SCROLL | SWT.V_SCROLL | style, eventInterceptor,
+    final SlizaaTreeViewer treeViewer = new SlizaaTreeViewer(parent, SWT.NO_SCROLL | SWT.V_SCROLL | style, eventInterceptor,
         autoExpandLevel);
     
     treeViewer.setUseHashlookup(true);

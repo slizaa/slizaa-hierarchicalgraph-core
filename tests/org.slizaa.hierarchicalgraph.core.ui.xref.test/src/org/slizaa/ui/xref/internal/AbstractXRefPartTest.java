@@ -15,8 +15,8 @@ import org.slizaa.ui.tree.actions.CopyActionGroup;
 import org.slizaa.ui.tree.actions.CopyIdAction;
 import org.slizaa.ui.tree.actions.CopyNameAction;
 import org.slizaa.ui.tree.actions.ExpandSelectionAction;
-import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
+import org.slizaa.ui.tree.internal.IInterceptableLabelProvider;
 import org.slizaa.ui.xref.internal.testfwk.XRefTestLabelProviderInterceptor;
 
 public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTest {

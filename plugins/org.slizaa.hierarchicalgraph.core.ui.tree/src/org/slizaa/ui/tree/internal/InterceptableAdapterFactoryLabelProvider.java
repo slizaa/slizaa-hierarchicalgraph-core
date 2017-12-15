@@ -1,4 +1,4 @@
-package org.slizaa.ui.tree;
+package org.slizaa.ui.tree.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -8,8 +8,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
-import org.slizaa.ui.tree.interceptors.ILabelProviderInterceptor;
+import org.slizaa.ui.tree.interceptors.ISlizaaLabelProviderInterceptor;
 
 /**
  * <p>
@@ -21,7 +20,7 @@ public class InterceptableAdapterFactoryLabelProvider extends AdapterFactoryLabe
     implements IInterceptableLabelProvider {
 
   /** - */
-  private ILabelProviderInterceptor _labelProviderInterceptor;
+  private ISlizaaLabelProviderInterceptor _labelProviderInterceptor;
 
   /**
    * <p>
@@ -56,7 +55,7 @@ public class InterceptableAdapterFactoryLabelProvider extends AdapterFactoryLabe
    *
    * @return
    */
-  public ILabelProviderInterceptor getLabelProviderInterceptor() {
+  public ISlizaaLabelProviderInterceptor getLabelProviderInterceptor() {
     return _labelProviderInterceptor;
   }
 
@@ -66,7 +65,7 @@ public class InterceptableAdapterFactoryLabelProvider extends AdapterFactoryLabe
    *
    * @param labelProviderInterceptor
    */
-  public void setLabelProviderInterceptor(ILabelProviderInterceptor labelProviderInterceptor) {
+  public void setLabelProviderInterceptor(ISlizaaLabelProviderInterceptor labelProviderInterceptor) {
     this._labelProviderInterceptor = labelProviderInterceptor;
   }
 

@@ -7,7 +7,10 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.slizaa.ui.tree.interceptors.ISlizaaLabelProviderInterceptor;
 import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
+import org.slizaa.ui.tree.internal.IInterceptableLabelProvider;
+import org.slizaa.ui.tree.internal.SlizaaTreeViewer;
 import org.slizaa.ui.tree.internal.SlizaaTreeViewerCreator;
 import org.slizaa.ui.tree.internal.osgi.Activator;
 
@@ -80,16 +83,19 @@ public class SlizaaTreeViewerFactory {
   private static class DefaultSlizaaTreeViewerBuilder implements ISlizaaTreeViewerBuilder {
 
     /** - */
-    private Composite                   _parent;
+    private Composite                       _parent;
 
     /** - */
-    private int                         _style;
+    private int                             _style;
 
     /** - */
-    private int                         _autoExpandLevel;
+    private int                             _autoExpandLevel;
 
     /** - */
-    private ISlizaaTreeEventInterceptor _treeEventInterceptor;
+    private ISlizaaTreeEventInterceptor     _treeEventInterceptor;
+
+    /** - */
+    private ISlizaaLabelProviderInterceptor _labelProviderInterceptor;
 
     /**
      * <p>
@@ -101,7 +107,7 @@ public class SlizaaTreeViewerFactory {
     public DefaultSlizaaTreeViewerBuilder(Composite parent) {
       _parent = checkNotNull(parent);
       _style = SWT.NO_BACKGROUND | SWT.NONE | SWT.MULTI;
-    _autoExpandLevel = 3;
+      _autoExpandLevel = 3;
     }
 
     /**
@@ -129,6 +135,13 @@ public class SlizaaTreeViewerFactory {
       return this;
     }
 
+    @Override
+    public ISlizaaTreeViewerBuilder withLabelProviderInterceptor(
+        ISlizaaLabelProviderInterceptor labelProviderInterceptor) {
+      _labelProviderInterceptor = labelProviderInterceptor;
+      return this;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -136,8 +149,14 @@ public class SlizaaTreeViewerFactory {
     public TreeViewer create() {
 
       //
-      TreeViewer result = slizaaTreeViewerCreator().createTreeViewer(_parent, _style, _autoExpandLevel,
+      SlizaaTreeViewer result = slizaaTreeViewerCreator().createTreeViewer(_parent, _style, _autoExpandLevel,
           _treeEventInterceptor);
+
+      //
+      if (_labelProviderInterceptor != null) {
+        ((IInterceptableLabelProvider) result.getLabelProvider())
+            .setLabelProviderInterceptor(_labelProviderInterceptor);
+      }
 
       //
       return result;

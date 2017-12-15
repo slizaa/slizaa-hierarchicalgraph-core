@@ -1,4 +1,6 @@
-package org.slizaa.ui.tree.interceptors;
+package org.slizaa.ui.tree.internal;
+
+import org.slizaa.ui.tree.interceptors.ISlizaaLabelProviderInterceptor;
 
 /**
  * <p>
@@ -14,7 +16,7 @@ public interface IInterceptableLabelProvider {
    *
    * @return
    */
-  public ILabelProviderInterceptor getLabelProviderInterceptor();
+  public ISlizaaLabelProviderInterceptor getLabelProviderInterceptor();
 
   /**
    * <p>
@@ -30,5 +32,5 @@ public interface IInterceptableLabelProvider {
    *
    * @param labelProviderInterceptor
    */
-  public void setLabelProviderInterceptor(ILabelProviderInterceptor labelProviderInterceptor);
+  public void setLabelProviderInterceptor(ISlizaaLabelProviderInterceptor labelProviderInterceptor);
 }

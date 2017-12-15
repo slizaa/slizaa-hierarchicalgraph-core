@@ -43,7 +43,6 @@ import org.slizaa.ui.tree.VisibleNodesFilter;
 import org.slizaa.ui.tree.expand.DefaultExpandStrategy;
 import org.slizaa.ui.tree.expand.IExpandStrategy;
 import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
-import org.slizaa.ui.tree.interceptors.IInterceptableLabelProvider;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 
 /**
@@ -206,40 +205,28 @@ public class DependencyTreeComposite extends Composite {
     sashForm.setLayoutData(data);
 
     //
-    // _fromTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(sashForm).withStyle(SWT.NO_BACKGROUND |
-    // SWT.MULTI).withAutoExpandLevel(3).withTreeEventInterceptor((node) ->
-    // _selector.getDependenciesForSourceNode(node)).create();
-
     _fromTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(sashForm).withStyle(SWT.NO_BACKGROUND | SWT.MULTI)
         .withAutoExpandLevel(3)
+        .withLabelProviderInterceptor(new SelectedNodesLabelProviderInterceptor(
+            () -> _selector.getSelectedTargetNodes().isEmpty() ? Collections.emptyList()
+                : _selector.getFilteredSourceNodes()))
         .withTreeEventInterceptor(
             new DependencyResolvingTreeEventInterceptor((node) -> _selector.getDependenciesForSourceNode(node)))
         .create();
 
     _fromTreeViewer.getTree().setData("slizaa-id", SLIZAA_ID_DEPENDENCY_TREE_FROM_TREE);
 
-    if (_fromTreeViewer.getLabelProvider() instanceof IInterceptableLabelProvider) {
-      ((IInterceptableLabelProvider) _fromTreeViewer.getLabelProvider())
-          .setLabelProviderInterceptor(new SelectedNodesLabelProviderInterceptor(
-              () -> _selector.getSelectedTargetNodes().isEmpty() ? Collections.emptyList()
-                  : _selector.getFilteredSourceNodes()));
-    }
-
     //
     _toTreeViewer = SlizaaTreeViewerFactory.newSlizaaTreeViewer(sashForm).withStyle(SWT.NO_BACKGROUND | SWT.MULTI)
         .withAutoExpandLevel(3)
+        .withLabelProviderInterceptor(new SelectedNodesLabelProviderInterceptor(
+            () -> _selector.getSelectedSourceNodes().isEmpty() ? Collections.emptyList()
+                : _selector.getFilteredTargetNodes()))
         .withTreeEventInterceptor(
             new DependencyResolvingTreeEventInterceptor((node) -> _selector.getDependenciesForTargetNode(node)))
         .create();
 
     _toTreeViewer.getTree().setData("slizaa-id", SLIZAA_ID_DEPENDENCY_TREE_TO_TREE);
-
-    if (_toTreeViewer.getLabelProvider() instanceof IInterceptableLabelProvider) {
-      ((IInterceptableLabelProvider) _toTreeViewer.getLabelProvider())
-          .setLabelProviderInterceptor(new SelectedNodesLabelProviderInterceptor(
-              () -> _selector.getSelectedSourceNodes().isEmpty() ? Collections.emptyList()
-                  : _selector.getFilteredTargetNodes()));
-    }
 
     //
     _fromTreeViewer.setFilters(new VisibleNodesFilter(() -> _selector.getUnfilteredSourceNodes(), false));

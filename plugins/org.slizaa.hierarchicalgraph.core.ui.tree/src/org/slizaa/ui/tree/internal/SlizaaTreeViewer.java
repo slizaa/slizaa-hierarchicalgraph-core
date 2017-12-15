@@ -119,8 +119,6 @@ public class SlizaaTreeViewer extends TreeViewer {
   @Override
   protected void inputChanged(Object input, Object oldInput) {
 
-    System.out.println("inputChanged: " + input);
-
     //
     if (input instanceof HGRootNode) {
 

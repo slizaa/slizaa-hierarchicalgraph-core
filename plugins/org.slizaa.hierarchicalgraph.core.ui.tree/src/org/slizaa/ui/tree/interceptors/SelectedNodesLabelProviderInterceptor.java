@@ -14,8 +14,8 @@ import org.slizaa.hierarchicalgraph.HGRootNode;
  * 
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class SelectedNodesLabelProviderInterceptor extends ILabelProviderInterceptor.Adapter
-    implements ILabelProviderInterceptor {
+public class SelectedNodesLabelProviderInterceptor extends ISlizaaLabelProviderInterceptor.Adapter
+    implements ISlizaaLabelProviderInterceptor {
 
   /** - */
   private Supplier<Collection<HGNode>> _selectedNodesSupplier;
