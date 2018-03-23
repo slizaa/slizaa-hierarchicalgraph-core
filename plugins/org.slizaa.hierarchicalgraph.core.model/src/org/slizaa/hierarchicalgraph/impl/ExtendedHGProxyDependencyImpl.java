@@ -2,15 +2,14 @@ package org.slizaa.hierarchicalgraph.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Future;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
+import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverResult;
 
 /**
  * <p>
@@ -60,7 +59,7 @@ public class ExtendedHGProxyDependencyImpl extends HGProxyDependencyImpl {
    *
    * @return
    */
-  public List<Future<?>> onResolveProxyDependency() {
+  public IProxyDependencyResolverResult onResolveProxyDependency() {
 
     //
     if (!resolved) {

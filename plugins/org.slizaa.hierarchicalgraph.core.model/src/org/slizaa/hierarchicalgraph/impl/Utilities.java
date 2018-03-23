@@ -5,11 +5,8 @@ import static org.slizaa.hierarchicalgraph.HierarchicalgraphFactoryFunctions.rem
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
@@ -19,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.slizaa.hierarchicalgraph.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
+import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverResult;
 
 /**
  * <p>
@@ -54,8 +52,7 @@ public class Utilities {
    *
    * @param dependencies
    */
-  public static void resolveProxyDependencies(IProgressMonitor progressMonitor,
-      HGCoreDependency... dependencies) {
+  public static void resolveProxyDependencies(IProgressMonitor progressMonitor, HGCoreDependency... dependencies) {
     resolveProxyDependencies(Arrays.asList(dependencies), progressMonitor);
   }
 
@@ -69,7 +66,7 @@ public class Utilities {
       IProgressMonitor progressMonitor) {
 
     System.out.println(dependencies);
-    
+
     //
     if (dependencies == null || dependencies.isEmpty()) {
       return;
@@ -91,8 +88,8 @@ public class Utilities {
 
         //
         ExtendedHGProxyDependencyImpl extendedDependency = (ExtendedHGProxyDependencyImpl) coreDependency;
-        List<Future<?>> futureList = extendedDependency.onResolveProxyDependency();
-        dependencyResolutions.add(new DependencyResolution(futureList, extendedDependency));
+        dependencyResolutions
+            .add(new DependencyResolution(extendedDependency.onResolveProxyDependency(), extendedDependency));
       }
     }
 
@@ -100,26 +97,20 @@ public class Utilities {
     for (DependencyResolution dependencyResolution : dependencyResolutions) {
 
       //
-      for (Future<?> future : dependencyResolution.getFutures()) {
-        try {
-          future.get();
-        } catch (InterruptedException | ExecutionException e) {
-          throw new RuntimeException(e);
-        }
-      }
-
+      dependencyResolution.waitForCompletion();
+      
       //
       if (!dependencyResolution.getDependency().getResolvedCoreDependencies().isEmpty()) {
         removeDependency(dependencyResolution.getDependency(), true);
       } else {
-         System.out.println("*****************************************************************************************");
-         System.out.println("** WARNING: Aggregated Dependency has been resolved to ZERO core dependencies! **");
-         System.out
-         .println(String.format("** %s : %s **", dependencyResolution.getDependency().getFrom().getIdentifier(),
-         dependencyResolution.getDependency().getTo().getIdentifier()));
-         System.out.println("*****************************************************************************************");
+        System.out.println("*****************************************************************************************");
+        System.out.println("** WARNING: Aggregated Dependency has been resolved to ZERO core dependencies! **");
+        System.out
+            .println(String.format("** %s : %s **", dependencyResolution.getDependency().getFrom().getIdentifier(),
+                dependencyResolution.getDependency().getTo().getIdentifier()));
+        System.out.println("*****************************************************************************************");
       }
-      
+
       dependencyResolution.getDependency().setResolved(true);
     }
   }
@@ -132,24 +123,26 @@ public class Utilities {
    */
   private static class DependencyResolution {
 
-    private List<Future<?>>                        _futures;
+    private IProxyDependencyResolverResult _resolverJob;
 
-    private ExtendedHGProxyDependencyImpl _dependency;
+    private ExtendedHGProxyDependencyImpl  _dependency;
 
-    public DependencyResolution(List<Future<?>> futures, ExtendedHGProxyDependencyImpl dependency) {
+    public DependencyResolution(IProxyDependencyResolverResult resolverJob, ExtendedHGProxyDependencyImpl dependency) {
       _dependency = checkNotNull(dependency);
-      _futures = futures != null ? futures : Collections.emptyList();
+      _resolverJob = resolverJob;
     }
 
-    public List<Future<?>> getFutures() {
-      return _futures;
+    public void waitForCompletion() {
+      if (_resolverJob != null) {
+        _resolverJob.waitForCompletion();
+      }
     }
 
     public ExtendedHGProxyDependencyImpl getDependency() {
       return _dependency;
     }
   }
-  
+
   /**
    * <p>
    * </p>

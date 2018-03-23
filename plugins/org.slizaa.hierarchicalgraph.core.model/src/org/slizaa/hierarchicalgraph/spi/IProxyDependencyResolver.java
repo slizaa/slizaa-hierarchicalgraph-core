@@ -1,8 +1,5 @@
 package org.slizaa.hierarchicalgraph.spi;
 
-import java.util.List;
-import java.util.concurrent.Future;
-
 import org.slizaa.hierarchicalgraph.HGProxyDependency;
 
 /**
@@ -19,5 +16,22 @@ public interface IProxyDependencyResolver {
    *
    * @param dependencyToResolve
    */
-  List<Future<?>> resolveProxyDependency(HGProxyDependency dependencyToResolve);
+  IProxyDependencyResolverResult resolveProxyDependency(HGProxyDependency dependencyToResolve);
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
+   *
+   */
+  public static interface IProxyDependencyResolverResult {
+
+    /**
+     * <p>
+     * </p>
+     *
+     */
+    void waitForCompletion();
+  }
 }
