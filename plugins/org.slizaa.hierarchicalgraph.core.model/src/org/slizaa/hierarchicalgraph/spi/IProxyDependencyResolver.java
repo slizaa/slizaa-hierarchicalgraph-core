@@ -16,7 +16,7 @@ public interface IProxyDependencyResolver {
    *
    * @param dependencyToResolve
    */
-  IProxyDependencyResolverResult resolveProxyDependency(HGProxyDependency dependencyToResolve);
+  IProxyDependencyResolverJob resolveProxyDependency(HGProxyDependency dependencyToResolve);
 
   /**
    * <p>
@@ -25,7 +25,7 @@ public interface IProxyDependencyResolver {
    * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
    *
    */
-  public static interface IProxyDependencyResolverResult {
+  public static interface IProxyDependencyResolverJob {
 
     /**
      * <p>

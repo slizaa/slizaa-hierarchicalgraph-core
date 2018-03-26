@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
-import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverResult;
+import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
 
 /**
  * <p>
@@ -59,7 +59,7 @@ public class ExtendedHGProxyDependencyImpl extends HGProxyDependencyImpl {
    *
    * @return
    */
-  public IProxyDependencyResolverResult onResolveProxyDependency() {
+  public IProxyDependencyResolverJob onResolveProxyDependency() {
 
     //
     if (!resolved) {

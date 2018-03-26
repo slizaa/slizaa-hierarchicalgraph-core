@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.slizaa.hierarchicalgraph.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver;
-import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverResult;
+import org.slizaa.hierarchicalgraph.spi.IProxyDependencyResolver.IProxyDependencyResolverJob;
 
 /**
  * <p>
@@ -123,11 +123,11 @@ public class Utilities {
    */
   private static class DependencyResolution {
 
-    private IProxyDependencyResolverResult _resolverJob;
+    private IProxyDependencyResolverJob _resolverJob;
 
     private ExtendedHGProxyDependencyImpl  _dependency;
 
-    public DependencyResolution(IProxyDependencyResolverResult resolverJob, ExtendedHGProxyDependencyImpl dependency) {
+    public DependencyResolution(IProxyDependencyResolverJob resolverJob, ExtendedHGProxyDependencyImpl dependency) {
       _dependency = checkNotNull(dependency);
       _resolverJob = resolverJob;
     }
