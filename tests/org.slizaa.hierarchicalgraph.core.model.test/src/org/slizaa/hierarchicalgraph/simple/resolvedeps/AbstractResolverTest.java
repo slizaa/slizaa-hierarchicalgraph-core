@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.slizaa.hierarchicalgraph.HierarchicalgraphFactoryFunctions.createNewCoreDependency;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -70,11 +69,13 @@ public abstract class AbstractResolverTest implements IProxyDependencyResolver {
     return this._newDependency_2;
   }
 
+  
+  
   /**
    * {@inheritDoc}
    */
   @Override
-  public List<Future<?>> resolveProxyDependency(HGProxyDependency dependencyToResolve) {
+  public IProxyDependencyResolverJob resolveProxyDependency(HGProxyDependency dependencyToResolve) {
 
     this._newDependency_1 = createNewCoreDependency(dependencyToResolve.getFrom(), dependencyToResolve.getTo(),
         "NEW_USAGE", () -> HierarchicalgraphFactory.eINSTANCE.createDefaultDependencySource(), false);
