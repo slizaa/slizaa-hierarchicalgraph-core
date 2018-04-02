@@ -1,12 +1,9 @@
 /*******************************************************************************
- * Copyright (c) Gerd W�therich 2012-2016.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
+ * Copyright (c) Gerd W�therich 2012-2016. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the GNU Public License v3.0 which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
- * 
- * Contributors:
- *    Gerd W�therich (gerd@gerd-wuetherich.de) - initial API and implementation
+ *
+ * Contributors: Gerd W�therich (gerd@gerd-wuetherich.de) - initial API and implementation
  ******************************************************************************/
 package org.slizaa.ui.tree.expand;
 
@@ -47,26 +44,26 @@ public abstract class AbstractExpandStrategy implements IExpandStrategy {
   public void init(TreeViewer treeViewer) {
 
     //
-    _treeViewer = checkNotNull(treeViewer);
+    this._treeViewer = checkNotNull(treeViewer);
 
     //
-    _treeViewerListener = new ITreeViewerListener() {
+    this._treeViewerListener = new ITreeViewerListener() {
 
       @Override
       public void treeExpanded(TreeExpansionEvent event) {
-        _manuallyExpandedElements.add((HGNode) event.getElement());
-        _manuallyCollapsedElements.remove(event.getElement());
+        AbstractExpandStrategy.this._manuallyExpandedElements.add(event.getElement());
+        AbstractExpandStrategy.this._manuallyCollapsedElements.remove(event.getElement());
       }
 
       @Override
       public void treeCollapsed(TreeExpansionEvent event) {
-        _manuallyExpandedElements.remove(event.getElement());
-        _manuallyCollapsedElements.add((HGNode) event.getElement());
+        AbstractExpandStrategy.this._manuallyExpandedElements.remove(event.getElement());
+        AbstractExpandStrategy.this._manuallyCollapsedElements.add(event.getElement());
       }
     };
 
     //
-    treeViewer.addTreeListener(_treeViewerListener);
+    treeViewer.addTreeListener(this._treeViewerListener);
   }
 
   /**
@@ -76,7 +73,7 @@ public abstract class AbstractExpandStrategy implements IExpandStrategy {
   public void dispose() {
 
     //
-    _treeViewer.remove(_treeViewerListener);
+    this._treeViewer.remove(this._treeViewerListener);
   }
 
   /**
@@ -86,39 +83,43 @@ public abstract class AbstractExpandStrategy implements IExpandStrategy {
   public TreeViewer getTreeViewer() {
 
     //
-    return _treeViewer;
+    return this._treeViewer;
   }
 
   @Override
   public final void expand(Collection<HGNode> visibleElements) {
 
     //
-    _visibleElements = visibleElements;
+    this._visibleElements = new HashSet<HGNode>();
+    for (HGNode hgNode : visibleElements) {
+      this._visibleElements.add(hgNode);
+      this._visibleElements.addAll(hgNode.getPredecessors());
+    }
 
     // disable redraw (performance)
-    _treeViewer.getTree().setRedraw(false);
-    
+    this._treeViewer.getTree().setRedraw(false);
+
     //
     _expand(false);
-    
+
     // enable redraw (performance)
-    _treeViewer.getTree().setRedraw(true);
+    this._treeViewer.getTree().setRedraw(true);
   }
 
   public Collection<HGNode> getVisibleElements() {
-    return _visibleElements;
+    return this._visibleElements;
   }
 
   private void _expand(boolean deleteManuallyExpandedElements) {
 
     //
     if (deleteManuallyExpandedElements) {
-      _manuallyExpandedElements.clear();
-      _manuallyCollapsedElements.clear();
+      this._manuallyExpandedElements.clear();
+      this._manuallyCollapsedElements.clear();
     }
 
     //
-    Object input = _treeViewer.getInput();
+    Object input = this._treeViewer.getInput();
     if (input == null) {
       return;
     }
@@ -134,17 +135,17 @@ public abstract class AbstractExpandStrategy implements IExpandStrategy {
     List<Object> expandedElements = computeExpandedArtifacts(rootElement);
 
     //
-    expandedElements.addAll(_manuallyExpandedElements);
-    expandedElements.removeAll(_manuallyCollapsedElements);
+    expandedElements.addAll(this._manuallyExpandedElements);
+    expandedElements.removeAll(this._manuallyCollapsedElements);
 
     //
-    _treeViewer.setExpandedElements(expandedElements.toArray());
+    this._treeViewer.setExpandedElements(expandedElements.toArray());
   }
 
   /**
    * <p>
    * </p>
-   * 
+   *
    * @param rootElement
    * @param visibleArtifact
    * @return

@@ -1,5 +1,6 @@
 package org.slizaa.ui.dependencytree.internal;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slizaa.hierarchicalgraph.selection.DependencySelection;
 import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
@@ -8,12 +9,13 @@ import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
  * <p>
  * </p>
  */
+@Ignore
 public class DependencyTreePartTest extends AbstractDependencyTreePartTest {
 
   /**
    * <p>
    * </p>
-   * 
+   *
    * @throws InterruptedException
    */
   @Test
@@ -27,6 +29,7 @@ public class DependencyTreePartTest extends AbstractDependencyTreePartTest {
     //
     part().handleMainDependencySelectionChanged(null, dependencySelection);
 
+    displaySleep();
     // TODO: tests
   }
 }

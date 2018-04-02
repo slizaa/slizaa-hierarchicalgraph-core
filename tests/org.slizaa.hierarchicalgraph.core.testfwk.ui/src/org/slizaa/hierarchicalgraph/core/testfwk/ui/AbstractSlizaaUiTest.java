@@ -41,6 +41,7 @@ public class AbstractSlizaaUiTest {
    * <p>
    * </p>
    */
+  @Deprecated
   public static <T extends AbstractSlizaaWorkbenchModelComponent> T openShell(T component) {
 
     //
@@ -49,7 +50,11 @@ public class AbstractSlizaaUiTest {
     swtBotRule.openShell();
     return component;
   }
-  
+
+  public static void openShell() {
+    swtBotRule.openShell();
+  }
+
   /**
    * <p>
    * </p>

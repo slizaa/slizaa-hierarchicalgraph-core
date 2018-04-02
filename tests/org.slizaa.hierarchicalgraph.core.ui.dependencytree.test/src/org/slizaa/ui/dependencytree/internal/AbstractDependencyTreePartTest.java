@@ -4,6 +4,8 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
+import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreeComposite;
+import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
 
 /**
  * <p>
@@ -28,7 +30,9 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
    */
   @BeforeClass
   public static void createPart() {
-    _part = openShell(new DependencyTreePart());
+    _part = new DependencyTreePart();
+    // TODO
+    // _part.createComposite(shell(), injector);
   }
 
   /**
@@ -40,8 +44,8 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
   public void setup() {
 
     // create the SWTBotTrees
-    _fromTree = swtbot().treeWithId("slizaa-id", DependencyTreeComposite.SLIZAA_ID_DEPENDENCY_TREE_FROM_TREE);
-    _toTree = swtbot().treeWithId("slizaa-id", DependencyTreeComposite.SLIZAA_ID_DEPENDENCY_TREE_TO_TREE);
+    this._fromTree = swtbot().treeWithId("slizaa-id", DependencyTreeComposite.SLIZAA_ID_DEPENDENCY_TREE_FROM_TREE);
+    this._toTree = swtbot().treeWithId("slizaa-id", DependencyTreeComposite.SLIZAA_ID_DEPENDENCY_TREE_TO_TREE);
   }
 
   /**
@@ -49,7 +53,7 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
    * </p>
    */
   public SWTBotTree fromTree() {
-    return _fromTree;
+    return this._fromTree;
   }
 
   /**
@@ -57,7 +61,7 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
    * </p>
    */
   public SWTBotTree toTree() {
-    return _toTree;
+    return this._toTree;
   }
 
   /**
