@@ -19,6 +19,7 @@ public class DependencyTreePartTest extends AbstractDependencyTreePartTest {
    * @throws InterruptedException
    */
   @Test
+  @Ignore
   public void test() throws InterruptedException {
 
     //

@@ -3,6 +3,7 @@ package org.slizaa.ui.dependencytree.internal;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreeComposite;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
@@ -13,6 +14,7 @@ import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTr
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
+@Ignore
 public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */

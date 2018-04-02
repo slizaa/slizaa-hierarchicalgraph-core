@@ -27,14 +27,18 @@ public class Activator implements BundleActivator {
   @Override
   public void start(BundleContext bundleContext) throws Exception {
 
-    // get the eclipse context..
-    IEclipseContext eclipseContext = PlatformUI.getWorkbench().getService(IEclipseContext.class);
-
     //
-    Injector injector = Guice.createInjector(new DependencyTreeModule(eclipseContext));
+    if (PlatformUI.isWorkbenchRunning()) {
 
-    // ...and set the injector
-    eclipseContext.set(DependencyTreePart.INJECTOR_KEY, injector);
+      // get the eclipse context..
+      IEclipseContext eclipseContext = PlatformUI.getWorkbench().getService(IEclipseContext.class);
+
+      //
+      Injector injector = Guice.createInjector(new DependencyTreeModule(eclipseContext));
+
+      // ...and set the injector
+      eclipseContext.set(DependencyTreePart.INJECTOR_KEY, injector);
+    }
   }
 
   /**
@@ -43,12 +47,16 @@ public class Activator implements BundleActivator {
   @Override
   public void stop(BundleContext bundleContext) throws Exception {
 
-    // get the eclipse context..
-    IEclipseContext eclipseContext = PlatformUI.getWorkbench().getService(IEclipseContext.class);
+    //
+    if (PlatformUI.isWorkbenchRunning()) {
 
-    // ...and remove the injector
-    if (eclipseContext != null) {
-      eclipseContext.remove(DependencyTreePart.INJECTOR_KEY);
+      // get the eclipse context..
+      IEclipseContext eclipseContext = PlatformUI.getWorkbench().getService(IEclipseContext.class);
+
+      // ...and remove the injector
+      if (eclipseContext != null) {
+        eclipseContext.remove(DependencyTreePart.INJECTOR_KEY);
+      }
     }
   }
 }
