@@ -51,6 +51,10 @@ public class AbstractSlizaaUiTest {
     return component;
   }
 
+  /**
+   * <p>
+   * </p>
+   */
   public static void openShell() {
     swtBotRule.openShell();
   }
@@ -84,6 +88,12 @@ public class AbstractSlizaaUiTest {
     return swtBotRule.shell();
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
   public static Display display() {
     return swtBotRule.display();
   }

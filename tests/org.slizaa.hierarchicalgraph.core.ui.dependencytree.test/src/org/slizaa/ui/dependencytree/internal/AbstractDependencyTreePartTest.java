@@ -3,10 +3,12 @@ package org.slizaa.ui.dependencytree.internal;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreeComposite;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * <p>
@@ -14,7 +16,6 @@ import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTr
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-@Ignore
 public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTestGraphUiTest {
 
   /** - */
@@ -32,9 +33,16 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
    */
   @BeforeClass
   public static void createPart() {
+
+    //
+    Injector injector = Guice.createInjector(new DependencyTreeTestModule());
+
+    //
     _part = new DependencyTreePart();
-    // TODO
-    // _part.createComposite(shell(), injector);
+    _part.createComposite(shell(), injector);
+
+    //
+    openShell();
   }
 
   /**
@@ -54,6 +62,14 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
    * <p>
    * </p>
    */
+  public DependencyTreePart part() {
+    return _part;
+  }
+
+  /**
+   * <p>
+   * </p>
+   */
   public SWTBotTree fromTree() {
     return this._fromTree;
   }
@@ -66,11 +82,4 @@ public abstract class AbstractDependencyTreePartTest extends AbstractXmiBasedTes
     return this._toTree;
   }
 
-  /**
-   * <p>
-   * </p>
-   */
-  public DependencyTreePart part() {
-    return _part;
-  }
 }
