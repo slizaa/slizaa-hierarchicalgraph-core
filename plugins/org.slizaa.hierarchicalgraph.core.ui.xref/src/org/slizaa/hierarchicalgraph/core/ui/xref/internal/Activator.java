@@ -1,4 +1,4 @@
-package org.slizaa.ui.xref.internal;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

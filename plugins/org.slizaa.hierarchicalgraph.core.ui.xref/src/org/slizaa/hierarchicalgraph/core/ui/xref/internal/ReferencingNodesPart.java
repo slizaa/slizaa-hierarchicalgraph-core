@@ -1,4 +1,4 @@
-package org.slizaa.ui.ref;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import java.util.Collection;
 import java.util.Set;

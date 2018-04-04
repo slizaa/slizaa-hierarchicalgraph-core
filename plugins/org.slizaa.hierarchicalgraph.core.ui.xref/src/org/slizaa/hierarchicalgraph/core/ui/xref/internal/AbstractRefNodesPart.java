@@ -1,4 +1,4 @@
-package org.slizaa.ui.ref;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +18,6 @@ import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
 import org.slizaa.ui.tree.VisibleNodesFilter;
-import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
 
 /**
  * <p>

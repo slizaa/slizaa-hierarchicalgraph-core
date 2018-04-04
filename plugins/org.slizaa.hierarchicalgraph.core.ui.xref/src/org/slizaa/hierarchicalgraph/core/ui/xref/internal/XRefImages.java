@@ -1,4 +1,4 @@
-package org.slizaa.ui.xref.internal;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import java.io.File;
 import java.net.MalformedURLException;

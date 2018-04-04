@@ -4,21 +4,21 @@
    <extension
          point="org.eclipse.ui.views">
       <e4view
-            class="org.slizaa.ui.xref.internal.XRefPart"
+            class="org.slizaa.hierarchicalgraph.core.ui.xref.internal.XRefPart"
             icon="icons/XRef.png"
             id="org.slizaa.ui.xref.XRefPart"
             name="Cross-Referencer"
             restorable="true">
       </e4view>
       <e4view
-            class="org.slizaa.ui.ref.ReferencedNodesPart"
+            class="org.slizaa.hierarchicalgraph.core.ui.xref.internal.ReferencedNodesPart"
             icon="icons/ReferencedNodes.gif"
             id="org.slizaa.ui.xref.ReferencedNodesPart"
             name="Uses"
             restorable="true">
       </e4view>
 	  <e4view
-            class="org.slizaa.ui.ref.ReferencingNodesPart"
+            class="org.slizaa.hierarchicalgraph.core.ui.xref.internal.ReferencingNodesPart"
             icon="icons/ReferencingNodes.gif"
             id="org.slizaa.ui.xref.ReferencingNodesPart"
             name="Used By"
