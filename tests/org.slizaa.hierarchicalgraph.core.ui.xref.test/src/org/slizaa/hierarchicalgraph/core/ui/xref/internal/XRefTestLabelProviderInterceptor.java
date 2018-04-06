@@ -1,4 +1,4 @@
-package org.slizaa.ui.xref.internal.testfwk;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

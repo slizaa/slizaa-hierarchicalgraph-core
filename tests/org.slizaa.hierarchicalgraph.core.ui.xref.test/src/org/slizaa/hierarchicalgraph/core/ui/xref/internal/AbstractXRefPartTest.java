@@ -1,4 +1,4 @@
-package org.slizaa.ui.xref.internal;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import java.util.List;
 
@@ -17,7 +17,6 @@ import org.slizaa.ui.tree.actions.CopyNameAction;
 import org.slizaa.ui.tree.actions.ExpandSelectionAction;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 import org.slizaa.ui.tree.internal.IInterceptableLabelProvider;
-import org.slizaa.ui.xref.internal.testfwk.XRefTestLabelProviderInterceptor;
 
 public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTest {
 

@@ -1,4 +1,4 @@
-package org.slizaa.ui.xref.internal;
+package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.junit.Test;
