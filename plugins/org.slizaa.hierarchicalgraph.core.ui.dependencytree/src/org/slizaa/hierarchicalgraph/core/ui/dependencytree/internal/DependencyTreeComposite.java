@@ -31,10 +31,13 @@ import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelector;
 import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelectorListener;
 import org.slizaa.hierarchicalgraph.selection.selector.SelectedNodesChangedEvent;
 import org.slizaa.hierarchicalgraph.selection.selector.UnfilteredDependenciesChangedEvent;
+import org.slizaa.hierarchicalgraph.spi.IAutoExpandInterceptor;
 import org.slizaa.ui.shared.SlizaaCommonColors;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
 import org.slizaa.ui.tree.VisibleNodesFilter;
+import org.slizaa.ui.tree.expand.DefaultExpandStrategy;
+import org.slizaa.ui.tree.expand.IExpandStrategy;
 import org.slizaa.ui.tree.interceptors.DependencyResolvingTreeEventInterceptor;
 import org.slizaa.ui.tree.interceptors.SelectedNodesLabelProviderInterceptor;
 
@@ -67,11 +70,11 @@ public class DependencyTreeComposite extends Composite {
   /** - */
   private IDependencySelector                _selector;
 
-  // /** - */
-  // private IExpandStrategy _fromExpandStrategy;
-  //
-  // /** - */
-  // private IExpandStrategy _toExpandStrategy;
+  /** - */
+  private IExpandStrategy                    _fromExpandStrategy;
+
+  /** - */
+  private IExpandStrategy                    _toExpandStrategy;
 
   /** - */
   @Inject
@@ -121,8 +124,8 @@ public class DependencyTreeComposite extends Composite {
       }
     }
 
-    // this._fromExpandStrategy.expand(this._selector.getUnfilteredSourceNodes());
-    // this._toExpandStrategy.expand(this._selector.getUnfilteredTargetNodes());
+    this._fromExpandStrategy.expand(this._selector.getUnfilteredSourceNodes());
+    this._toExpandStrategy.expand(this._selector.getUnfilteredTargetNodes());
   }
 
   /**
@@ -131,11 +134,33 @@ public class DependencyTreeComposite extends Composite {
    */
   public void init() {
 
-    // TODO!!
-    // this._fromExpandStrategy = new DefaultExpandStrategy(
-    // (node) -> DefaultExpandStrategy.hasUnresolvedProxyDependencies(node.getOutgoingCoreDependencies()));
-    // this._toExpandStrategy = new DefaultExpandStrategy(
-    // (node) -> DefaultExpandStrategy.hasUnresolvedProxyDependencies(node.getIncomingCoreDependencies()));
+    //
+    this._fromExpandStrategy = new DefaultExpandStrategy((node) -> {
+
+      //
+      boolean preventAutoExpand = false;
+      if (node.getRootNode().hasExtension(IAutoExpandInterceptor.class)) {
+        preventAutoExpand = node.getRootNode().getExtension(IAutoExpandInterceptor.class).preventAutoExpansion(node);
+      }
+
+      //
+      return preventAutoExpand
+          || DefaultExpandStrategy.hasUnresolvedProxyDependencies(node.getOutgoingCoreDependencies());
+    });
+
+    //
+    this._toExpandStrategy = new DefaultExpandStrategy((node) -> {
+
+      //
+      boolean preventAutoExpand = false;
+      if (node.getRootNode().hasExtension(IAutoExpandInterceptor.class)) {
+        preventAutoExpand = node.getRootNode().getExtension(IAutoExpandInterceptor.class).preventAutoExpansion(node);
+      }
+
+      //
+      return preventAutoExpand
+          || DefaultExpandStrategy.hasUnresolvedProxyDependencies(node.getIncomingCoreDependencies());
+    });
 
     //
     this._selector = new DefaultDependencySelector();
@@ -217,8 +242,8 @@ public class DependencyTreeComposite extends Composite {
     this._toTreeViewer.addSelectionChangedListener(new ToArtifactSelectionChangedListener());
 
     //
-    // this._fromExpandStrategy.init(this._fromTreeViewer);
-    // this._toExpandStrategy.init(this._toTreeViewer);
+    this._fromExpandStrategy.init(this._fromTreeViewer);
+    this._toExpandStrategy.init(this._toTreeViewer);
   }
 
   /**
