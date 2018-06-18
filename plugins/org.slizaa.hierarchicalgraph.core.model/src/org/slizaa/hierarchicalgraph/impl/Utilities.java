@@ -65,8 +65,6 @@ public class Utilities {
   public static void resolveProxyDependencies(List<? extends HGCoreDependency> dependencies,
       IProgressMonitor progressMonitor) {
 
-    System.out.println(dependencies);
-
     //
     if (dependencies == null || dependencies.isEmpty()) {
       return;
@@ -98,7 +96,7 @@ public class Utilities {
 
       //
       dependencyResolution.waitForCompletion();
-      
+
       //
       if (!dependencyResolution.getDependency().getResolvedCoreDependencies().isEmpty()) {
         removeDependency(dependencyResolution.getDependency(), true);
@@ -123,23 +121,23 @@ public class Utilities {
    */
   private static class DependencyResolution {
 
-    private IProxyDependencyResolverJob _resolverJob;
+    private IProxyDependencyResolverJob   _resolverJob;
 
-    private ExtendedHGProxyDependencyImpl  _dependency;
+    private ExtendedHGProxyDependencyImpl _dependency;
 
     public DependencyResolution(IProxyDependencyResolverJob resolverJob, ExtendedHGProxyDependencyImpl dependency) {
-      _dependency = checkNotNull(dependency);
-      _resolverJob = resolverJob;
+      this._dependency = checkNotNull(dependency);
+      this._resolverJob = resolverJob;
     }
 
     public void waitForCompletion() {
-      if (_resolverJob != null) {
-        _resolverJob.waitForCompletion();
+      if (this._resolverJob != null) {
+        this._resolverJob.waitForCompletion();
       }
     }
 
     public ExtendedHGProxyDependencyImpl getDependency() {
-      return _dependency;
+      return this._dependency;
     }
   }
 
@@ -162,18 +160,18 @@ public class Utilities {
     }
 
     public void startBuffering() {
-      EList<Adapter> eAdapters = eObject.eAdapters();
+      EList<Adapter> eAdapters = this.eObject.eAdapters();
       for (Adapter a : eAdapters) {
-        savedAdapters.add(a);
+        this.savedAdapters.add(a);
       }
-      for (Adapter a : savedAdapters) {
+      for (Adapter a : this.savedAdapters) {
         eAdapters.remove(a);
       }
-      System.out.println("NotificationBuffer: " + savedAdapters.size());
+      System.out.println("NotificationBuffer: " + this.savedAdapters.size());
     }
 
     public void stopBuffering() {
-      eObject.eAdapters().addAll(savedAdapters);
+      this.eObject.eAdapters().addAll(this.savedAdapters);
     }
   }
 }
