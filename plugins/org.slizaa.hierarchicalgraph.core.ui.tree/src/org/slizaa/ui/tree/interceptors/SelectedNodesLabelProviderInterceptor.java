@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.graphics.Font;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 
 /**
  * <p>

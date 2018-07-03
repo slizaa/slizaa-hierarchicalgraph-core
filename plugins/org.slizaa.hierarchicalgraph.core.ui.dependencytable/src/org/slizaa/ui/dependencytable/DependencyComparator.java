@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) Gerd Wütherich 2012-2016.
+ * Copyright (c) Gerd Wï¿½therich 2012-2016.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  * 
  * Contributors:
- *    Gerd Wütherich (gerd@gerd-wuetherich.de) - initial API and implementation
+ *    Gerd Wï¿½therich (gerd@gerd-wuetherich.de) - initial API and implementation
  ******************************************************************************/
 package org.slizaa.ui.dependencytable;
 
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import org.eclipse.swt.SWT;
-import org.slizaa.hierarchicalgraph.AbstractHGDependency;
+import org.slizaa.hierarchicalgraph.core.model.AbstractHGDependency;
 
 /**
  * Compares {@link AbstractHGDependency} instances, either by their from- or to-side or their usage

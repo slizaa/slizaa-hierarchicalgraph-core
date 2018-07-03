@@ -18,7 +18,7 @@ import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.PartSite;
 import org.eclipse.ui.progress.UIJob;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.selection.NodeSelection;
 import org.slizaa.workbench.model.ModelPackage;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;

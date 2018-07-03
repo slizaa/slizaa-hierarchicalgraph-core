@@ -11,6 +11,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -18,7 +19,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;
 import org.slizaa.ui.tree.interceptors.ISlizaaTreeEventInterceptor;
@@ -167,7 +168,8 @@ public class SlizaaTreeViewerCreator {
     GridDataFactory.fillDefaults().grab(true, true).applyTo(treeViewer.getControl());
 
     //
-    treeViewer.setContentProvider(getAdapterFactoryContentProvider(checkNotNull(_adapterFactory)));
+    IContentProvider contentProvider = getAdapterFactoryContentProvider(checkNotNull(_adapterFactory));
+    treeViewer.setContentProvider(contentProvider);
     new SlizaaTreeMenuBuilder(treeViewer, _slizaaActionContributionProvider, _contextSupplier).populateMenu();
 
     //

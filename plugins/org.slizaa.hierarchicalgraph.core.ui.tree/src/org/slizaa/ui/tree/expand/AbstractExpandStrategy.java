@@ -17,7 +17,7 @@ import java.util.Set;
 import org.eclipse.jface.viewers.ITreeViewerListener;
 import org.eclipse.jface.viewers.TreeExpansionEvent;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.ui.shared.context.RootObject;
 
 public abstract class AbstractExpandStrategy implements IExpandStrategy {

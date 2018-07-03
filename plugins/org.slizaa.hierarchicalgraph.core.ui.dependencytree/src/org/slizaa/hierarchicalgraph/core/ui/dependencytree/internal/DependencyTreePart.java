@@ -17,7 +17,7 @@ import javax.inject.Named;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.widgets.Composite;
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.selection.DependencySelection;
 import org.slizaa.hierarchicalgraph.selection.DependencySelections;
 import org.slizaa.ui.shared.ILifecycleParticipator;

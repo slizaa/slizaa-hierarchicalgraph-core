@@ -18,7 +18,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.StyledString;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage;
 
 /**
  * This is the item provider adapter for a {@link org.slizaa.hierarchicalgraph.AbstractHGDependency} object.

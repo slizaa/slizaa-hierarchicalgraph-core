@@ -12,8 +12,8 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage;
 
 /**
  * This is the item provider adapter for a {@link org.slizaa.hierarchicalgraph.HGAggregatedDependency} object.

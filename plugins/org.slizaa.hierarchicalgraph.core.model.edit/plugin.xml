@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated hierarchicalgraph -->
       <factory
-            uri="http://org/slizaa/hierarchicalgraph"
+            uri="http://org/slizaa/hierarchicalgraph/core/model"
             class="org.slizaa.hierarchicalgraph.provider.HierarchicalgraphItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

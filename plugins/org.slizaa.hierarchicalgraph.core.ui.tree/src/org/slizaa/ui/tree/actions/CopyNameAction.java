@@ -3,8 +3,8 @@ package org.slizaa.ui.tree.actions;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 @Component(service = ISlizaaActionContribution.class)

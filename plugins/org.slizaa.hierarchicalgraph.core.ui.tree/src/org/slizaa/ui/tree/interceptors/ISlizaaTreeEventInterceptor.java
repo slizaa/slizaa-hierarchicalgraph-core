@@ -1,6 +1,6 @@
 package org.slizaa.ui.tree.interceptors;
 
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 /**
  * <p>

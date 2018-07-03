@@ -18,8 +18,8 @@ import org.eclipse.elk.core.options.Direction
 import org.eclipse.elk.core.options.EdgeRouting
 import org.eclipse.emf.edit.provider.IItemLabelProvider
 import org.eclipse.swt.graphics.Image
-import org.slizaa.hierarchicalgraph.HGNode
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider
+import org.slizaa.hierarchicalgraph.core.model.HGNode
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider
 
 class HierarchicalGraphSelectionSynthesis extends AbstractDiagramSynthesis<Set<HGNode>> {
 

@@ -7,7 +7,7 @@ import java.util.List;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.osgi.service.component.annotations.Component;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 @Component(service = ISlizaaActionContribution.class)

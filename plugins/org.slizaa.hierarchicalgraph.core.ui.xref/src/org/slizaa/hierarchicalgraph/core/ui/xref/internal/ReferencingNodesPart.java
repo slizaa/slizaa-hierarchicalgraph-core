@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.ProxyDependencyFunctions;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.ProxyDependencyFunctions;
 import org.slizaa.hierarchicalgraph.selection.NodeSelections;
 
 public class ReferencingNodesPart extends AbstractRefNodesPart {

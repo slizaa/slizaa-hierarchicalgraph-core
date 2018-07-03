@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
-import org.slizaa.hierarchicalgraph.impl.Utilities;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.impl.Utilities;
 
 /**
  * <p>

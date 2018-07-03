@@ -15,7 +15,6 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.osgi.framework.FrameworkUtil;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;

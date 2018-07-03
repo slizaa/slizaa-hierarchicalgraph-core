@@ -6,7 +6,7 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
 

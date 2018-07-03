@@ -8,9 +8,9 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.StyledString;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.INodeSource;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.INodeSource;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 
 public class ExtendedHGNodeItemProvider extends HGNodeItemProvider {
 

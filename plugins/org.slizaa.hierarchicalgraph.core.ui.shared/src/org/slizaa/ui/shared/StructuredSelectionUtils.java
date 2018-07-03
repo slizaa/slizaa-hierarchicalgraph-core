@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 public class StructuredSelectionUtils {
 

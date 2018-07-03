@@ -2,7 +2,7 @@ package org.slizaa.ui.dsm;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 
 public class DelegatingLabelProvider extends LabelProvider {
 

@@ -4,7 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.slizaa.hierarchicalgraph.spi.INodeComparator;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
 
 /**
  * <p>

@@ -11,7 +11,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.widgets.Composite;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.selection.FilterSelections;
 import org.slizaa.hierarchicalgraph.selection.NodeSelection;
 import org.slizaa.hierarchicalgraph.selection.SelectionHolder;

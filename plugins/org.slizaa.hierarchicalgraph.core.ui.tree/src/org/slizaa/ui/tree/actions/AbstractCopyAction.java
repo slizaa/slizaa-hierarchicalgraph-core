@@ -9,8 +9,7 @@ import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Display;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 public abstract class AbstractCopyAction implements ISlizaaActionContribution {

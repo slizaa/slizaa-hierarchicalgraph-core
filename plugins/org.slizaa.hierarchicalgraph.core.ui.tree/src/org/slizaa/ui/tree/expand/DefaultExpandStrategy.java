@@ -13,9 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGProxyDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
 
 /**
  * <p>

@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.ui.internal.PartSite;
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
 import org.slizaa.hierarchicalgraph.selection.DependencySelection;
 import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;

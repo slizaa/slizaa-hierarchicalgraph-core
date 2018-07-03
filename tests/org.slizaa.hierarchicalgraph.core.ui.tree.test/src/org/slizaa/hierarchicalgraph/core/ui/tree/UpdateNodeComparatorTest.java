@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.DefaultNodeSource;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.DefaultNodeSource;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
 import org.slizaa.hierarchicalgraph.core.ui.tree.fwk.AbstractSlizaaTreeViewerTest;
-import org.slizaa.hierarchicalgraph.spi.INodeComparator;
 
 /**
  * <p>
