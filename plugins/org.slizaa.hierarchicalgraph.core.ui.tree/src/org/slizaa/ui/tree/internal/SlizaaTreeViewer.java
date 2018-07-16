@@ -65,7 +65,7 @@ public class SlizaaTreeViewer extends TreeViewer {
           BasicEMap.Entry<String, Object> newValue = (BasicEMap.Entry<String, Object>) notification.getNewValue();
 
           switch (newValue.getKey()) {
-          case "org.slizaa.hierarchicalgraph.spi.INodeComparator":
+          case "org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator":
             updateNodeComparator((HGRootNode) getInput());
             break;
           default:
