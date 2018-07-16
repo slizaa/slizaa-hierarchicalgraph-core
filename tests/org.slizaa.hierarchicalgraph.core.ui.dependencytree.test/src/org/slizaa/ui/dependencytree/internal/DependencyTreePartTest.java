@@ -26,8 +26,5 @@ public class DependencyTreePartTest extends AbstractDependencyTreePartTest {
 
     //
     part().handleMainDependencySelectionChanged(null, dependencySelection);
-
-    //
-    displaySleep();
   }
 }

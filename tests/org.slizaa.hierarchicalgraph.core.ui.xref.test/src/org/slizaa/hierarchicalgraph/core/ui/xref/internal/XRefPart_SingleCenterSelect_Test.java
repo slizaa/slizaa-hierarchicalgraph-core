@@ -2,8 +2,8 @@ package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 
 import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 /**
  * <p>

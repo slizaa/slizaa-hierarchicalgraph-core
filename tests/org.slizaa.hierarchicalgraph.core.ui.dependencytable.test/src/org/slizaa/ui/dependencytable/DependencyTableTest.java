@@ -1,6 +1,6 @@
 package org.slizaa.ui.dependencytable;
 
-import static org.slizaa.hierarchicalgraph.selection.SelectionFactoryMethods.createDependencySelection;
+import static org.slizaa.hierarchicalgraph.core.selections.SelectionFactoryMethods.createDependencySelection;
 
 import java.util.Collection;
 
@@ -8,7 +8,7 @@ import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTable;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.HGCoreDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.AbstractXmiBasedTestGraphUiTest;
 
 /**

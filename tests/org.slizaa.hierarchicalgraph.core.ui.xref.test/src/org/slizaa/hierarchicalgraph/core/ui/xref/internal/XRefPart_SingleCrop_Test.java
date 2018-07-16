@@ -3,8 +3,8 @@ package org.slizaa.hierarchicalgraph.core.ui.xref.internal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
-import org.slizaa.hierarchicalgraph.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 
 /**
  * <p>
