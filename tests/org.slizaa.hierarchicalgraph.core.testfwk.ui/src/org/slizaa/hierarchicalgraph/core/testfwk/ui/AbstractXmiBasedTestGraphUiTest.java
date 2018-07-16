@@ -3,11 +3,11 @@ package org.slizaa.hierarchicalgraph.core.testfwk.ui;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.junit.ClassRule;
-import org.slizaa.hierarchicalgraph.HGNode;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
 import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
 
 public class AbstractXmiBasedTestGraphUiTest extends AbstractSlizaaUiTest {
 

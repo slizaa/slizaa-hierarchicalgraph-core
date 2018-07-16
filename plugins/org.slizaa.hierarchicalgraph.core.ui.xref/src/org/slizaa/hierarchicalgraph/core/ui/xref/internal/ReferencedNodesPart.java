@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.ProxyDependencyFunctions;
-import org.slizaa.hierarchicalgraph.selection.NodeSelections;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelections;
 
 /**
  * <p>
@@ -19,6 +19,7 @@ public class ReferencedNodesPart extends AbstractRefNodesPart {
   /**
    * {@inheritDoc}
    */
+  @Override
   protected Set<HGNode> getNodesToShow(Collection<HGNode> selectedNodes) {
 
     //

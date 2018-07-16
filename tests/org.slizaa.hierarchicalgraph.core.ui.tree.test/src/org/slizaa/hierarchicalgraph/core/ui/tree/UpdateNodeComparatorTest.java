@@ -37,6 +37,7 @@ public class UpdateNodeComparatorTest extends AbstractSlizaaTreeViewerTest {
 
     //
     SWTBotTreeItem[] treeItems = tree().getAllItems();
+
     assertThat(treeItems).hasSize(63);
     assertThat(treeItems[0].getText()).isEqualTo("/annotations-2.0.0.jar (16)");
     assertThat(treeItems[62].getText()).isEqualTo("/xstream-1.4.2.jar (306123)");

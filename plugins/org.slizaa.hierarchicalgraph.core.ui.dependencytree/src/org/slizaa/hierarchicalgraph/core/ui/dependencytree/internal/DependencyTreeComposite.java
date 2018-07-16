@@ -25,13 +25,13 @@ import org.slizaa.hierarchicalgraph.core.model.AbstractHGDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.core.model.spi.IAutoExpandInterceptor;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
-import org.slizaa.hierarchicalgraph.selection.selector.DefaultDependencySelector;
-import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelector;
-import org.slizaa.hierarchicalgraph.selection.selector.IDependencySelectorListener;
-import org.slizaa.hierarchicalgraph.selection.selector.SelectedNodesChangedEvent;
-import org.slizaa.hierarchicalgraph.selection.selector.UnfilteredDependenciesChangedEvent;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.SelectionsFactory;
+import org.slizaa.hierarchicalgraph.core.selections.selector.DefaultDependencySelector;
+import org.slizaa.hierarchicalgraph.core.selections.selector.IDependencySelector;
+import org.slizaa.hierarchicalgraph.core.selections.selector.IDependencySelectorListener;
+import org.slizaa.hierarchicalgraph.core.selections.selector.SelectedNodesChangedEvent;
+import org.slizaa.hierarchicalgraph.core.selections.selector.UnfilteredDependenciesChangedEvent;
 import org.slizaa.ui.shared.SlizaaCommonColors;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
@@ -255,7 +255,7 @@ public class DependencyTreeComposite extends Composite {
   private void broadcastDetailDependencies(Set<HGCoreDependency> dependencies) {
 
     // create dependency selection
-    DependencySelection dependencySelection = SelectionFactory.eINSTANCE.createDependencySelection();
+    DependencySelection dependencySelection = SelectionsFactory.eINSTANCE.createDependencySelection();
     dependencySelection.getDependencies().addAll(dependencies);
 
     // and broadcast it

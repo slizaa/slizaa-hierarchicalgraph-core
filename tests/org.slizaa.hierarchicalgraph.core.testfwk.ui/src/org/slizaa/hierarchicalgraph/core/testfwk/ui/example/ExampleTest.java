@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedGraph;
 import org.slizaa.hierarchicalgraph.core.testfwk.XmiBasedTestGraphProviderRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.TestGraphConfigurer;
+import org.slizaa.hierarchicalgraph.core.testfwk.ui.internal.DefaultNodeLabelProvider;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.ImageRegistryRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SwtBotRule;
@@ -49,10 +50,11 @@ public class ExampleTest {
     System.out.println(swtBotRule.swtbot());
 
     //
-    Image image = imageRegistryRule.getImage("org/slizaa/testfwk/ui/internal/icons/enum_obj.png");
+    Image image = imageRegistryRule
+        .getImage(DefaultNodeLabelProvider.class.getPackage().getName().replace('.', '/') + "/icons/enum_obj.png");
     System.out.println(image);
 
     //
-    System.out.println(testMock);
+    System.out.println(this.testMock);
   }
 }

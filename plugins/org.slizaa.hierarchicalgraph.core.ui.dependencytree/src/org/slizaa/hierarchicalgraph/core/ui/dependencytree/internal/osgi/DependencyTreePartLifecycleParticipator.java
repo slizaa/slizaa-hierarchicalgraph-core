@@ -9,11 +9,11 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.swt.widgets.Display;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.workbench.model.ModelPackage;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 import org.slizaa.ui.shared.ILifecycleParticipator;
-import org.slizaa.workbench.model.ModelPackage;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 import com.google.inject.Inject;
 

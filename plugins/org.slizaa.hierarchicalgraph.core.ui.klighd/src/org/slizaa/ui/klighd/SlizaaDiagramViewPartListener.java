@@ -19,14 +19,15 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.PartSite;
 import org.eclipse.ui.progress.UIJob;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
-import org.slizaa.hierarchicalgraph.selection.NodeSelection;
-import org.slizaa.workbench.model.ModelPackage;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelection;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelection;
+import org.slizaa.hierarchicalgraph.core.workbench.model.ModelPackage;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 
 import de.cau.cs.kieler.klighd.ui.DiagramViewManager;
 
 /**
- * 
+ *
  */
 class SlizaaDiagramViewPartListener implements IPartListener2 {
 
@@ -36,10 +37,10 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
   private final SlizaaDiagramViewPart _diagramView;
 
   /** - */
-  private Set<HGNode>          _currentNodeSelection;
+  private Set<HGNode>                 _currentNodeSelection;
 
   /** - */
-  private Set<HGNode>          _shownNodeSelection;
+  private Set<HGNode>                 _shownNodeSelection;
 
   /** - */
   private SlizaaWorkbenchModel        _slizaaWorkbenchModel;
@@ -61,16 +62,16 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
    * Activated this adapter.
    */
   public void activate() {
-    _diagramView.getSite().getPage().addPartListener(this);
+    this._diagramView.getSite().getPage().addPartListener(this);
 
     //
-    IEclipseContext context = ((PartSite) _diagramView.getSite()).getContext();
+    IEclipseContext context = ((PartSite) this._diagramView.getSite()).getContext();
 
     //
-    _slizaaWorkbenchModel = context.get(SlizaaWorkbenchModel.class);
+    this._slizaaWorkbenchModel = context.get(SlizaaWorkbenchModel.class);
 
     //
-    _adapter = new AdapterImpl() {
+    this._adapter = new AdapterImpl() {
       @Override
       public void notifyChanged(Notification msg) {
         if (msg.getFeature() != null) {
@@ -81,18 +82,20 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
         }
       }
     };
-    _slizaaWorkbenchModel.eAdapters().add(_adapter);
-    
-    // 
-    initSelection(_slizaaWorkbenchModel.getNodeSelection() != null ? new HashSet<>(_slizaaWorkbenchModel.getNodeSelection().getNodes()) : Collections.emptySet());
+    this._slizaaWorkbenchModel.eAdapters().add(this._adapter);
+
+    //
+    initSelection(this._slizaaWorkbenchModel.getNodeSelection() != null
+        ? new HashSet<>(this._slizaaWorkbenchModel.getNodeSelection().getNodes())
+        : Collections.emptySet());
   }
 
   /**
    * Deactivated this adapter.
    */
   public void deactivate() {
-    _diagramView.getSite().getPage().removePartListener(this);
-    _slizaaWorkbenchModel.eAdapters().remove(_adapter);
+    this._diagramView.getSite().getPage().removePartListener(this);
+    this._slizaaWorkbenchModel.eAdapters().remove(this._adapter);
   }
 
   /**
@@ -106,7 +109,7 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
       return;
     }
 
-    _diagramView.updateDiagram();
+    this._diagramView.updateDiagram();
   }
 
   /**
@@ -203,10 +206,10 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
   private void initSelection(Set<HGNode> selectedNodes) {
 
     //
-    _currentNodeSelection = selectedNodes;
+    this._currentNodeSelection = selectedNodes;
 
     //
-    if (_diagramView.getSite().getPage().isPartVisible(_diagramView)) {
+    if (this._diagramView.getSite().getPage().isPartVisible(this._diagramView)) {
       updateNodeSelection();
     }
   }
@@ -216,16 +219,16 @@ class SlizaaDiagramViewPartListener implements IPartListener2 {
    */
   private void updateNodeSelection() {
 
-    if (!equalLists(_currentNodeSelection, _shownNodeSelection)) {
+    if (!equalLists(this._currentNodeSelection, this._shownNodeSelection)) {
 
-      _shownNodeSelection = _currentNodeSelection;
+      this._shownNodeSelection = this._currentNodeSelection;
 
       // Start update job
       new UIJob(UPDATE_JOB) {
         @Override
         public IStatus runInUIThread(final IProgressMonitor monitor) {
-          DiagramViewManager.updateView("org.slizaa.ui.klighd.SlizaaDiagramViewPart", null, _currentNodeSelection,
-              null);
+          DiagramViewManager.updateView("org.slizaa.ui.klighd.SlizaaDiagramViewPart", null,
+              SlizaaDiagramViewPartListener.this._currentNodeSelection, null);
           return Status.OK_STATUS;
         }
       }.schedule();

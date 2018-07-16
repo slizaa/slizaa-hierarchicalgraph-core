@@ -3,8 +3,8 @@ package org.slizaa.hierarchicalgraph.core.testfwk.ui.rules;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-import org.slizaa.workbench.model.ModelFactory;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
+import org.slizaa.hierarchicalgraph.core.workbench.model.ModelFactory;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 
 public class SlizaaWorkbenchModelRule implements TestRule {
 

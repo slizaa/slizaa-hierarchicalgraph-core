@@ -12,9 +12,9 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.hierarchicalgraph.selection.FilterSelections;
-import org.slizaa.hierarchicalgraph.selection.NodeSelection;
-import org.slizaa.hierarchicalgraph.selection.SelectionHolder;
+import org.slizaa.hierarchicalgraph.core.selections.FilterSelections;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelection;
+import org.slizaa.hierarchicalgraph.core.selections.SelectionHolder;
 import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 
 /**

@@ -11,7 +11,7 @@ import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 /**
  * <p>
  * </p>
- * 
+ *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
 public class SelectedNodesLabelProviderInterceptor extends ISlizaaLabelProviderInterceptor.Adapter
@@ -29,14 +29,14 @@ public class SelectedNodesLabelProviderInterceptor extends ISlizaaLabelProviderI
    */
   public SelectedNodesLabelProviderInterceptor(Supplier<Collection<HGNode>> selectedNodesSupplier) {
     super();
-    _selectedNodesSupplier = selectedNodesSupplier;
+    this._selectedNodesSupplier = selectedNodesSupplier;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Font alterFont(Object object, Font font) {
+  public Font alterFont(Object object) {
 
     //
     Collection<HGNode> selectedNodes = selectedNodes();
@@ -50,7 +50,7 @@ public class SelectedNodesLabelProviderInterceptor extends ISlizaaLabelProviderI
     }
 
     //
-    return font;
+    return null;
   }
 
   /**
@@ -60,6 +60,6 @@ public class SelectedNodesLabelProviderInterceptor extends ISlizaaLabelProviderI
    * @return
    */
   public Collection<HGNode> selectedNodes() {
-    return _selectedNodesSupplier.get();
+    return this._selectedNodesSupplier.get();
   }
 }

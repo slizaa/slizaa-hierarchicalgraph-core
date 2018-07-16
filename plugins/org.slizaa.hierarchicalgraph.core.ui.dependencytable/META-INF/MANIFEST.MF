@@ -10,9 +10,9 @@ Require-Bundle: org.eclipse.ui,
  org.slizaa.hierarchicalgraph.core.model;bundle-version="0.0.3",
  org.eclipse.e4.ui.di;bundle-version="1.1.0",
  org.eclipse.e4.core.di.annotations;bundle-version="1.5.0",
- org.slizaa.hierarchicalgraph.core.ui.shared;bundle-version="0.0.3",
- org.slizaa.hierarchicalgraph.core.selection;bundle-version="0.0.3",
- org.slizaa.hierarchicalgraph.core.workbench.model;bundle-version="0.0.4"
+ org.slizaa.hierarchicalgraph.core.ui.shared;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.core.selections;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.core.workbench.model;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject;version="1.0.0"
 

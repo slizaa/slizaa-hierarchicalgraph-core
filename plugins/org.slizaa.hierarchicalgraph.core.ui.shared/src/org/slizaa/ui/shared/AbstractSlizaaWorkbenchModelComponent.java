@@ -13,10 +13,10 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.NodeSelection;
-import org.slizaa.workbench.model.ModelPackage;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelection;
+import org.slizaa.hierarchicalgraph.core.workbench.model.ModelPackage;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 
 /**
  * <p>
@@ -43,10 +43,10 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
   @Inject
   public final void initializeAbstractSlizaaPart(SlizaaWorkbenchModel workbenchModel) {
 
-    _workbenchModel = checkNotNull(workbenchModel, "SlizaaWorkbenchModel must not be null.");
+    this._workbenchModel = checkNotNull(workbenchModel, "SlizaaWorkbenchModel must not be null.");
 
     //
-    _workbenchModelObserver = new AdapterImpl() {
+    this._workbenchModelObserver = new AdapterImpl() {
       @Override
       public void notifyChanged(Notification msg) {
         if (msg.getFeature() != null) {
@@ -79,7 +79,7 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
     };
 
     //
-    _workbenchModel.eAdapters().add(_workbenchModelObserver);
+    this._workbenchModel.eAdapters().add(this._workbenchModelObserver);
   }
 
   /**
@@ -90,7 +90,7 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
   public final void disposeAbstractSlizaaPart() {
 
     //
-    _workbenchModel.eAdapters().remove(_workbenchModelObserver);
+    this._workbenchModel.eAdapters().remove(this._workbenchModelObserver);
   }
 
   /**
@@ -100,9 +100,9 @@ public abstract class AbstractSlizaaWorkbenchModelComponent {
    * @return
    */
   public SlizaaWorkbenchModel getWorkbenchModel() {
-    checkState(_workbenchModel != null,
+    checkState(this._workbenchModel != null,
         "Component has not been initialized (invoke 'initializeAbstractSlizaaPart(SlizaaWorkbenchModel)').");
-    return _workbenchModel;
+    return this._workbenchModel;
   }
 
   /**

@@ -6,9 +6,9 @@ import java.util.Set;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.ui.internal.PartSite;
 import org.slizaa.hierarchicalgraph.core.model.HGAggregatedDependency;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.SelectionsFactory;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 
 import de.cau.cs.kieler.klighd.IAction;
 import de.cau.cs.kieler.klighd.kgraph.KGraphElement;
@@ -21,6 +21,7 @@ public class SelectDependenciesAction implements IAction {
   /**
    * {@inheritDoc}
    */
+  @Override
   public ActionResult execute(final ActionContext context) {
 
     KGraphElement kGraphElement = context.getKGraphElement();
@@ -43,7 +44,7 @@ public class SelectDependenciesAction implements IAction {
         SlizaaWorkbenchModel workbenchModel = eclipseContext.get(SlizaaWorkbenchModel.class);
 
         //
-        DependencySelection dependencySelection = SelectionFactory.eINSTANCE.createDependencySelection();
+        DependencySelection dependencySelection = SelectionsFactory.eINSTANCE.createDependencySelection();
         dependencySelection.getDependencies().addAll(dependencies);
         workbenchModel.setMainDependencySelection(dependencySelection);
       }

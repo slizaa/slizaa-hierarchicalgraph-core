@@ -1,12 +1,9 @@
 /*******************************************************************************
- * Copyright (c) Gerd W�therich 2012-2016.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
+ * Copyright (c) Gerd W�therich 2012-2016. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the GNU Public License v3.0 which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
- * 
- * Contributors:
- *    Gerd W�therich (gerd@gerd-wuetherich.de) - initial API and implementation
+ *
+ * Contributors: Gerd W�therich (gerd@gerd-wuetherich.de) - initial API and implementation
  ******************************************************************************/
 package org.slizaa.ui.dependencytable;
 
@@ -32,8 +29,8 @@ import org.slizaa.hierarchicalgraph.core.model.AbstractHGDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HGProxyDependency;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.DependencySelections;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelections;
 import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
 
 public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
@@ -53,6 +50,7 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
   /** - */
   private ArtifactPathLabelGenerator _toLabelGenerator   = new ArtifactPathLabelGenerator();
 
+  @Override
   @PostConstruct
   public void createComposite(Composite parent) {
     FillLayout fillLayout = new FillLayout();
@@ -63,16 +61,16 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
     Composite tableComposite = new Composite(parent, SWT.NONE);
     tableComposite.setLayout(new TableColumnLayout());
 
-    _dependencyComparator = new DependencyComparator(_fromLabelGenerator, _toLabelGenerator);
+    this._dependencyComparator = new DependencyComparator(this._fromLabelGenerator, this._toLabelGenerator);
 
-    _viewer = new TableViewer(tableComposite,
+    this._viewer = new TableViewer(tableComposite,
         SWT.VIRTUAL | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.MULTI);
-    final Table table = _viewer.getTable();
+    final Table table = this._viewer.getTable();
     table.setHeaderVisible(true);
     table.setLinesVisible(true);
-    _viewer.setContentProvider(new LazyDependencyProvider(_viewer));
+    this._viewer.setContentProvider(new LazyDependencyProvider(this._viewer));
 
-    createColumns(tableComposite, _viewer);
+    createColumns(tableComposite, this._viewer);
 
     if (getWorkbenchModel() != null) {
       handleDetailDependencySelectionChanged(null, getWorkbenchModel().getMainDependencySelection());
@@ -82,14 +80,14 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
   @Override
   protected void handleDetailDependencySelectionChanged(DependencySelection oldValue, DependencySelection newValue) {
 
-    if (_viewer == null || _viewer.getTable().isDisposed()) {
+    if (this._viewer == null || this._viewer.getTable().isDisposed()) {
       return;
     }
 
     if (newValue == null || newValue.getDependencies().isEmpty()) {
       setColumnTitles("From", "To");
-      _viewer.setInput(new AbstractHGDependency[0]);
-      _viewer.getTable().redraw();
+      this._viewer.setInput(new AbstractHGDependency[0]);
+      this._viewer.getTable().redraw();
       return;
     }
     //
@@ -105,8 +103,8 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
         fromBaseArtifact = fromBaseArtifact.getRootNode();
       }
 
-      _fromLabelGenerator.setBaseArtifact(fromBaseArtifact);
-      _toLabelGenerator.setBaseArtifact(toBaseArtifact);
+      this._fromLabelGenerator.setBaseArtifact(fromBaseArtifact);
+      this._toLabelGenerator.setBaseArtifact(toBaseArtifact);
 
       //
       String fromColumnTitle = "From " /* + _fromLabelGenerator.getTitle() */;
@@ -123,7 +121,7 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
 
   private void createColumns(Composite parent, TableViewer viewer) {
 
-    createTableViewerColumn(parent, viewer, 0, "From", 45, new DependencyColumnLabelProvider(_fromLabelGenerator) {
+    createTableViewerColumn(parent, viewer, 0, "From", 45, new DependencyColumnLabelProvider(this._fromLabelGenerator) {
       @Override
       protected HGNode getNode(AbstractHGDependency dependency) {
         return dependency.getFrom();
@@ -154,7 +152,7 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
       }
 
     });
-    createTableViewerColumn(parent, viewer, 2, "To", 45, new DependencyColumnLabelProvider(_toLabelGenerator) {
+    createTableViewerColumn(parent, viewer, 2, "To", 45, new DependencyColumnLabelProvider(this._toLabelGenerator) {
 
       @Override
       public HGNode getNode(AbstractHGDependency dependency) {
@@ -187,33 +185,34 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
     SelectionAdapter selectionAdapter = new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-        _dependencyComparator.setColumn(index);
-        int dir = _dependencyComparator.getDirection();
-        _viewer.getTable().setSortDirection(dir);
-        _viewer.getTable().setSortColumn(column);
+        DependencyTablePart.this._dependencyComparator.setColumn(index);
+        int dir = DependencyTablePart.this._dependencyComparator.getDirection();
+        DependencyTablePart.this._viewer.getTable().setSortDirection(dir);
+        DependencyTablePart.this._viewer.getTable().setSortColumn(column);
 
-        AbstractHGDependency[] currentDependencies = (AbstractHGDependency[]) _viewer.getInput();
+        AbstractHGDependency[] currentDependencies = (AbstractHGDependency[]) DependencyTablePart.this._viewer
+            .getInput();
         setOrderedDependencies(currentDependencies);
 
-        _viewer.refresh();
+        DependencyTablePart.this._viewer.refresh();
       }
     };
     return selectionAdapter;
   }
 
   private void setColumnTitles(String fromColumnTitle, String toColumnTitle) {
-    Table table = _viewer.getTable();
+    Table table = this._viewer.getTable();
 
     table.getColumn(0).setText(fromColumnTitle);
     table.getColumn(2).setText(toColumnTitle);
   }
 
   private void setOrderedDependencies(AbstractHGDependency[] dependencies) {
-    _dependencyComparator.sortDependencies(dependencies);
+    this._dependencyComparator.sortDependencies(dependencies);
 
-    _viewer.setInput(dependencies);
-    _viewer.setItemCount(dependencies.length); // This is the difference when using a ILazyContentProvider
+    this._viewer.setInput(dependencies);
+    this._viewer.setItemCount(dependencies.length); // This is the difference when using a ILazyContentProvider
     // _viewer.getTable().redraw();
-    _viewer.refresh();
+    this._viewer.refresh();
   }
 }

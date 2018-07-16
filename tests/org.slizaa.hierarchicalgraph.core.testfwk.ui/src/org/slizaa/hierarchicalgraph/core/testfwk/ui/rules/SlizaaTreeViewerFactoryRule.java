@@ -1,13 +1,8 @@
 package org.slizaa.hierarchicalgraph.core.testfwk.ui.rules;
 
-import java.util.function.Consumer;
-
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.junit.rules.ExternalResource;
-import org.slizaa.hierarchicalgraph.provider.HierarchicalgraphItemProviderAdapterFactory;
 import org.slizaa.ui.tree.SlizaaTreeViewerFactory;
 
 public class SlizaaTreeViewerFactoryRule extends ExternalResource {
@@ -18,43 +13,18 @@ public class SlizaaTreeViewerFactoryRule extends ExternalResource {
   /** - */
   private DefaultActionContributionProvider _defaultActionContributionProvider;
 
-  /** - */
-  private Consumer<ComposedAdapterFactory>  _composedAdapterFactoryConfigurer;
-
   /**
-   * <p>
-   * Creates a new instance of type {@link SlizaaTreeViewerFactoryRule}.
-   * </p>
+   * {@inheritDoc}
    */
-  public SlizaaTreeViewerFactoryRule() {
-    super();
-  }
-
-  public SlizaaTreeViewerFactoryRule(Consumer<ComposedAdapterFactory> composedAdapterFactoryConfigurer) {
-    super();
-    _composedAdapterFactoryConfigurer = composedAdapterFactoryConfigurer;
-  }
-
   @Override
   protected void before() throws Throwable {
 
     //
-    _eclipseContext = EclipseContextFactory.create();
-    _defaultActionContributionProvider = new DefaultActionContributionProvider();
-
-    // manual add the adapter factory
-    ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory();
-    composedAdapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-    composedAdapterFactory.addAdapterFactory(new HierarchicalgraphItemProviderAdapterFactory());
+    this._eclipseContext = EclipseContextFactory.create();
+    this._defaultActionContributionProvider = new DefaultActionContributionProvider();
 
     //
-    if (_composedAdapterFactoryConfigurer != null) {
-      _composedAdapterFactoryConfigurer.accept(composedAdapterFactory);
-    }
-
-    //
-    SlizaaTreeViewerFactory.setSlizaaTreeViewerCreator(_defaultActionContributionProvider, composedAdapterFactory,
-        () -> eclipseContext());
+    SlizaaTreeViewerFactory.setSlizaaTreeViewerCreator(this._defaultActionContributionProvider, () -> eclipseContext());
   }
 
   @Override
@@ -68,7 +38,7 @@ public class SlizaaTreeViewerFactoryRule extends ExternalResource {
    * @return
    */
   public final IEclipseContext eclipseContext() {
-    return _eclipseContext;
+    return this._eclipseContext;
   }
 
   /**
@@ -78,6 +48,6 @@ public class SlizaaTreeViewerFactoryRule extends ExternalResource {
    * @return
    */
   public final DefaultActionContributionProvider defaultActionContributionProvider() {
-    return _defaultActionContributionProvider;
+    return this._defaultActionContributionProvider;
   }
 }

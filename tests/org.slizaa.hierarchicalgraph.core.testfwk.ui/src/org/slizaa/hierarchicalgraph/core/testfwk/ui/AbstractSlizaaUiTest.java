@@ -15,8 +15,8 @@ import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.ImageRegistryRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaTreeViewerFactoryRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SlizaaWorkbenchModelRule;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.rules.SwtBotRule;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 import org.slizaa.ui.shared.AbstractSlizaaWorkbenchModelComponent;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 @RunWith(SWTBotJunit4ClassRunner.class)
 public class AbstractSlizaaUiTest {

@@ -5,9 +5,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.function.Function;
 
 import org.eclipse.swt.graphics.Image;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 import org.slizaa.hierarchicalgraph.core.testfwk.ui.internal.DefaultNodeLabelProvider;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
 
 public class TestGraphConfigurer {
 

@@ -7,9 +7,9 @@ import java.util.function.Function;
 
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 import org.slizaa.hierarchicalgraph.core.testfwk.HGNodeUtils;
-import org.slizaa.hierarchicalgraph.spi.INodeLabelProvider;
 
 /**
  * <p>
@@ -29,7 +29,7 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
    * @param imageProvider
    */
   public DefaultNodeLabelProvider(Function<String, Image> imageProvider) {
-    _imageProvider = checkNotNull(imageProvider);
+    this._imageProvider = checkNotNull(imageProvider);
   }
 
   /**
@@ -63,7 +63,7 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
     //
     for (String[] mapping : mappings) {
       if (labels.contains(mapping[0])) {
-        return _imageProvider.apply(mapping[1]);
+        return this._imageProvider.apply(mapping[1]);
       }
     }
 

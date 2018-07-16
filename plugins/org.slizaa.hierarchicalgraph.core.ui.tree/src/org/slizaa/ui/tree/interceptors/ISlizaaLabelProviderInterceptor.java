@@ -27,16 +27,6 @@ public interface ISlizaaLabelProviderInterceptor {
    * </p>
    *
    * @param object
-   * @param font
-   * @return
-   */
-  Font alterFont(Object object, Font font);
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param object
    * @param styledString
    * @return
    */
@@ -47,20 +37,27 @@ public interface ISlizaaLabelProviderInterceptor {
    * </p>
    *
    * @param object
-   * @param color
    * @return
    */
-  Color alterForeground(Object object, Color color);
+  Font alterFont(Object object);
 
   /**
    * <p>
    * </p>
    *
    * @param object
-   * @param color
    * @return
    */
-  Color alterBackground(Object object, Color color);
+  Color alterForeground(Object object);
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param object
+   * @return
+   */
+  Color alterBackground(Object object);
 
   /**
    * <p>
@@ -82,14 +79,6 @@ public interface ISlizaaLabelProviderInterceptor {
      * {@inheritDoc}
      */
     @Override
-    public Font alterFont(Object object, Font font) {
-      return font;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public StyledString alterStyledText(Object object, StyledString styledString) {
       return styledString;
     }
@@ -98,16 +87,24 @@ public interface ISlizaaLabelProviderInterceptor {
      * {@inheritDoc}
      */
     @Override
-    public Color alterForeground(Object object, Color color) {
-      return color;
+    public Font alterFont(Object object) {
+      return null;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Color alterBackground(Object object, Color color) {
-      return color;
+    public Color alterForeground(Object object) {
+      return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Color alterBackground(Object object) {
+      return null;
     }
   }
 }

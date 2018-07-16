@@ -25,11 +25,11 @@ import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.NodeSelections;
-import org.slizaa.hierarchicalgraph.selection.SelectionFactory;
-import org.slizaa.hierarchicalgraph.selection.xref.IXRefListener;
-import org.slizaa.hierarchicalgraph.selection.xref.XRefStack;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.NodeSelections;
+import org.slizaa.hierarchicalgraph.core.selections.SelectionsFactory;
+import org.slizaa.hierarchicalgraph.core.selections.xref.IXRefListener;
+import org.slizaa.hierarchicalgraph.core.selections.xref.XRefStack;
 import org.slizaa.ui.shared.NodeComparator2ViewerComparatorAdapter;
 import org.slizaa.ui.shared.SlizaaCommonColors;
 import org.slizaa.ui.shared.context.BusyCursor;
@@ -68,7 +68,7 @@ public class XRefComposite extends Composite {
    * <p>
    * Creates a new instance of type {@link XRefComposite}.
    * </p>
-   * 
+   *
    * @param parent
    * @param eclipseContextSupplier
    */
@@ -76,7 +76,7 @@ public class XRefComposite extends Composite {
     super(parent, SWT.NONE);
 
     //
-    _dependencySelectionConsumer = checkNotNull(dependencySelectionConsumer);
+    this._dependencySelectionConsumer = checkNotNull(dependencySelectionConsumer);
 
     //
     GridLayoutFactory.fillDefaults().applyTo(this);
@@ -87,20 +87,20 @@ public class XRefComposite extends Composite {
     GridDataFactory.fillDefaults().grab(true, true).applyTo(sashForm);
 
     //
-    _leftsidedTreeViewComposite = createLeftTree(sashForm);
-    _centeredTreeViewComposite = createCenterTree(sashForm);
-    _rightsidedTreeViewComposite = createRightTree(sashForm);
+    this._leftsidedTreeViewComposite = createLeftTree(sashForm);
+    this._centeredTreeViewComposite = createCenterTree(sashForm);
+    this._rightsidedTreeViewComposite = createRightTree(sashForm);
 
     //
-    _xRefStack = new XRefStack();
-    _xRefStack.addXRefListener(new IXRefListenerImplementation());
+    this._xRefStack = new XRefStack();
+    this._xRefStack.addXRefListener(new IXRefListenerImplementation());
   }
 
   public void refresh() {
     // TODO
-    _leftsidedTreeViewComposite.getTreeViewer().refresh();
-    _centeredTreeViewComposite.getTreeViewer().refresh();
-    _rightsidedTreeViewComposite.getTreeViewer().refresh();
+    this._leftsidedTreeViewComposite.getTreeViewer().refresh();
+    this._centeredTreeViewComposite.getTreeViewer().refresh();
+    this._rightsidedTreeViewComposite.getTreeViewer().refresh();
   }
 
   /**
@@ -115,16 +115,16 @@ public class XRefComposite extends Composite {
     if (filteredNodes != null && !filteredNodes.isEmpty()) {
 
       //
-      _xRefStack.pruneDependenciesForUncroppedCenterNodes(filteredNodes,
+      this._xRefStack.pruneDependenciesForUncroppedCenterNodes(filteredNodes,
           getSelectedIncomingCoreDependenciesIfNotRoot(filteredNodes),
           getSelectedOutgoingCoreDependenciesIfNotRoot(filteredNodes));
 
-      _xRefStack.cropSelection();
+      this._xRefStack.cropSelection();
     }
     //
     else {
       //
-      _xRefStack.uncropAll();
+      this._xRefStack.uncropAll();
     }
   }
 
@@ -137,17 +137,17 @@ public class XRefComposite extends Composite {
   public void setRootNode(HGRootNode rootNode) {
 
     //
-    if (rootNode != null && rootNode.equals(_rootNode)) {
+    if (rootNode != null && rootNode.equals(this._rootNode)) {
       return;
     }
 
     //
-    _rootNode = rootNode;
+    this._rootNode = rootNode;
 
     //
-    if (_rootNode == null) {
+    if (this._rootNode == null) {
       forEachTreeViewerComposite(t -> t.getTreeViewer().setInput(null));
-      _xRefStack.pruneDependenciesForUncroppedCenterNodes(Collections.emptySet(), Collections.emptySet(),
+      this._xRefStack.pruneDependenciesForUncroppedCenterNodes(Collections.emptySet(), Collections.emptySet(),
           Collections.emptySet());
     }
     //
@@ -157,9 +157,9 @@ public class XRefComposite extends Composite {
       forEachTreeViewerComposite(t -> t.getTreeViewer().setInput(new RootObject(rootNode)));
 
       //
-      _leftsidedTreeViewComposite.getTreeViewer()
+      this._leftsidedTreeViewComposite.getTreeViewer()
           .setFilters(new VisibleNodesFilter(() -> Collections.emptySet(), false));
-      _rightsidedTreeViewComposite.getTreeViewer()
+      this._rightsidedTreeViewComposite.getTreeViewer()
           .setFilters(new VisibleNodesFilter(() -> Collections.emptySet(), false));
 
       // set the viewer comparator
@@ -173,7 +173,7 @@ public class XRefComposite extends Composite {
     forEachTreeViewerComposite(t -> t.getTreeViewer().setSelection(new StructuredSelection()));
 
     // set focus to center tree viewer
-    _centeredTreeViewComposite.getTreeViewer().getTree().setFocus();
+    this._centeredTreeViewComposite.getTreeViewer().getTree().setFocus();
   }
 
   /**
@@ -183,7 +183,7 @@ public class XRefComposite extends Composite {
    * @return
    */
   XRefStack xRefStack() {
-    return _xRefStack;
+    return this._xRefStack;
   }
 
   /**
@@ -193,7 +193,7 @@ public class XRefComposite extends Composite {
    * @return
    */
   TreeViewComposite centeredTreeViewComposite() {
-    return _centeredTreeViewComposite;
+    return this._centeredTreeViewComposite;
   }
 
   /**
@@ -203,9 +203,9 @@ public class XRefComposite extends Composite {
    * @param consumer
    */
   private void forEachTreeViewerComposite(Consumer<TreeViewComposite> consumer) {
-    consumer.accept(_leftsidedTreeViewComposite);
-    consumer.accept(_centeredTreeViewComposite);
-    consumer.accept(_rightsidedTreeViewComposite);
+    consumer.accept(this._leftsidedTreeViewComposite);
+    consumer.accept(this._centeredTreeViewComposite);
+    consumer.accept(this._rightsidedTreeViewComposite);
   }
 
   /**
@@ -220,7 +220,7 @@ public class XRefComposite extends Composite {
     //
     TreeViewComposite treeViewComposite = new TreeViewComposite(sashForm,
         new DependencyResolvingTreeEventInterceptor(
-            (node) -> _xRefStack.outgoingDependencySelector().getDependenciesForTargetNode(node)),
+            (node) -> this._xRefStack.outgoingDependencySelector().getDependenciesForTargetNode(node)),
         new NullExpandStrategy(), SWT.RIGHT);
 
     //
@@ -235,7 +235,7 @@ public class XRefComposite extends Composite {
     //
     treeViewComposite.getTreeViewer().addSelectionChangedListener(event -> {
       IStructuredSelection structuredSelection = (IStructuredSelection) event.getSelection();
-      _xRefStack.setSelectedRightsidedNodes(structuredSelection.toList());
+      this._xRefStack.setSelectedRightsidedNodes(structuredSelection.toList());
     });
 
     //
@@ -256,9 +256,9 @@ public class XRefComposite extends Composite {
         new DependencyResolvingTreeEventInterceptor((node) -> {
           Set<HGCoreDependency> result = new HashSet<>();
 
-          if (_xRefStack.hasCroppedSelections()) {
-            result.addAll(_xRefStack.incomingDependencySelector().getDependenciesForTargetNode(node));
-            result.addAll(_xRefStack.outgoingDependencySelector().getDependenciesForSourceNode(node));
+          if (this._xRefStack.hasCroppedSelections()) {
+            result.addAll(this._xRefStack.incomingDependencySelector().getDependenciesForTargetNode(node));
+            result.addAll(this._xRefStack.outgoingDependencySelector().getDependenciesForSourceNode(node));
           } else {
             result.addAll(node.getIncomingCoreDependencies());
             result.addAll(node.getOutgoingCoreDependencies());
@@ -272,7 +272,7 @@ public class XRefComposite extends Composite {
 
     // set label provider
     ((IInterceptableLabelProvider) treeViewComposite.getTreeViewer().getLabelProvider()).setLabelProviderInterceptor(
-        new SelectedNodesLabelProviderInterceptor(() -> _xRefStack.getBackreferencedCenterNodes()));
+        new SelectedNodesLabelProviderInterceptor(() -> this._xRefStack.getBackreferencedCenterNodes()));
 
     //
     treeViewComposite.getTreeViewer().addSelectionChangedListener(event -> {
@@ -286,10 +286,10 @@ public class XRefComposite extends Composite {
 
           // This is a performance optimization: if nothing has been 'cropped' yet, we set
           // the initial dependencies whenever the selection changes.
-          if (_xRefStack.isCurrentSelectionCropped()) {
-            _xRefStack.setSelectedCenterNodes(structuredSelection.toList());
+          if (this._xRefStack.isCurrentSelectionCropped()) {
+            this._xRefStack.setSelectedCenterNodes(structuredSelection.toList());
           } else {
-            _xRefStack.pruneDependenciesForUncroppedCenterNodes(structuredSelection.toList(),
+            this._xRefStack.pruneDependenciesForUncroppedCenterNodes(structuredSelection.toList(),
                 getSelectedIncomingCoreDependenciesIfNotRoot(structuredSelection.toList()),
                 getSelectedOutgoingCoreDependenciesIfNotRoot(structuredSelection.toList()));
           }
@@ -301,25 +301,25 @@ public class XRefComposite extends Composite {
     // create the crop selection button
     treeViewComposite.createToolItem(ToolbarItems.CROP, XRefImages.CROP_SELECTION.getImage(),
         XRefImages.DISABLED_CROP_SELECTION.getImage(), (e) -> {
-          _xRefStack.cropSelection();
+          this._xRefStack.cropSelection();
         });
 
     // create the uncrop selection button
     treeViewComposite.createToolItem(ToolbarItems.UNCROP, XRefImages.UNCROP.getImage(),
         XRefImages.DISABLED_UNCROP.getImage(), (e) -> {
-          _xRefStack.uncropAll();
+          this._xRefStack.uncropAll();
         });
 
     // create the go back button
     treeViewComposite.createToolItem(ToolbarItems.BACK, XRefImages.CROP_SELECTION_BACK.getImage(),
         XRefImages.DISABLED_CROP_SELECTION_BACK.getImage(), (e) -> {
-          _xRefStack.goBack();
+          this._xRefStack.goBack();
         });
 
     // create the go forward button
     treeViewComposite.createToolItem(ToolbarItems.FORWARD, XRefImages.CROP_SELECTION_FORWARD.getImage(),
         XRefImages.DISABLED_CROP_SELECTION_FORWARD.getImage(), (e) -> {
-          _xRefStack.goForward();
+          this._xRefStack.goForward();
         });
 
     // separator
@@ -353,7 +353,7 @@ public class XRefComposite extends Composite {
     //
     TreeViewComposite treeViewComposite = new TreeViewComposite(sashForm,
         new DependencyResolvingTreeEventInterceptor(
-            (node) -> _xRefStack.incomingDependencySelector().getDependenciesForSourceNode(node)),
+            (node) -> this._xRefStack.incomingDependencySelector().getDependenciesForSourceNode(node)),
         new NullExpandStrategy(), SWT.RIGHT);
 
     //
@@ -362,7 +362,7 @@ public class XRefComposite extends Composite {
     //
     treeViewComposite.getTreeViewer().addSelectionChangedListener(event -> {
       IStructuredSelection structuredSelection = (IStructuredSelection) event.getSelection();
-      _xRefStack.setSelectedLeftsidedNodes(structuredSelection.toList());
+      this._xRefStack.setSelectedLeftsidedNodes(structuredSelection.toList());
     });
 
     // collapse all
@@ -397,10 +397,10 @@ public class XRefComposite extends Composite {
         XRefComposite.this.setCursor(cursor);
 
         //
-        DependencySelection dependencySelection = SelectionFactory.eINSTANCE.createDependencySelection();
-        dependencySelection.getDependencies().addAll(_xRefStack.getSelectedDependencies());
+        DependencySelection dependencySelection = SelectionsFactory.eINSTANCE.createDependencySelection();
+        dependencySelection.getDependencies().addAll(this._xRefStack.getSelectedDependencies());
 
-        _dependencySelectionConsumer.accept(dependencySelection);
+        this._dependencySelectionConsumer.accept(dependencySelection);
 
       } finally {
         XRefComposite.this.setCursor(null);
@@ -423,9 +423,8 @@ public class XRefComposite extends Composite {
     }
 
     //
-    return (List<HGCoreDependency>) checkNotNull(elements).stream().filter((e) -> e instanceof HGNode)
-        .flatMap((node) -> ((HGNode) node).getAccumulatedIncomingCoreDependencies().stream())
-        .collect(Collectors.toList());
+    return checkNotNull(elements).stream().filter((e) -> e instanceof HGNode)
+        .flatMap((node) -> node.getAccumulatedIncomingCoreDependencies().stream()).collect(Collectors.toList());
   }
 
   /**
@@ -443,9 +442,8 @@ public class XRefComposite extends Composite {
     }
 
     //
-    return (List<HGCoreDependency>) checkNotNull(elements).stream().filter((e) -> e instanceof HGNode)
-        .flatMap((node) -> ((HGNode) node).getAccumulatedOutgoingCoreDependencies().stream())
-        .collect(Collectors.toList());
+    return checkNotNull(elements).stream().filter((e) -> e instanceof HGNode)
+        .flatMap((node) -> node.getAccumulatedOutgoingCoreDependencies().stream()).collect(Collectors.toList());
 
   }
 
@@ -464,28 +462,29 @@ public class XRefComposite extends Composite {
     public void croppedSelectionChanged() {
 
       //
-      _leftsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getLeftsidedNodes(), false));
-      _leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getLeftsidedNodes(), false));
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       //
-      if (_xRefStack.isCurrentSelectionCropped()) {
-        _centeredTreeViewComposite.getTreeViewer()
-            .setFilters(new VisibleNodesFilter(() -> _xRefStack.getCenterNodes(), true));
+      if (XRefComposite.this._xRefStack.isCurrentSelectionCropped()) {
+        XRefComposite.this._centeredTreeViewComposite.getTreeViewer()
+            .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getCenterNodes(), true));
       }
       //
       else {
         //
-        IStructuredSelection selection = _centeredTreeViewComposite.getTreeViewer().getStructuredSelection();
-        _centeredTreeViewComposite.getTreeViewer().resetFilters();
-        _centeredTreeViewComposite.getTreeViewer().setSelection(selection);
+        IStructuredSelection selection = XRefComposite.this._centeredTreeViewComposite.getTreeViewer()
+            .getStructuredSelection();
+        XRefComposite.this._centeredTreeViewComposite.getTreeViewer().resetFilters();
+        XRefComposite.this._centeredTreeViewComposite.getTreeViewer().setSelection(selection);
       }
-      _centeredTreeViewComposite.getTreeViewer().refresh();
+      XRefComposite.this._centeredTreeViewComposite.getTreeViewer().refresh();
 
       //
-      _rightsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getRightsidedNodes(), false));
-      _rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getRightsidedNodes(), false));
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       // update the toolbar
       updateToolbar();
@@ -501,24 +500,24 @@ public class XRefComposite extends Composite {
     public void coreDependenciesChanged() {
 
       //
-      _leftsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getLeftsidedNodes(), false));
-      _leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getLeftsidedNodes(), false));
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       //
-      if (_xRefStack.isCurrentSelectionCropped()) {
-        _centeredTreeViewComposite.getTreeViewer()
-            .setFilters(new VisibleNodesFilter(() -> _xRefStack.getCenterNodes(), true));
+      if (XRefComposite.this._xRefStack.isCurrentSelectionCropped()) {
+        XRefComposite.this._centeredTreeViewComposite.getTreeViewer()
+            .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getCenterNodes(), true));
       }
       //
       else {
-        _centeredTreeViewComposite.getTreeViewer().refresh();
+        XRefComposite.this._centeredTreeViewComposite.getTreeViewer().refresh();
       }
 
       //
-      _rightsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getRightsidedNodes(), false));
-      _rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getRightsidedNodes(), false));
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       // update the toolbar
       updateToolbar();
@@ -534,18 +533,18 @@ public class XRefComposite extends Composite {
     public void centerNodeSelectionChanged() {
 
       // prepare left tree viewer
-      _leftsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getLeftsidedNodes(), false));
-      _leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getLeftsidedNodes(), false));
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       //
-      _centeredTreeViewComposite.getTreeViewer()
-          .update(NodeSelections.computeNodesWithParents(_xRefStack.getCenterNodes(), true).toArray(), null);
+      XRefComposite.this._centeredTreeViewComposite.getTreeViewer().update(
+          NodeSelections.computeNodesWithParents(XRefComposite.this._xRefStack.getCenterNodes(), true).toArray(), null);
 
       // prepare right tree viewer
-      _rightsidedTreeViewComposite.getTreeViewer()
-          .setFilters(new VisibleNodesFilter(() -> _xRefStack.getRightsidedNodes(), false));
-      _rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer()
+          .setFilters(new VisibleNodesFilter(() -> XRefComposite.this._xRefStack.getRightsidedNodes(), false));
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       // update the toolbar
       updateToolbar();
@@ -561,11 +560,11 @@ public class XRefComposite extends Composite {
     public void leftsidedNodeSelectionChanged() {
 
       // update center...
-      _centeredTreeViewComposite.getTreeViewer()
-          .update(NodeSelections.computeNodesWithParents(_xRefStack.getCenterNodes(), true).toArray(), null);
+      XRefComposite.this._centeredTreeViewComposite.getTreeViewer().update(
+          NodeSelections.computeNodesWithParents(XRefComposite.this._xRefStack.getCenterNodes(), true).toArray(), null);
 
       // ...and deselect rightsided tree
-      _rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._rightsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       // update the toolbar
       updateToolbar();
@@ -581,11 +580,11 @@ public class XRefComposite extends Composite {
     public void rightsidedNodeSelectionChanged() {
 
       // update center...
-      _centeredTreeViewComposite.getTreeViewer()
-          .update(NodeSelections.computeNodesWithParents(_xRefStack.getCenterNodes(), true).toArray(), null);
+      XRefComposite.this._centeredTreeViewComposite.getTreeViewer().update(
+          NodeSelections.computeNodesWithParents(XRefComposite.this._xRefStack.getCenterNodes(), true).toArray(), null);
 
       // ...and deselect leftsided tree
-      _leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
+      XRefComposite.this._leftsidedTreeViewComposite.getTreeViewer().getTree().deselectAll();
 
       // update the toolbar
       updateToolbar();
@@ -599,13 +598,16 @@ public class XRefComposite extends Composite {
      * </p>
      */
     private void updateToolbar() {
-      _centeredTreeViewComposite.getToolItem(ToolbarItems.CROP)
-          .setEnabled(_xRefStack.isCurrentSelectionCropped()
-              || !_xRefStack.incomingDependencySelector().getUnfilteredCoreDependencies().isEmpty()
-              || !_xRefStack.outgoingDependencySelector().getUnfilteredCoreDependencies().isEmpty());
-      _centeredTreeViewComposite.getToolItem(ToolbarItems.UNCROP).setEnabled(_xRefStack.hasCroppedSelections());
-      _centeredTreeViewComposite.getToolItem(ToolbarItems.BACK).setEnabled(_xRefStack.canGoBack());
-      _centeredTreeViewComposite.getToolItem(ToolbarItems.FORWARD).setEnabled(_xRefStack.canGoForward());
+      XRefComposite.this._centeredTreeViewComposite.getToolItem(ToolbarItems.CROP)
+          .setEnabled(XRefComposite.this._xRefStack.isCurrentSelectionCropped()
+              || !XRefComposite.this._xRefStack.incomingDependencySelector().getUnfilteredCoreDependencies().isEmpty()
+              || !XRefComposite.this._xRefStack.outgoingDependencySelector().getUnfilteredCoreDependencies().isEmpty());
+      XRefComposite.this._centeredTreeViewComposite.getToolItem(ToolbarItems.UNCROP)
+          .setEnabled(XRefComposite.this._xRefStack.hasCroppedSelections());
+      XRefComposite.this._centeredTreeViewComposite.getToolItem(ToolbarItems.BACK)
+          .setEnabled(XRefComposite.this._xRefStack.canGoBack());
+      XRefComposite.this._centeredTreeViewComposite.getToolItem(ToolbarItems.FORWARD)
+          .setEnabled(XRefComposite.this._xRefStack.canGoForward());
     }
   }
 }

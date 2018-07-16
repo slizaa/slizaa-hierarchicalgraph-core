@@ -5,10 +5,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.function.Consumer;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 import org.slizaa.ui.shared.ILifecycleParticipator;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;

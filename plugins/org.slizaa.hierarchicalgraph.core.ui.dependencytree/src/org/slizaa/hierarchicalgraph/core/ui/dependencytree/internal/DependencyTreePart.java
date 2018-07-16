@@ -18,8 +18,8 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.core.model.HGCoreDependency;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
-import org.slizaa.hierarchicalgraph.selection.DependencySelections;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelections;
 import org.slizaa.ui.shared.ILifecycleParticipator;
 
 import com.google.inject.Injector;

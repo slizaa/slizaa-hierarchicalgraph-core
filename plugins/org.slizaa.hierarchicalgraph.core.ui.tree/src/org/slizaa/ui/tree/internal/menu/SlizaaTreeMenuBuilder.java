@@ -1,16 +1,15 @@
-package org.slizaa.ui.tree.internal;
+package org.slizaa.ui.tree.internal.menu;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.GroupMarker;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -20,7 +19,6 @@ import org.slizaa.ui.tree.ISlizaaActionContribution;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;
 import org.slizaa.ui.tree.ISlizaaActionGroupContribution;
 
-import com.google.common.base.Supplier;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -58,9 +56,9 @@ public class SlizaaTreeMenuBuilder {
    */
   public SlizaaTreeMenuBuilder(TreeViewer treeViewer, ISlizaaActionContributionProvider contributionProvider,
       Supplier<IEclipseContext> contextSupplier) {
-    _treeViewer = checkNotNull(treeViewer);
-    _slizaaActionContributionProvider = checkNotNull(contributionProvider);
-    _contextSupplier = checkNotNull(contextSupplier);
+    this._treeViewer = checkNotNull(treeViewer);
+    this._slizaaActionContributionProvider = checkNotNull(contributionProvider);
+    this._contextSupplier = checkNotNull(contextSupplier);
   }
 
   /**
@@ -71,31 +69,28 @@ public class SlizaaTreeMenuBuilder {
    */
   public void populateMenu() {
 
-    _menuManager = new MenuManager();
-    _menuManager.setRemoveAllWhenShown(true);
+    this._menuManager = new MenuManager();
+    this._menuManager.setRemoveAllWhenShown(true);
 
     // the menu listener creates the menu on demand
-    _menuManager.addMenuListener(new IMenuListener() {
+    this._menuManager.addMenuListener(menuManager -> {
 
-      @Override
-      public void menuAboutToShow(IMenuManager menuManager) {
+      if (SlizaaTreeMenuBuilder.this._treeViewer.getSelection().isEmpty()) {
+        return;
+      }
+      if (SlizaaTreeMenuBuilder.this._treeViewer.getSelection() instanceof IStructuredSelection) {
 
-        if (_treeViewer.getSelection().isEmpty()) {
-          return;
-        }
-        if (_treeViewer.getSelection() instanceof IStructuredSelection) {
+        SlizaaTreeMenuBuilder.this._currentObjectSelection = ((IStructuredSelection) SlizaaTreeMenuBuilder.this._treeViewer
+            .getSelection()).toList();
 
-          _currentObjectSelection = ((IStructuredSelection) _treeViewer.getSelection()).toList();
+        SlizaaTreeMenuGroup rootMenuGroup = computeInternalSlizaaMenuModel();
 
-          SlizaaTreeMenuGroup rootMenuGroup = computeInternalSlizaaMenuModel();
-
-          populateMenuManager(_menuManager, rootMenuGroup, null);
-        }
+        populateMenuManager(SlizaaTreeMenuBuilder.this._menuManager, rootMenuGroup, null);
       }
     });
 
     // return the result
-    _treeViewer.getControl().setMenu(_menuManager.createContextMenu(_treeViewer.getControl()));
+    this._treeViewer.getControl().setMenu(this._menuManager.createContextMenu(this._treeViewer.getControl()));
   }
 
   /**
@@ -179,15 +174,17 @@ public class SlizaaTreeMenuBuilder {
     //
     LoadingCache<String, SlizaaTreeMenuGroup> menuGroupMap = CacheBuilder.newBuilder()
         .build(new CacheLoader<String, SlizaaTreeMenuGroup>() {
+          @Override
           public SlizaaTreeMenuGroup load(String id) {
             return new SlizaaTreeMenuGroup(id);
           }
         });
 
     // TODO: HIERARCHIES
-    for (ISlizaaActionGroupContribution actionGroupContribution : _slizaaActionContributionProvider.getActionGroupContributions()) {
+    for (ISlizaaActionGroupContribution actionGroupContribution : this._slizaaActionContributionProvider
+        .getActionGroupContributions()) {
 
-      if (actionGroupContribution.shouldShow(_currentObjectSelection)) {
+      if (actionGroupContribution.shouldShow(this._currentObjectSelection)) {
         SlizaaTreeMenuGroup group = menuGroupMap.getUnchecked(actionGroupContribution.getId());
         group.setActionGroupContribution(actionGroupContribution);
         menuGroup.getMenuEntries().add(group);
@@ -195,8 +192,9 @@ public class SlizaaTreeMenuBuilder {
     }
 
     //
-    for (ISlizaaActionContribution slizaaActionContribution : _slizaaActionContributionProvider.getActionContributions()) {
-      if (slizaaActionContribution.shouldShow(_currentObjectSelection, _treeViewer)) {
+    for (ISlizaaActionContribution slizaaActionContribution : this._slizaaActionContributionProvider
+        .getActionContributions()) {
+      if (slizaaActionContribution.shouldShow(this._currentObjectSelection, this._treeViewer)) {
         if (slizaaActionContribution.getParentGroupId() != null) {
           SlizaaTreeMenuGroup group = menuGroupMap.getIfPresent(slizaaActionContribution.getParentGroupId());
           if (group != null) {
@@ -218,35 +216,36 @@ public class SlizaaTreeMenuBuilder {
    *
    * @param eSelectedObject
    * @param slizaaTreeAction
-   * 
+   *
    * @return
    */
   private Action wrapActionContribution(final ISlizaaActionContribution slizaaTreeAction) {
 
     // set enabled
-    ContextInjectionFactory.inject(slizaaTreeAction, _contextSupplier.get());
+    ContextInjectionFactory.inject(slizaaTreeAction, this._contextSupplier.get());
 
     //
     final Action newAction = new Action() {
       @Override
       public void run() {
-        ContextInjectionFactory.inject(slizaaTreeAction,  _contextSupplier.get());
-        slizaaTreeAction.execute(_currentObjectSelection, _treeViewer);
+        ContextInjectionFactory.inject(slizaaTreeAction, SlizaaTreeMenuBuilder.this._contextSupplier.get());
+        slizaaTreeAction.execute(SlizaaTreeMenuBuilder.this._currentObjectSelection,
+            SlizaaTreeMenuBuilder.this._treeViewer);
       }
     };
 
     // set action image
-    if (slizaaTreeAction.getImagePath(_currentObjectSelection) != null) {
+    if (slizaaTreeAction.getImagePath(this._currentObjectSelection) != null) {
       newAction.setImageDescriptor(ImageDescriptor.createFromURL(FrameworkUtil.getBundle(slizaaTreeAction.getClass())
-          .getResource(slizaaTreeAction.getImagePath(_currentObjectSelection))));
+          .getResource(slizaaTreeAction.getImagePath(this._currentObjectSelection))));
 
     }
 
     //
-    newAction.setEnabled(slizaaTreeAction.isEnabled(_currentObjectSelection, _treeViewer));
+    newAction.setEnabled(slizaaTreeAction.isEnabled(this._currentObjectSelection, this._treeViewer));
 
     // set action text
-    newAction.setText(slizaaTreeAction.getLabel(_currentObjectSelection));
+    newAction.setText(slizaaTreeAction.getLabel(this._currentObjectSelection));
 
     // return the result
     return newAction;

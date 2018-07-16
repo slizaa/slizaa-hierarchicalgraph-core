@@ -3,7 +3,6 @@ package org.slizaa.ui.tree;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -45,12 +44,12 @@ public class SlizaaTreeViewerFactory {
    * @param composedAdapterFactory
    */
   public static void setSlizaaTreeViewerCreator(ISlizaaActionContributionProvider slizaaActionContributionProvider,
-      ComposedAdapterFactory adapterFactory, Supplier<IEclipseContext> contextSupplier) {
+      Supplier<IEclipseContext> contextSupplier) {
 
     // checkState(_creator == null);
 
     //
-    _creator = new SlizaaTreeViewerCreator(checkNotNull(slizaaActionContributionProvider), checkNotNull(adapterFactory),
+    _creator = new SlizaaTreeViewerCreator(checkNotNull(slizaaActionContributionProvider),
         checkNotNull(contextSupplier));
   }
 
@@ -67,7 +66,7 @@ public class SlizaaTreeViewerFactory {
 
       // create the default OSGi based creator
       _creator = new SlizaaTreeViewerCreator(Activator.getDefault().getSlizaaActionContributionProvider(),
-          Activator.getDefault().getComposedAdapterFactory(), () -> Activator.getDefault().getEclipseContext());
+          () -> Activator.getDefault().getEclipseContext());
     }
 
     //
@@ -105,9 +104,9 @@ public class SlizaaTreeViewerFactory {
      * @param parent
      */
     public DefaultSlizaaTreeViewerBuilder(Composite parent) {
-      _parent = checkNotNull(parent);
-      _style = SWT.NO_BACKGROUND | SWT.NONE | SWT.MULTI;
-      _autoExpandLevel = 3;
+      this._parent = checkNotNull(parent);
+      this._style = SWT.NO_BACKGROUND | SWT.NONE | SWT.MULTI;
+      this._autoExpandLevel = 3;
     }
 
     /**
@@ -119,26 +118,26 @@ public class SlizaaTreeViewerFactory {
      */
     @Override
     public ISlizaaTreeViewerBuilder withStyle(int style) {
-      _style = style;
+      this._style = style;
       return this;
     }
 
     @Override
     public ISlizaaTreeViewerBuilder withAutoExpandLevel(int autoExpandLevel) {
-      _autoExpandLevel = autoExpandLevel;
+      this._autoExpandLevel = autoExpandLevel;
       return this;
     }
 
     @Override
     public ISlizaaTreeViewerBuilder withTreeEventInterceptor(ISlizaaTreeEventInterceptor treeEventInterceptor) {
-      _treeEventInterceptor = treeEventInterceptor;
+      this._treeEventInterceptor = treeEventInterceptor;
       return this;
     }
 
     @Override
     public ISlizaaTreeViewerBuilder withLabelProviderInterceptor(
         ISlizaaLabelProviderInterceptor labelProviderInterceptor) {
-      _labelProviderInterceptor = labelProviderInterceptor;
+      this._labelProviderInterceptor = labelProviderInterceptor;
       return this;
     }
 
@@ -149,13 +148,13 @@ public class SlizaaTreeViewerFactory {
     public TreeViewer create() {
 
       //
-      SlizaaTreeViewer result = slizaaTreeViewerCreator().createTreeViewer(_parent, _style, _autoExpandLevel,
-          _treeEventInterceptor);
+      SlizaaTreeViewer result = slizaaTreeViewerCreator().createTreeViewer(this._parent, this._style,
+          this._autoExpandLevel, this._treeEventInterceptor);
 
       //
-      if (_labelProviderInterceptor != null) {
+      if (this._labelProviderInterceptor != null) {
         ((IInterceptableLabelProvider) result.getLabelProvider())
-            .setLabelProviderInterceptor(_labelProviderInterceptor);
+            .setLabelProviderInterceptor(this._labelProviderInterceptor);
       }
 
       //

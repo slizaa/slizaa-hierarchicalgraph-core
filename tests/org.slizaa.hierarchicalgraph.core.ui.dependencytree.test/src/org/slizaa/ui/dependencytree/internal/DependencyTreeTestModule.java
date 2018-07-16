@@ -5,8 +5,8 @@ package org.slizaa.ui.dependencytree.internal;
 
 import java.util.function.Consumer;
 
+import org.slizaa.hierarchicalgraph.core.selections.DependencySelection;
 import org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.DependencyTreePart;
-import org.slizaa.hierarchicalgraph.selection.DependencySelection;
 import org.slizaa.ui.shared.DefaultLifecycleParticipator;
 import org.slizaa.ui.shared.ILifecycleParticipator;
 
