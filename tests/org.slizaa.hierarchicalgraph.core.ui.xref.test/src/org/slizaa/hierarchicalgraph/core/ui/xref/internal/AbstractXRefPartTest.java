@@ -92,6 +92,7 @@ public abstract class AbstractXRefPartTest extends AbstractXmiBasedTestGraphUiTe
                 .centeredTreeViewComposite().getTreeViewer().getLabelProvider()).getLabelProviderInterceptor()));
 
     //
+    testGraph().rootNode().setName("HG Root Node");
     workbenchModel().setRootNode(testGraph().rootNode());
 
     _modules = testGraph().rootNode().getChildren();

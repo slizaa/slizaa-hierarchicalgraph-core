@@ -19,6 +19,7 @@ import org.slizaa.hierarchicalgraph.core.testfwk.HGNodeUtils;
  */
 public class DefaultNodeLabelProvider implements INodeLabelProvider {
 
+  /** - */
   private final Function<String, Image> _imageProvider;
 
   /**
@@ -79,7 +80,7 @@ public class DefaultNodeLabelProvider implements INodeLabelProvider {
   public Object getStyledText(Object object) {
 
     HGNode hgNode = (HGNode) object;
-
+    
     //
     List<String> labels = HGNodeUtils.getLabels(hgNode);
 

@@ -26,7 +26,7 @@ import org.slizaa.ui.tree.interceptors.ISlizaaLabelProviderInterceptor;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class DefaultInterceptableLabelProvider extends BaseLabelProvider
+public class DefaultInterceptableLabelProviderAdapter extends BaseLabelProvider
     implements ILabelProvider, IStyledLabelProvider, IColorProvider, IFontProvider, IInterceptableLabelProvider {
 
   /** - */
@@ -37,12 +37,12 @@ public class DefaultInterceptableLabelProvider extends BaseLabelProvider
 
   /**
    * <p>
-   * Creates a new instance of type {@link DefaultInterceptableLabelProvider}.
+   * Creates a new instance of type {@link DefaultInterceptableLabelProviderAdapter}.
    * </p>
    *
    * @param nodeLabelProviderSupplier
    */
-  public DefaultInterceptableLabelProvider(Supplier<INodeLabelProvider> _nodeLabelProviderSupplier) {
+  public DefaultInterceptableLabelProviderAdapter(Supplier<INodeLabelProvider> _nodeLabelProviderSupplier) {
     this._nodeLabelProviderSupplier = checkNotNull(_nodeLabelProviderSupplier);
   }
 
@@ -120,6 +120,11 @@ public class DefaultInterceptableLabelProvider extends BaseLabelProvider
    */
   @Override
   public StyledString getStyledText(Object element) {
+
+    //
+    if (element instanceof HGRootNode) {
+      return new StyledString(((HGRootNode) element).getName());
+    }
 
     //
     StyledString styledString = new StyledString(

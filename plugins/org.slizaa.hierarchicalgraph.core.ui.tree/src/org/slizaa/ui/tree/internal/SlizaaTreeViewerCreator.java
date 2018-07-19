@@ -218,7 +218,7 @@ public class SlizaaTreeViewerCreator {
    * @param contentViewer
    * @return
    */
-  private DefaultInterceptableLabelProvider createLabelProvider(final ContentViewer contentViewer) {
+  private DefaultInterceptableLabelProviderAdapter createLabelProvider(final ContentViewer contentViewer) {
     //
     Supplier<INodeLabelProvider> supplier = () -> {
 
@@ -231,7 +231,7 @@ public class SlizaaTreeViewerCreator {
       return rootNode.getExtension(INodeLabelProvider.class);
     };
 
-    DefaultInterceptableLabelProvider labelProvider = new DefaultInterceptableLabelProvider(supplier);
+    DefaultInterceptableLabelProviderAdapter labelProvider = new DefaultInterceptableLabelProviderAdapter(supplier);
     return labelProvider;
   }
 

@@ -17,41 +17,6 @@
    </license>
 
    <plugin
-         id="org.slizaa.hierarchicalgraph.core.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.hierarchicalgraph.core.model.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-   <plugin
-         id="org.slizaa.hierarchicalgraph.core.algorithms"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.hierarchicalgraph.core.selection"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.hierarchicalgraph.core.workbench.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.slizaa.hierarchicalgraph.core.ui.shared"
          download-size="0"
          install-size="0"
