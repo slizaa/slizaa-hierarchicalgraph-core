@@ -60,6 +60,7 @@
 						</configuration>
 					</execution>
 				</executions>
+				<!-- workaround -->
 				<dependencies>
 						<dependency>
 						    <groupId>org.eclipse.platform</groupId>
